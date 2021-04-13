@@ -1,3 +1,7 @@
+//I copy pasted example code from git clone --single-branch --branch part-0-starting-point git@github.com:colbyfayock/my-final-space-characters.git in order to implement drag and drop functionality. Line 27, 28, 36 and parts of 53 to 57. 
+
+
+
 import { useContext, useState } from "react"
 import Card from './card'
 import styles from './cardContainer.module.scss'
