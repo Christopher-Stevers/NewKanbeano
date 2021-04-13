@@ -4,20 +4,29 @@ import Card from '../components/card'
 import CardContainer from '../components/cardcontainer'
 import CardContext from '../components/cardContext'
 import React from 'react'
-import { useState } from 'react'
+import Il from '../components/ol.js'
+import { useState, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 export default function Home() {
-  const [stateContext, updateStateContext]=useState([{title: "heroku",
-  content: "Heroku is slow",
+  const red=Date.now();
+  const current=Date.now();
+  const cardContext=useContext(CardContext);
+  const [stateContext, updateStateContext]=useState([/*{
+    title: "dingawlwal",
+    content: "",
 
-  id: "heroku"+Date.now()},
-  {title: "Vercel",
-  content: " Vercel built Nextjs",
-id: "Vercel"+Date.now()},
-  {title: "Netlify",
-  content: "Netlify is static",
-  id: "Netlify"+Date.now()}]);
+    id: current+"github",
+    editable: true
+}*/]);
+  const [otherStateContext, updateOtherStateContext]=useState([/*{
+    title: "Gitlense",
+    content: "",
+
+    id: current+"github",
+    editable: true
+}*/])
   const defaultContext=[stateContext, updateStateContext];
+  const otherDefaultContext=[otherStateContext, updateOtherStateContext];
   return (
     <div className={styles.container}>
       <Head>
@@ -25,17 +34,22 @@ id: "Vercel"+Date.now()},
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <header className={styles.header}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+      </header>
+
+      <main className={styles.main}>
         <CardContext.Provider value={[defaultContext]}>
-          <CardContainer />
+          <CardContainer list={stateContext}/>
            </CardContext.Provider>
 
-
-      </main>
-
+           <CardContext.Provider value={[otherDefaultContext]}>
+          <CardContainer list={otherStateContext}/>
+           </CardContext.Provider>
+</main>
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -46,6 +60,7 @@ id: "Vercel"+Date.now()},
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
+      <Il />
     </div>
   )
 }
