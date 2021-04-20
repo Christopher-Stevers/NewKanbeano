@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import NewContext from '../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import CardContainer from '../components/indieContainer'
 import { v4 as uuidv4 } from 'uuid';
 export default function Home() {
@@ -18,14 +18,15 @@ export default function Home() {
   const [signUp, updateSignUp]=useState(false)
   const [username, updateUsername]=useState("")
   const [message, updateMessage]=useState("")
+  const [domain, updateDomain]=useState(document.documentURI)
+ // useEffect(()=>{ domainName=document.documentURI},[]);
   const newUser=async()=>{
     updateName(username);
     const options ={
     method: 'PUT',
     body: name
 };
-
-  const url="https://great-kanbeano.vercel.app/api/movies?name="+username
+  const url=domain+"api/movies?name="+username
   const response= await fetch(url)
        const responseObj=await response.json()
        console.log(responseObj)
@@ -41,7 +42,7 @@ updateLoggedIn(true)
   const [dbId, updateDbId]=useState("")
     const logger=async(e)=>{
         e.preventDefault()
-        const url="https://great-kanbeano.vercel.app/api/movies?name="+name
+        const url=domain+"api/movies?name="+name
        const response= await fetch(url)
        const responseObj=await response.json()
        if(responseObj.data){
@@ -101,7 +102,7 @@ name: name
     body: JSON.stringify(clone)
 };
 
-  const url="https://great-kanbeano.vercel.app/api/movies?name="+name
+const url=domain+"api/movies?name="+name
   const response= await fetch(url, JSON.parse(JSON.stringify(options)))
 
 }
