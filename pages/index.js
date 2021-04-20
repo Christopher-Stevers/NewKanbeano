@@ -25,7 +25,7 @@ export default function Home() {
     body: name
 };
 
-  const url="http://localhost:3000/api/movies?name="+username
+  const url="https://great-kanbeano.vercel.app/api/movies?name="+username
   const response= await fetch(url)
        const responseObj=await response.json()
        console.log(responseObj)
@@ -41,7 +41,7 @@ updateLoggedIn(true)
   const [dbId, updateDbId]=useState("")
     const logger=async(e)=>{
         e.preventDefault()
-        const url="http://localhost:3000/api/movies?name="+name
+        const url="https://great-kanbeano.vercel.app/api/movies?name="+name
        const response= await fetch(url)
        const responseObj=await response.json()
        if(responseObj.data){
@@ -101,7 +101,7 @@ name: name
     body: JSON.stringify(clone)
 };
 
-  const url="http://localhost:3000/api/movies?name="+name
+  const url="https://great-kanbeano.vercel.app/api/movies?name="+name
   const response= await fetch(url, JSON.parse(JSON.stringify(options)))
 
 }

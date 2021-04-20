@@ -11,12 +11,8 @@ export default async (req, res) => {
 
     .collection("kanbeano")
     .findOne(nameObj);
-  if (movies) {
     res.json(movies)
-  }
-  if (!movies) {
-    res.json(JSON.stringify({ data: "" }))
-  }
+  
 
   if (req.method === "POST") {
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
