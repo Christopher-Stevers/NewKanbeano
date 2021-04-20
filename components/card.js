@@ -2,7 +2,6 @@ import styles from './card.module.scss';
 import { useState, useContext } from 'react'
 import CardContext from './cardContext'
 import NewContext from '../components/newContext'
-import { Droppable } from 'react-beautiful-dnd';
 export default function Card(props) {
     let [newContext, updateNewContext] = useContext(NewContext);
     const [title, updateTitle] = useState(newContext[props.listIndex][props.index].title);
