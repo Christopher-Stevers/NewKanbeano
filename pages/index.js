@@ -5,7 +5,6 @@ import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext } from 'react'
 import CardContainer from '../components/cardContainer'
-import LoginForm from '../components/loginForm'
 import { v4 as uuidv4 } from 'uuid';
 export default function Home() {
   const current = Date.now();
