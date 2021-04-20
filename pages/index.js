@@ -4,7 +4,7 @@ import NewContext from '../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext } from 'react'
-import CardContainer from '../components/cardContainer'
+import CardContainer from '../components/indieContainer'
 import { v4 as uuidv4 } from 'uuid';
 export default function Home() {
   const current = Date.now();
