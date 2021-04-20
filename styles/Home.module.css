@@ -16,8 +16,7 @@
   align-items: center;
 }
 .main{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   
 }
 
@@ -96,7 +95,8 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-
+.list{display: flex;
+list-style: none;}
 .card:hover,
 .card:focus,
 .card:active {

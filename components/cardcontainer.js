@@ -1,70 +1,65 @@
 //I copy pasted example code from git clone --single-branch --branch part-0-starting-point git@github.com:colbyfayock/my-final-space-characters.git in order to implement drag and drop functionality. Line 27, 28, 36 and parts of 53 to 57. 
-
+//CardContainer
 
 
 import { useContext, useState } from "react"
 import Card from './card'
 import styles from './cardContainer.module.scss'
 import CardContext from './cardContext'
+import NewContext from './newContext'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+
+import { v4 as uuidv4 } from 'uuid';
 export default function CardContainer(props) {
-    
-    const cardContext = useContext(CardContext);
+    const [newContext, updateNewContext] = useContext(NewContext);
     const current = Date.now();
-    const [propslist, updatePropsList] = useState([]);
-    const [count, updateCounter] = useState(props.list);
-    const newElems = "";
-        
-        function handleOnDragEnd(result){
-            const clone = cardContext[0][0].map(elem  => { 
-                let newObj={};
-                for(const prop in elem){
-                    newObj[prop]=elem[prop];
+    const clone=JSON.parse(JSON.stringify(newContext))
 
-            }
-        return newObj;
-        });
-    const [reorderedItem] = clone.splice(result.source.index, 1);
-    clone.splice(result.destination.index, 0, reorderedItem);
-            console.log("yeet")
-            cardContext[0][1](clone
-              
 
-            )
-            updatePropsList(clone);
-            updateCounter(count + 1);
-            return ;
-        }
+
+    
+  
 
     const addObjectToContext = () => {
-        cardContext[0][0].push({
+       
+    
+    const updatedContext=clone.map((elem, index)=>{
+      if(index===parseInt(props.i)){
+         return elem.concat({
             title: "",
             content: "",
-
-            id: current+"github",
+            id: current.toString(),
+            listIndex: props.i.toString(),
             editable: true
-        }
-
-        );
-         updatePropsList(props.list) 
-        updateCounter(count + 1);
-    }
+        });
+      }
+      return elem;
+    })
+    updateNewContext(updatedContext);
+           /* newContext[0][props.i][0][0].push(
+            [cardVals, updateCardVals]
+        )*/
+    }/*onDragEnd={handleOnDragEnd}*/
+              const ownIndex=          parseInt(props.i)
     return (
-        <div className={styles.cardContainer}><DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="tasks">
-
+        <div className={styles.cardContainer}>
+                <Droppable droppableId={props.i.toString()}>
                 {(provided) => (
-                <ul {...provided.droppableProps} ref={provided.innerRef}>
-                    {cardContext[0][0].map((elem, index) =>
-                    <Draggable key={elem.id} draggableId={elem.id} index={index}>
-                        {(provided) => (
-                        <li  ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card title={elem.title} id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} /></div></li>
-                    )}
-                    </Draggable>)}
-                
-                {provided.placeholder}</ul>)}
-            </Droppable>
-        </DragDropContext>
+                    <ul {...provided.droppableProps} ref={provided.innerRef}>
+                       {newContext[ownIndex].map((elem, index) =>
+                       
+                          <Draggable key={elem.id} draggableId={elem.id} index={index}> 
+                          {(provided) => (
+                               <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card  index={index}  title={elem.title}
+                                id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i}  /></div></li>
+                                )} 
+                                </Draggable>
+                           )}
+
+                        {provided.placeholder}</ul>)}
+         </Droppable>
+
+      
             <button onClick={addObjectToContext} className={styles.add}>+</button>
         </div>
 
