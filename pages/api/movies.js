@@ -1,50 +1,80 @@
-//This file was modified from npx create-next-app --example with-mongodb mflix
-
 import { connectToDatabase } from "../../util/mongodb";
-
+import { getSession } from 'next-auth/client'
 export default async (req, res) => {
+  const idNum= parseInt(req.query.listDate)
+  const session = await getSession({ req })
 
   const { db } = await connectToDatabase();
   const nameObj = req.query
 
-  const movies = await db
 
+ const deleteData=async()=>{
+  
+ const deleted=await db 
+      .collection("kanbeano")
+      .deleteOne({listDate:{$eq: idNum}});
+      res.json(deleted.deletedCount)
+      console.log(deleted.deletedCount);
+console.log(req.query)
+
+ }
+
+  const getData=async()=>{
+    if(req.query.listDate){
+const dutu=await db 
+      .collection("kanbeano")
+      .findOne({listDate: idNum});
+  console.log(dutu.email)
+   console.log(dutu)
+  console.log(session.user.email)
+//if(dutu.email!==session.user.email){res.json({message: "access denied"})
+  
+   // }
+   if(dutu.email===session.user.email){ res.json(dutu)}
+   else{res.json(JSON.stringify(["denied"]))}
+ }
+
+    else{const dutu=await db 
     .collection("kanbeano")
-    .findOne(nameObj);
-    res.json(movies)
+    .find({email: session.user.email})
+.toArray();
+res.json(dutu)};
+    }
   
 
-  if (req.method === "POST") {
+  const postData=async ()=> {
+    console.log("posted")
+    console.log(req.query)
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
-    console.log(req)
-      / db.collection("kanbeano")
-        .findOneAndUpdate(nameObj, {
+       db.collection("kanbeano")
+        .findOneAndUpdate({listDate: idNum}, {
           $set: { data: JSON.parse(req.body) }
-
         })
-
-
   }
-  if (req.method === "PUT") {
-    const anything = await db
-
-      .collection("kanbeano")
-
-      .findOne(nameObj);
-
-    if (anything.data==="") {
-      db.collection("kanbeano").insertOne(
-        {
-          "data": [
-          ],
-          "name": nameObj.name
-        }
-      )
-      console.log("thanks")
-      res.json({"message": "Thank you for joining Kanbeano!"})
-    }
-    if (anything.data) {
-      res.json({"message": "This username is already taken."})
-    }
+  const putData=async()=>{
+    console.log("put")
+    db.collection("kanbeano").insertOne(JSON.parse(req.body))
   }
+
+  
+const execute=()=>{ switch(req.method){
+
+case "POST":
+   postData();
+   break;
+case "PUT":
+   putData()
+  break;
+case "DELETE":
+  deleteData()
+  break;
+default:
+   getData()
+
+
+}}
+
+if(!session){ res.json({"message": "please authenticate"})}
+if(session){
+  execute();}
 };

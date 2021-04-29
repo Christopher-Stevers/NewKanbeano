@@ -13,53 +13,88 @@ import { v4 as uuidv4 } from 'uuid';
 export default function CardContainer(props) {
     const [newContext, updateNewContext] = useContext(NewContext);
     const current = Date.now();
-    const clone=JSON.parse(JSON.stringify(newContext))
+    const clone = JSON.parse(JSON.stringify(newContext))
+    const [titleOpen, updateTitleOpen] = useState(false)
+    const [title, updateTitle] = useState("")
+    //coment
 
-//coment
 
-    
-  
+
 
     const addObjectToContext = () => {
-       
-    
-    const updatedContext=clone.map((elem, index)=>{
-      if(index===parseInt(props.i)){
-         return elem.concat({
-            title: "",
-            content: "",
-            id: current.toString(),
-            listIndex: props.i.toString(),
-            editable: true
-        });
-      }
-      return elem;
-    })
-    updateNewContext(updatedContext);
-           /* newContext[0][props.i][0][0].push(
-            [cardVals, updateCardVals]
-        )*/
-    }/*onDragEnd={handleOnDragEnd}*/
-              const ownIndex=          parseInt(props.i)
+
+
+        const updatedContext = clone.map((elem, index) => {
+            if (index === parseInt(props.i)) {
+                return elem.concat({
+                    title: "",
+                    content: "",
+                    id: current.toString(),
+                    listIndex: props.i.toString(),
+                    editable: true
+                });
+            }
+            return elem;
+        })
+        updateNewContext(updatedContext);
+        /* newContext[0][props.i][0][0].push(
+         [cardVals, updateCardVals]
+     )*/
+    }
+    const deleteList = () => {
+
+
+        const updatedContext = clone.filter((elem, index) => {
+            return (index !== props.i)
+        })
+        updateNewContext(updatedContext);
+
+
+    }
+    /*onDragEnd={handleOnDragEnd}*/
+    const ownIndex = parseInt(props.i)
+    const closeTitle = () => {
+       if (!titleOpen) {updateTitleOpen(true)}
+       if(titleOpen){
+        const updatedContext = clone.map((elem, index) => {
+            if (index === parseInt(props.i)) {
+                return elem.map((elem, index) => {
+                    if (index === 0) {
+                        return {
+                            title: title,
+                            id: elem.id
+                        }
+                    }
+                    return elem
+                })
+            }
+            return elem;
+        })
+        updateNewContext(updatedContext);
+        updateTitleOpen(false);
+
+    }
+    }
     return (
         <div className={styles.cardContainer}>
-                <Droppable droppableId={props.i.toString()}>
+            <h2><div><button onClick={closeTitle}>open title</button> {titleOpen ? <div><input onChange={(e)=>updateTitle(e.target.value)} value={title}></input></div> : <h2>{newContext[ownIndex][0].title}</h2>}</div></h2>
+            <Droppable droppableId={props.i.toString() } type="nestedList">
                 {(provided) => (
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
-                       {newContext[ownIndex].map((elem, index) =>
-                       
-                          <Draggable key={elem.id} draggableId={elem.id} index={index}> 
-                          {(provided) => (
-                               <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card  index={index}  title={elem.title}
-                                id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i}  /></div></li>
-                                )} 
-                                </Draggable>
-                           )}
+                        {newContext[ownIndex].map((elem, index) => {
+                            if (!index) { return  }
+                            return <Draggable key={elem.id} draggableId={elem.id.toString()} index={index}>
+                                {(provided) => (
+                                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card index={index} title={elem.title}
+                                        id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i} /></div></li>
+                                )}
+                            </Draggable>
+                        })}
 
                         {provided.placeholder}</ul>)}
-         </Droppable>
+            </Droppable>
 
-      
+            <button id={props.i} onClick={deleteList}>DeleteList</button>
             <button onClick={addObjectToContext} className={styles.add}>+</button>
         </div>
 

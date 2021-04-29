@@ -48,7 +48,7 @@ export default function CardContainer(props) {
                     <ul {...provided.droppableProps} ref={provided.innerRef}>
                        {newContext[ownIndex].map((elem, index) =>
                        
-                          <Draggable key={elem.id} draggableId={elem.id} index={index}> 
+                          <Draggable key={elem.id} draggableId={elem.id.toString()} index={index}> 
                           {(provided) => (
                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card  index={index}  title={elem.title}
                                 id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i}  /></div></li>

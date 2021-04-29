@@ -5,7 +5,7 @@ import NewContext from '../components/newContext'
 export default function Card(props) {
     let [newContext, updateNewContext] = useContext(NewContext);
     const [title, updateTitle] = useState(newContext[props.listIndex][props.index].title);
-    const [content, updateContent] = useState("");
+    const [content, updateContent] = useState(newContext[props.listIndex][props.index].content);
     const id=newContext[props.listIndex][props.index].id;
     const modifyContext=(e)=>{
         const clone=JSON.parse(JSON.stringify(newContext))
@@ -47,6 +47,21 @@ export default function Card(props) {
         }
         editable ? updateEditable(false) : updateEditable(true);
     }
+    const deleteCard=()=>{
+        const clone=JSON.parse(JSON.stringify(newContext))
+        const updatedContext=JSON.parse(JSON.stringify(clone.map((elem, index)=>{
+            
+            if(index===parseInt(props.listIndex)){
+              return   elem.filter((nestedElem)=>{
+                  return (!nestedElem.id===id)
+            })
+               
+            }
+            return elem;
+          })))
+         updateNewContext(updatedContext);
+
+    }
    
     return (
 
@@ -55,7 +70,7 @@ export default function Card(props) {
             {newContext[props.listIndex][props.index].editable ? <input  onChange={(e) => updateContent(e.target.value)} value={content} className={`${styles.content} ${styles.input}`}></input> :
                 <div className={styles.content}>{newContext[props.listIndex][props.index].content}</div>
             }
-            <button  onClick={modifyContext}></button>
+            <button  onClick={modifyContext}>update</button><button onClick={deleteCard}>delete</button>
             <div></div>
         </div>
 
