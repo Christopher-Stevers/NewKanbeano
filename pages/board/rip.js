@@ -1,4 +1,4 @@
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/Home.module.scss'
 import NewContext from '../../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
