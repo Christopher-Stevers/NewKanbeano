@@ -148,13 +148,14 @@ export default function Home () {
 
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
-
+if(response.status===200){console.log("success")}
   }
   return (
 
     <>{auth ?
     <div><Header />
-        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span><button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
+        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span>
+        <button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
     height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
  <g id="_x37_7_Essential_Icons">
    <path id="Save" d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8

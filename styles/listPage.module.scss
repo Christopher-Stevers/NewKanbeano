@@ -1,5 +1,16 @@
 .saveIcon {
-    height: 3.5rem;
+    height: 3.7rem;
+    &:hover{cursor: pointer;
+    background-color: var(--header-text) ;
+&:active{background-color: var(--darker-header-text);}}
+    
+}
+.save{
+    &:hover{cursor: pointer;
+    background-color: var(--header-text) ;
+&:active{background-color: var(--darker-header-text);}}
+    
+
 }
 .header {
     display: flex;

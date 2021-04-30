@@ -16,7 +16,7 @@ export default function Header () {
         <div className={(!session && loading) ? styles.loading : styles.loaded}>
           <h1 className={styles.h1}><Link href="/">KANBEANO</Link>
           </h1><div className={styles.userInfo}>{!session && <>
-            <span className={styles.notSignedInText}>You are not signed in</span>
+            <span className={styles.signedInText}>You are not signed in</span>
             <a
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}

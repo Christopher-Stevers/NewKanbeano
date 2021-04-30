@@ -1,5 +1,6 @@
 /* Set min-height to avoid page reflow while session loading */
 
+.buttonPrimary{}
 
 .header{
   width: 100%;
@@ -94,10 +95,14 @@ justify-content: flex-end;}
   }
 }
 
-.buttonPrimary {
+.buttonPrimary {box-shadow: 0 0 3px 3px var(--darker-header-text);
+  background-color: black;
+margin: 0px 3rem;
   background-color:  var(--darker-header-background);
   border-color: var(--darker-header-background);
   color: #fff;
+  &:hover{color: white;
+  background-color: var(--dark-header-text);}
   text-decoration: none;
   padding: .7rem 1.4rem;
 }

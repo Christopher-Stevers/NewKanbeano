@@ -1,14 +1,15 @@
 
-import styles from '../styles/Home.module.css'
-import NewContext from '../components/newContext'
+import styles from '../../styles/Home.module.scss'
+import NewContext from '../../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
 import { useSession } from 'next-auth/client'
-import CardContainer from '../components/indieContainer'
+import CardContainer from '../../components/indieContainer'
 import { parse, v4 as uuidv4 } from 'uuid';
-import Header from '../components/header'
+import Header from '../../components/header'
 import Link from 'next/link'
+import Image from 'next/image'
 export default function Home() {
   const [session, loading] = useSession()
   const current = Date.now();
@@ -18,13 +19,11 @@ export default function Home() {
   const newContext = useContext(NewContext);
   const [domain, updateDomain] = useState("")
   const [res, updateRes] = useState([])
-  const [enterName, updateEnterName] = useState(false)
-  useEffect(() => {
-    updateDomain(document.domain)
-  }, [])
+  const [enterName, updateEnterName] = useState(false);
+  
   useEffect(async () => {
     if (session) {
-      const url = domain + "api/movies"
+      const url =  "/api/movies"
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj)
@@ -42,7 +41,7 @@ export default function Home() {
   const [signUp, updateSignUp] = useState(false)
   const [username, updateUsername] = useState("")
   const [message, updateMessage] = useState("")
-  useEffect(() => { updateDomain(document.documentURI) }, []);
+  if(!session){return <><Header /><main className={styles.fullPage}></main></>}
   const newBoard = async () => {
     updateName(username);
     const options = {
@@ -63,29 +62,15 @@ export default function Home() {
       listDate:current
     }])
 
+updateEnterName(false);
 
-    const url = domain + "api/movies"
+    const url =  "/api/movies"
     const response = await fetch(url, options)
     const responseObj = await response.json();
 
-
   }/* */
-  const [dbId, updateDbId] = useState("")
-  const logger = async (e) => {
-    e.preventDefault()
-    const url = domain + "api/movies?name=" + name
-    const response = await fetch(url)
-    const responseObj = await response.json()
-    if (responseObj.data) {
-      updateLoggedIn(true)
-      updateContextState(responseObj.data);
-
-
-    }
-    if (!responseObj.data) {
-      updateSignUp(true)
-    }
-  }
+  //const [dbId, updateDbId] = useState("")
+  
   const grabName = (e) => {
     updateName(e.target.value)
   }
@@ -95,9 +80,9 @@ export default function Home() {
 
   }
 
-  let [stateContext, updateStateContext] = useState([
-  ]);
-  const defaultContext = [stateContext, updateStateContext];
+  //let [stateContext, updateStateContext] = useState([
+  //]);
+  //const defaultContext = [stateContext, updateStateContext];
 
   const clone = JSON.parse(JSON.stringify(contextState));
   function handleOnDragEnd(result) {
@@ -133,10 +118,11 @@ export default function Home() {
     };
   }
   const deleteFromDb = async (e) => {
+    console.log(e)
     const options = {
       method: 'DELETE',
     };
-    const url = domain + "api/movies?listDate=" + e.target.id
+    const url = "/api/movies?listDate=" + e.currentTarget.id
     const response = await fetch(url, options)
     const resObj=await response.json()
    console.log(resObj)
@@ -149,23 +135,46 @@ export default function Home() {
 
   }
   return (<><Header />
-    < main className={styles.main} >
-
-<ul>{res.map(elem => {
+{(session)? 
+  < main className={styles.main} >
+<ul className={styles.boards}> 
+<li><div className={styles.board}><Image src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/>{enterName ?
+        <div className={styles.openBoard}>
+          <input value={name} onChange={(e) => updateName(e.target.value)}></input>
+          <button onClick={newBoard}>Create</button>
+        </div>
+        : 
+        <div className={styles.newBoard}><button className={styles.addButton} onClick={() => updateEnterName(true)}>+</button></div>}
+        </div>
+        
+        </li>
+        {   [...res].reverse().map(elem => {
       const dateURL = "/board/" + elem.listDate
-      return <li key={uuidv4()}><Link href={dateURL}>{elem.listTitle}</Link><button id={elem.listDate} onClick={deleteFromDb}>Delete</button></li>
+      const dateString= new Date(elem.listDate);
+      return <li key={uuidv4()}>
+      <div className={styles.board}><Image src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button id={elem.listDate} onClick={deleteFromDb}>
+   <svg height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
+                    <g id="_x37_7_Essential_Icons">
+                        <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
+		c0,1.1,0.9,2,2,2h44.8c1.1,0,2-0.9,2-2V27.5H81c1.1,0,2-0.9,2-2C83,24.4,82.1,23.5,81,23.5z M43,19h14v4H43V19z M70.4,81H29.6V27.5
+		h40.8V81z M61,38.3v32c0,1.1-0.9,2-2,2s-2-0.9-2-2v-32c0-1.1,0.9-2,2-2S61,37.1,61,38.3z M43,38.3v32c0,1.1-0.9,2-2,2s-2-0.9-2-2
+		v-32c0-1.1,0.9-2,2-2S43,37.1,43,38.3z"/>
+                    </g>
+                    <g id="Guides">
+                    </g>
+                    <g id="Info">
+                        <g id="BORDER">
+                            <path fill="#0000FF" d="M1364-930V754H-420V-930H1364 M1372-938H-428V762h1800V-938L1372-938z" />
+                        </g>
+                    </g>
+                </svg></button></span></div>
+      </li>
     }
 
     )}</ul>
-      {enterName ?
-        <div>
-          <input value={name} onChange={(e) => updateName(e.target.value)}></input>
-          <button onClick={newBoard}>Create Board</button>
-        </div>
-        : 
-        <button onClick={() => updateEnterName(true)}>New Board!</button>}
-    <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    </main >
+     
+   {/* <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/}
+    </main > :null}
   </>
   )
 }
