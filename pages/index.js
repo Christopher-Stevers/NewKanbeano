@@ -151,10 +151,9 @@ export default function Home() {
   return (<><Header />
     < main className={styles.main} >
 
-
-    </main ><h2>{JSON.stringify(session)} {loading}</h2><h3><ul>{res.map(elem => {
+<ul>{res.map(elem => {
       const dateURL = "/board/" + elem.listDate
-      return <li key={uuidv4()}><Link href={dateURL}>{document.domain + dateURL + elem.listTitle}</Link><button id={elem.listDate} onClick={deleteFromDb}>Delete</button></li>
+      return <li key={uuidv4()}><Link href={dateURL}>{elem.listTitle}</Link><button id={elem.listDate} onClick={deleteFromDb}>Delete</button></li>
     }
 
     )}</ul>
@@ -165,7 +164,8 @@ export default function Home() {
         </div>
         : 
         <button onClick={() => updateEnterName(true)}>New Board!</button>}
-    </h3>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </main >
   </>
   )
 }

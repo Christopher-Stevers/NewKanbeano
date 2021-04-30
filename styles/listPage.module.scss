@@ -1,8 +1,63 @@
-.saveIcon{height: 2rem;}
-.header{display: flex;
-width: 100%;
-justify-content: space-between;
+.saveIcon {
+    height: 3.5rem;
+}
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.list{display: flex;
-    list-style: none;}
+.list {
+    display: flex;
+    list-style: none;
+}
+
+.listHeader {
+    align-items: center;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: .75rem;
+    margin-right: 10rem;
+    background-color: var(--list-header-background-color);
+}
+.h2{
+  line-height: 1.5 rem;
+  margin:1rem 0.6rem ;
+  color: var(--header-text);
+    
+}
+.date{color: var(--header-text);
+}
+.listItem{margin: 2rem;
+height: min-content;}
+.main{height: 86.5vh;
+    max-height: 86.5vh;
+    padding: 2rem;
+    overflow-x: scroll;}
+.flexWrapper{
+    display: flex;
+}
+.addList{
+    height: 200px;
+    min-width: 364px;
+    justify-items: center;
+    align-content: start;
+    background-color: var(--dark-header-text);
+    margin: 3rem 3rem 0 3rem;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    
+    }
+    .button
+    {
+    font-weight: bold;
+        background-color: var(--header-text);
+        width: 2rem;
+    height: 2rem;
+&:hover{
+    background-color: var(--darker-header-text) ;
+    cursor: pointer;
+}}

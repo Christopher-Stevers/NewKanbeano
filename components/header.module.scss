@@ -1,20 +1,37 @@
 /* Set min-height to avoid page reflow while session loading */
+
+
+.header{
+  width: 100%;
+  background-color: var(--header-background-color);
+}
+.h1{font-size: 2rem;
+margin: 0px;}
 .signedInStatus {
   display: block;
   min-height: 4rem;
   width: 100%;
 }
-
+.userInfo{display: flex;
+align-content: center;
+justify-content: flex-end;}
 .loading,
 .loaded {
+  width: 100%;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: .5fr 1.5fr;
+  
+@media(max-width: 410px){
+  grid-template-columns: 1fr ;
+}
   position: relative;
   top: 0;
   opacity: 1;
   overflow: hidden;
-  border-radius: 0 0 .6rem .6rem;
   padding: .6rem 1rem;
   margin: 0;
-  background-color: rgba(0,0,0,.05);
+  color: var(--header-text);
   transition: all 0.2s ease-in;
 }
 
@@ -25,6 +42,8 @@
 
 .signedInText,
 .notSignedInText {
+  align-self: center;
+  height: 2rem;
   padding-top: .8rem;
   left: 1rem;
   right: 6.5rem;
@@ -33,7 +52,7 @@
   overflow: hidden;
   display: inherit;  
   z-index: 1;
-  line-height: 1.3rem;
+  line-height: 2rem;
 }
 
 .signedInText {
@@ -43,12 +62,16 @@
 
 .avatar {
   border-radius: 2rem;
-  float: left;
+  margin-right: 50px;
   height: 2.8rem;
   width: 2.8rem;
-  background-color: white;
+  background-color: var(--header-background-color);
+  border: 2px solid var(--header-text);
   background-size: cover;
   background-repeat: no-repeat;
+  @media(max-width: 510px){
+    display: none;
+  }
 }
 
 .button,
@@ -57,19 +80,23 @@
   margin-right: -.4rem;
   font-weight: 500;
   border-radius: .3rem;
+  white-space: nowrap;
   cursor: pointer;
   font-size: 1rem;
-  line-height: 1.4rem;
-  padding: .7rem .8rem;
+  line-height: 1rem;
+  padding: .7rem 5rem;
   position: relative;
   z-index: 10;
+  text-decoration: underline;
   background-color: transparent;
-  color: #555;
+  @media(max-width: 410px){
+    padding: .7rem 0rem;
+  }
 }
 
 .buttonPrimary {
-  background-color: #346df1;
-  border-color: #346df1;
+  background-color:  var(--darker-header-background);
+  border-color: var(--darker-header-background);
   color: #fff;
   text-decoration: none;
   padding: .7rem 1.4rem;

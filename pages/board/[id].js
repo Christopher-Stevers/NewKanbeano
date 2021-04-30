@@ -9,14 +9,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import Header from '../../components/header'
-export default function Home() {
+export default function Home () {
   const [session, loading] = useSession()
-  if (typeof window !== 'undefined' && loading) return <div>loading</div>
-
-  // If no session exists, display access denied message
-  if (!session) { return <div> <Header /> <span>This board either does not exist, or you do not own it.</span> </div> }
   const router = useRouter()
   const { id } = router.query
+  const ogDate=new Date(parseInt(id)).toDateString();
   const current = Date.now();
   const [loggedIn, updateLoggedIn] = useState(true);
   const [listArr, updateListArr] = useState([]);
@@ -33,12 +30,20 @@ export default function Home() {
   const [domain, updateDomain] = useState("")
   const [dontext, updateDontext] = useState("")
   const [auth, updateAuth] = useState(true)
+  const [h2, updateH2]=useState("")
+  const [name, updateName] = useState("")
+  const [dbId, updateDbId] = useState("")
+  const [placeCard, updatePlaceCard]=useState("")
   useEffect(async () => {
-    updateDomain(document.documentURI)
+    console.log(session)
+    if (session){
+      
+      updateDomain(document.documentURI)
     console.log(document)
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url)
     const responseObj = await response.json();
+    console.log(responseObj)
     if (typeof responseObj[0] === 'string') {
       updateAuth(false)
     }
@@ -46,8 +51,14 @@ export default function Home() {
       updateDontext(
         JSON.stringify(responseObj.data))
       updateContextState(responseObj.data)
-    }
-  }, [router.query.id]);
+      updateH2(responseObj.listTitle)
+      updatePlaceCard(true)
+    }}
+  }, [router.query.id, session]);
+ //if (typeof window !== 'undefined' && loading) return <div> KANBEANOYou are not signed inSign in This board either does not exist, or you do not own it. </div>
+
+  // If no session exists, display access denied message
+  if (!session) { return <div> <Header  /> <span>This board either does not exist, or you do not own it.</span> </div> }
   /* const newUser=async()=>{
      updateName(username);
      const options ={
@@ -66,8 +77,6 @@ export default function Home() {
         if(responseObj){
           updateMessage("This username is already taken.")
        }}*/
-  const [name, updateName] = useState("")
-  const [dbId, updateDbId] = useState("")
 
   const grabName = (e) => {
     updateName(e.target.value)
@@ -81,9 +90,8 @@ export default function Home() {
 
   }
 
-  let [stateContext, updateStateContext] = useState([
-  ]);
-  const defaultContext = [stateContext, updateStateContext];
+  //let [stateContext, updateStateContext] = useState([]);
+  //const defaultContext = [stateContext, updateStateContext];
 
   const clone = JSON.parse(JSON.stringify(contextState));
   function handleOnDragEnd(result) {
@@ -144,7 +152,9 @@ export default function Home() {
   }
   return (
 
-    <>{auth ? <div><div class={styles.header}><Header /><button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
+    <>{auth ?
+    <div><Header />
+        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span><button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
     height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
  <g id="_x37_7_Essential_Icons">
    <path id="Save" d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8
@@ -163,7 +173,7 @@ export default function Home() {
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <NewContext.Provider value={[contextState, updateContextState]}>
 
-            <Droppable key={1} droppableId="kingOfTheDrops" direction="horizontal" type="parentList">
+          <div className={styles.flexWrapper}>  <Droppable key={1} droppableId="kingOfTheDrops" direction="horizontal" type="parentList">
               {(provided, snapshot) => (
                 <div className={styles.list}
                   ref={provided.innerRef}
@@ -171,7 +181,7 @@ export default function Home() {
                 >{contextState.map((elem, index) => {
                   return <Draggable draggableId={index.toString() + "topLevel"} index={index}>
                     {(provided, snapshot) => (
-                      <div
+                      <div className={styles.listItem}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -183,14 +193,14 @@ export default function Home() {
                   {provided.placeholder}
                 </div>
               )}
-            </Droppable>
-            <button onClick={addList} >+</button>
+            </Droppable><div>
+           {(placeCard)?<div className={styles.addList}><button className={styles.button} onClick={addList} >+</button></div>: null} 
+            </div></div>
           </NewContext.Provider>
         </DragDropContext>
         
       </main >
-      <h1>{dontext}</h1>
-      {JSON.stringify(session)}</div> : <div>Access denied, this is not your board <Link href='/'>Home</Link></div>}
+      </div> : <div>Access denied, this is not your board <Link href='/'>Home</Link></div>}
     </>
   )
 }

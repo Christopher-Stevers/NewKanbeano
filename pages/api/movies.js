@@ -14,8 +14,6 @@ export default async (req, res) => {
       .collection("kanbeano")
       .deleteOne({listDate:{$eq: idNum}});
       res.json(deleted.deletedCount)
-      console.log(deleted.deletedCount);
-console.log(req.query)
 
  }
 
@@ -24,9 +22,6 @@ console.log(req.query)
 const dutu=await db 
       .collection("kanbeano")
       .findOne({listDate: idNum});
-  console.log(dutu.email)
-   console.log(dutu)
-  console.log(session.user.email)
 //if(dutu.email!==session.user.email){res.json({message: "access denied"})
   
    // }
@@ -43,8 +38,6 @@ res.json(dutu)};
   
 
   const postData=async ()=> {
-    console.log("posted")
-    console.log(req.query)
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
        db.collection("kanbeano")
         .findOneAndUpdate({listDate: idNum}, {
@@ -52,7 +45,6 @@ res.json(dutu)};
         })
   }
   const putData=async()=>{
-    console.log("put")
     db.collection("kanbeano").insertOne(JSON.parse(req.body))
   }
 
