@@ -14,7 +14,7 @@ export default function Header () {
     <header className={styles.header}>
       <div className={styles.signedInStatus}>
         <div className={(!session && loading) ? styles.loading : styles.loaded}>
-          <h1 className={styles.h1}><Link href="/">KANBEANO</Link>
+          <h1 className={styles.h1}><Link href="/boards">KANBEANO</Link>
           </h1><div className={styles.userInfo}>{!session && <>
             <span className={styles.signedInText}>You are not signed in</span>
             <a
