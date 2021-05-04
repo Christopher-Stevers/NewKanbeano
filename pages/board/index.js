@@ -27,6 +27,7 @@ export default function Home() {
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj)
+      console.log(session)
 
     }
 
