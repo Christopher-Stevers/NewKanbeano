@@ -1,14 +1,14 @@
-import styles from '../../styles/listPage.module.scss'
-import NewContext from '../../components/newContext'
+import styles from '../styles/listPage.module.scss'
+import NewContext from '../components/newContext'
 import React from 'react'
 import Link from 'next/link'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
-import CardContainer from '../../components/indieContainer'
+import CardContainer from '../components/indieContainer'
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
-import Header from '../../components/header'
+import Header from '../components/header'
 export default function Home () {
   const [session, loading] = useSession()
   const router = useRouter()
