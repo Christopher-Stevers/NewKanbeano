@@ -149,7 +149,7 @@ if(response.status===200){console.log("success")}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >{contextState.map((elem, index) => {
-                  return <Draggable draggableId={index.toString() + "topLevel"} index={index}>
+                  return <Draggable key={()=>uuidv4}  draggableId={index.toString() + "topLevel"} index={index}>
                     {(provided, snapshot) => (
                       <div className={styles.listItem}
                         ref={provided.innerRef}

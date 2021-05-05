@@ -44,7 +44,6 @@ export default function Home() {
   const [message, updateMessage] = useState("")
   if(!session){return <><Header /><main className={styles.fullPage}></main></>}
   const newBoard = async () => {
-    updateName(username);
     const options = {
       method: 'PUT',
       body: JSON.stringify({
@@ -64,7 +63,7 @@ export default function Home() {
     }])
 
 updateEnterName(false);
-
+console.log("yeet")
     const url =  "/api/movies"
     const response = await fetch(url, options)
     const responseObj = await response.json();
@@ -72,14 +71,6 @@ updateEnterName(false);
   }/* */
   //const [dbId, updateDbId] = useState("")
   
-  const grabName = (e) => {
-    updateName(e.target.value)
-  }
-  const addList = () => {
-    updateContextState(
-      contextState.concat([[]]));
-
-  }
 
   //let [stateContext, updateStateContext] = useState([
   //]);
@@ -102,7 +93,7 @@ updateEnterName(false);
     const nextContext = JSON.parse(JSON.stringify(draggedContext[parseInt(droppableDestination)]));
     updateContextState(nextContext)
     return;
-  }
+  }{/*
   const postToAPI = async () => {
     const clone = JSON.parse(JSON.stringify(contextState));
     const contextString = JSON.stringify(newContext)
@@ -117,7 +108,7 @@ updateEnterName(false);
       method: 'POST',
       body: JSON.stringify(clone)
     };
-  }
+  }*/}
   const deleteFromDb = async (e) => {
     console.log(e)
     const options = {
@@ -150,10 +141,11 @@ updateEnterName(false);
         
         </li>
         {   [...res].reverse().map(elem => {
+          console.log("noooo")
       const dateURL = "/board/" + elem.listDate
       const dateString= new Date(elem.listDate);
       return <li key={uuidv4()}>
-      <div className={styles.board}><Image src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button id={elem.listDate} onClick={deleteFromDb}>
+      <div className={styles.board}><Image priority="true" src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button id={elem.listDate} onClick={deleteFromDb}>
    <svg height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
                     <g id="_x37_7_Essential_Icons">
                         <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
