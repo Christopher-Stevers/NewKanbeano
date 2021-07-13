@@ -16,7 +16,6 @@ export default function Header () {
         <div className={(!session && loading) ? styles.loading : styles.loaded}>
           <h1 className={styles.h1}><Link href="/">KANBEANO</Link>
           </h1><div className={styles.userInfo}>{!session && <>
-            <span className={styles.signedInText}>You are not signed in</span>
             <a
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}
@@ -28,21 +27,21 @@ export default function Header () {
                 Sign in
               </a>
           </>}
-          {session && <>
+          {session && <><div className={styles.flexContainer}>
             {session.user.image && <span style={{backgroundImage: `url(${session.user.image})` }} className={styles.avatar}/>}
             <span className={styles.signedInText}>
-              <span >Signed in as {session.user.email || session.user.name}</span>
+              <p >Signed in as <br/><strong className={styles.strong}>{session.user.email || session.user.name}</strong></p>
               </span>
-            <a
+            <p
+                className={styles.button}><a
                 href={`/api/auth/signout`}
-                className={styles.button}
                 onClick={(e) => {
                   e.preventDefault()
                   signOut()
                 }}
               >
                 Sign out
-              </a>
+              </a></p></div>
           </>}</div>
         </div>
       </div>

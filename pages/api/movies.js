@@ -5,8 +5,6 @@ export default async (req, res) => {
   const session = await getSession({ req })
 
   const { db } = await connectToDatabase();
-  const nameObj = req.query
-
 
  const deleteData=async()=>{
   

@@ -115,7 +115,7 @@ export default function CardContainer(props) {
                             if (!index) { return }
                             return <Draggable key={elem.id} draggableId={elem.id.toString()} index={index}>
                                 {(provided) => (
-                                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card index={index} title={elem.title}
+                                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div className={styles.cardWrapper}><Card index={index} title={elem.title}
                                         id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i} /></div></li>
                                 )}
                             </Draggable>

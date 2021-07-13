@@ -5,11 +5,9 @@
 import { useContext, useState } from "react"
 import Card from './card'
 import styles from './cardContainer.module.scss'
-import CardContext from './cardContext'
 import NewContext from './newContext'
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
+import {  Draggable, Droppable } from "react-beautiful-dnd"
 
-import { v4 as uuidv4 } from 'uuid';
 export default function CardContainer(props) {
     const [newContext, updateNewContext] = useContext(NewContext);
     const current = Date.now();
@@ -50,7 +48,7 @@ export default function CardContainer(props) {
                        
                           <Draggable key={elem.id} draggableId={elem.id.toString()} index={index}> 
                           {(provided) => (
-                               <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div><Card  index={index}  title={elem.title}
+                               <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}><div className={styles.cardWrapper} ><Card  index={index}  title={elem.title}
                                 id={elem.id} content={elem.content} key={elem.id} editable={elem.editable} listIndex={props.i}  /></div></li>
                                 )} 
                                 </Draggable>

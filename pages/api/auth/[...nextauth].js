@@ -1,3 +1,5 @@
+ 
+//This file is mostly code from the next-auth repo
  import NextAuth from "next-auth"
 import Providers from "next-auth/providers"
 

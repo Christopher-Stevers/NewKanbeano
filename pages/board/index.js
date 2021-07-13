@@ -10,6 +10,7 @@ import { parse, v4 as uuidv4 } from 'uuid';
 import Header from '../../components/header'
 import Link from 'next/link'
 import Image from 'next/image'
+import ColorPicker from '../../components/colorPicker'
 export default function Home() {
   const [session, loading] = useSession()
   const current = Date.now();
@@ -130,7 +131,7 @@ console.log("yeet")
 {(session)? 
   < main className={styles.main} >
 <ul className={styles.boards}> 
-<li><div className={styles.board}><Image src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/>{enterName ?
+<li><div className={styles.board}><Image className={styles.image}src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/>{enterName ?
         <div className={styles.openBoard}>
           <input value={name} onChange={(e) => updateName(e.target.value)}></input>
           <button onClick={newBoard}>Create</button>
@@ -145,7 +146,8 @@ console.log("yeet")
       const dateURL = "/board/" + elem.listDate
       const dateString= new Date(elem.listDate);
       return <li key={uuidv4()}>
-      <div className={styles.board}><Image priority="true" src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button id={elem.listDate} onClick={deleteFromDb}>
+      <div className={styles.board}><Image priority="true" src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><div>
+        <span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button className={styles.delete} id={elem.listDate} onClick={deleteFromDb}>
    <svg height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
                     <g id="_x37_7_Essential_Icons">
                         <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
@@ -160,31 +162,15 @@ console.log("yeet")
                             <path fill="#0000FF" d="M1364-930V754H-420V-930H1364 M1372-938H-428V762h1800V-938L1372-938z" />
                         </g>
                     </g>
-                </svg></button></span></div>
+                </svg>
+                </button></span></div></div>
       </li>
     }
 
     )}</ul>
      
-   {/* <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/}
     </main > :null}
+    <ColorPicker />
   </>
   )
 }
-
-{/*<div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-  */} {/*</main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>*/}

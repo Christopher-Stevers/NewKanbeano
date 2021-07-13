@@ -1,26 +1,35 @@
-
+//this file conatains next js starter example code.
 .board{display: grid;
   margin: 50px;
+  overflow: hidden;
   justify-items:center;
   align-items: center;
-span, div{background-color: hsla(0, 9%, 4%, .75);
-  text-align: center;
-  border: solid black 10px;
-  box-shadow: 0px 0px 3px 3px var(--darker-header-text);
-  color: var(--header-text);
-  width: 300px;
   height: 150px;
-  line-height: 130px;
-  z-index: 1;
-  svg{height:2rem;}
+div{background-color: hsla(0, 0%, 0%, .75);
+  justify-content:center;
+  border: solid black 10px;
+  box-shadow: 0px 0px 3px 3px var(--header-text);
+  color: white;
+  padding: 10px;
+  width: 100%;
+  z-index: 3;
+  width: 250px;
+  height: 130px;
+  display: grid;
+  align-content: center;
+  span{
+    
+    display: flex;
+    width: min-content;
+    svg{height:2rem;}
   a{font-size: 2rem;
     text-decoration: underline;
     padding-right: 2rem;
-  }
+    z-index:3;
+  }}
 }
 *{grid-area: 1/1/2/2}}
 .openBoard{
-  z-index: 3;
   justify-content: center;
   justify-items: center;
   align-content: center;
@@ -39,9 +48,46 @@ span, div{background-color: hsla(0, 9%, 4%, .75);
   z-index: 3;
   font-weight: bold;
   .addButton{
+
     width: 2rem;
     height: 2rem;
-  font-size: 1rem;}
+  font-size: 1rem;
+  border: 2px solid var(--header-background-color);
+  font-weight: bold;
+
+  background-color: var(--header-text);
+  
+      color: var(--header-background-color);
+      font-weight: bold;
+          background-color: var(--header-text);
+          width: 2rem;
+      height: 2rem;
+  &:hover{
+      background-color: var(--main-background-color) ;
+      color: var(--header-text);
+      box-shadow: 0px 0px 2px 2px var(--header-text);
+      cursor: pointer;
+  }
+
+
+
+}
+}
+.delete{background-color: red;
+ align-self: center;
+  background-color: var(--header-text);
+  fill: var(--header-background-color);
+  width: 40px;
+height: 40px;
+border: 2px solid var(--header-background-color);
+
+
+  &:hover{
+    background-color: var(--main-background-color) ;
+    fill: var(--header-text);
+    box-shadow: 0px 0px 2px 2px var(--header-text);
+    cursor: pointer;
+}
 }
 .boards{display: grid;
 justify-self: center;
@@ -49,7 +95,7 @@ width: 100%;
 padding: 5%;
 grid-auto-flow: horizontal;
 justify-content: center;
-grid-template-columns: repeat(3, 400px);}
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));}
 .fullPage{
   position: fixed;
   width: 100%;
@@ -71,10 +117,6 @@ grid-template-columns: repeat(3, 400px);}
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.main{
-  display: flex;
-  
 }
 
 .footer {

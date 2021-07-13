@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import Header from '../components/header'
+import ColorPicker from '../components/colorPicker';
 export default function Home () {
   const [session, loading] = useSession()
   const router = useRouter()
@@ -58,20 +59,15 @@ export default function Home () {
       "editable": false
   }]
 ])
-  const [state, updateState] = useState([])
-  const [newestState, updateNewestState] = useState([]);
-  const [signUp, updateSignUp] = useState(false)
-  const [username, updateUsername] = useState("")
-  const [message, updateMessage] = useState("")
-  const [domain, updateDomain] = useState("")
-  const [dontext, updateDontext] = useState("")
-  const [auth, updateAuth] = useState(true)
-  const [h2, updateH2]=useState("")
-  const [name, updateName] = useState("")
-  const [dbId, updateDbId] = useState("")
   const [placeCard, updatePlaceCard]=useState("")
  //if (typeof window !== 'undefined' && loading) return <div> KANBEANOYou are not signed inSign in This board either does not exist, or you do not own it. </div>
 
+ const addList = () => {
+  updateContextState(
+    contextState.concat([[{
+      title: "",
+      id: current + 1
+    }]]));}
   // If no session exists, display access denied message
 
   //let [stateContext, updateStateContext] = useState([]);
@@ -134,13 +130,18 @@ export default function Home () {
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
 if(response.status===200){console.log("success")}
   }
+  const handleOnDragStart=()=>{
+
+console.log("dragStarted");
+
+  }
   return (
 
     <>
-    <div><Header />
+    <div className={styles.entirePage}><Header />
         
       < main className={styles.main} >
-        <DragDropContext onDragEnd={handleOnDragEnd}>
+        <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
           <NewContext.Provider value={[contextState, updateContextState]}>
 
           <div className={styles.flexWrapper}>  <Droppable key={1} droppableId="kingOfTheDrops" direction="horizontal" type="parentList">
@@ -164,31 +165,15 @@ if(response.status===200){console.log("success")}
                 </div>
               )}
             </Droppable><div>
-           {(placeCard)?<div className={styles.addList}><button className={styles.button} onClick={addList} >+</button></div>: null} 
+           {(true)?<div className={styles.addList}><button className={styles.button} onClick={addList} >+</button></div>: null} 
             </div></div>
           </NewContext.Provider>
         </DragDropContext>
         
       </main >
       </div>
+      <ColorPicker />
     </>
   )
 }
 
-
-{/*<div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-  */} {/*</main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>*/}

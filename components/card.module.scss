@@ -1,41 +1,61 @@
 .card {
     background-color: var(--header-background-color);
-    box-shadow: inset 1px 1px 3px 3px var(--darker-header-text),
-    1px 1px 3px 3px var(--darker-header-text);
-    color: white;
-    width: 300px;
-    max-width: 100%;
+    box-shadow: 
+    0px 0px 3px 3px var(--header-text);
+    color: var(--header-text);
+    width: 100%;
+    max-width: 60vw;
+    margin: 1rem 0;
+    padding-bottom: 10px;
     display: grid;
+    transition-duration: .3s;
     justify-items: center;
     align-content: space-between;
-    margin: 1rem;
+    &:hover{
+        cursor: pointer;
+        box-shadow: 
+        0px 0px 4px 4px var(--header-text);}
+        &:focus{box-shadow: none;}
+        &:active{box-shadow:none;}
+}
+.needsRoom>li{
+    padding: 10px;
 }
 .content{
-    background-color: #222222;
+    margin: 0;
+    color: var(--header-text);
+    background-color: var(--content-background-color);
     width: 90%;
     word-break: break-word;
     align-self: stretch;
     padding: 10px;
     min-height: 120px;
-    margin: 1rem;
 }
 .input{
-    background-color: var(--header-text);
+    background-color: var(--header-background-color);
     font-size: 1rem;
     max-width: 150px;
+    height: max-content;
+    align-self: center;
+
+
     
 }
-.span{align-self: start;}
+.span{
+    color: var(--header-text);
+    align-self: center;}
 .titleSvg{height: 1rem;
     fill: var(--header-text);
-    width: 1.8rem;}
+    width: 1rem;
+&:hover{fill: var(--header-background-color)}}
     
 .cardTitle {
-    grid-template-columns: 150px auto auto;
-    margin: 1rem;
+
+    grid-template-columns: minmax(50px, 2fr) auto auto;
+    margin: 1rem ;
     display: grid;
-    justify-items: stretch;
-    width: 75%;
+    justify-content: space-between;
+    width: 90%;
     font-size: 1rem;
     align-content: start;
     align-self: center;
@@ -45,8 +65,10 @@
 .deleteButton{
     fill: var(--header-text);
     height: 1rem;
-    width: 1.8rem;
+    width: 1rem;
     align-self: start;
+    &:hover{
+        fill: var(--header-background-color);}
 }
 .textArea{
     resize: vertical;
@@ -56,10 +78,17 @@ padding: .1rem;
 height: 100px; 
 width: 90%;
 align-self: stretch;
-margin: 1rem;
+margin: 0 1rem;
 }
 .button{background-color: var(--header-background-color);
-    height: 1.1rem;
+    width: min-content;
+    aspect-ratio: 1/1;
+    border-radius: 2px;
+    margin: .4rem;
+    padding-left: .3rem;
+    padding-right: .3rem;
 &:hover{cursor: pointer;
-    background-color: var(--dark-header-text);
+    position: relative;
+    background-color: var(--header-text);
+    *{fill: var(--header-background-color);}
 }}

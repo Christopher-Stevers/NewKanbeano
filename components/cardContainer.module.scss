@@ -1,71 +1,96 @@
 .cardContainer{display: grid;
 width: 100%;
-min-width: 364px;
 justify-items: center;
+justify-content:center;
 align-content: space-between;
-background-color: var(--dark-header-text);
-margin: 1rem;
+background-color: var(--sublist-background-color);
 min-height: 300px;
+padding: 1rem;
+margin: 10px;
+
 
 }
-
 .titleSvg{height: 1rem;
-width: 2rem;}
+width: 2rem;
+&:hover{fill: var(--header-text)}}
 
 .listTitle{
-    max-width: 300px;
-    width: 100%;
-    min-width: 200px;
-    margin: 1rem;
+    width: 300px;
+    max-width: 50vw;
     display: flex;
-    justify-content:flex-end;
+    flex-wrap: wrap;
+    justify-content:space-between;
     min-height: 3rem;
     color: var(--header-text);
-    background-color:  var(--darker-header-background-color);
-    padding: .5rem;
+    background-color:  var(--header-background-color);
+    padding: .5rem 1rem;
     overflow: hidden;
     padding-right: 1rem;
+    h2{flex: 1;}
+    input{flex: 1;
+        border-radius: 2px;
+    justify-self: flex-start;}
 }
 .needsRoom{
-    
-width: 85%;
+    min-width: 200px;
+    padding: 1rem;
+    width: 300px;
+    max-width: 66vw;
 min-height: 300px;
 }
 .titleButton {
     margin-left: 1rem;
     height: 2rem;
     width: 2rem;
-    border: 1px solid var(--darker-header-background-color);
+    border: 1px solid var(--header-background-color);
     background-color: var(--header-text);
     justify-self: end;
+    border-radius: 3px;
+    fill: var(--header-background-color);
     &:hover {
-        border: solid var(--header-background-color) 1px;
-    background-color: var(--darker-header-text);
+        fill: var(--header-background-color);
+        //border: solid var(--header-text) 3px;
+    background-color: var(--main-background-color);
+    color: var(--header-text);
+    fill: var(--header-text);
     cursor: pointer;
+    *{fill: inherit;}
     }
 }
 .deleteButton{
     height: 1.8rem;
     width: 1.8rem;
+    fill: var(--header-background-color);
 }
 
 .input{
     height: 2rem;
     font-size: 1.5rem;
     max-width: 60%;
+    justify-self: flex-start;
 }
 .h2{
+    max-width: 60%;
     font-size: 1.5rem;
     justify-self: flex-start;
 }
 .add{margin: 1rem;
+    color: var(--header-background-color);
 width: 2rem;
 height: 2rem;
 font-weight: bold;
 
 background-color: var(--header-text);
+
+    color: var(--header-background-color);
+    font-weight: bold;
+        background-color: var(--header-text);
+        width: 2rem;
+    height: 2rem;
 &:hover{
-background-color: var(--darker-header-text) ;
-cursor: pointer;
+    background-color: var(--main-background-color) ;
+    color: var(--header-text);
+    box-shadow: 0px 0px 2px 2px var(--header-text);
+    cursor: pointer;
 }
 }

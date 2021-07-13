@@ -9,37 +9,24 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import Header from '../../components/header'
+import ColorPicker from '../../components/colorPicker'
 export default function Home () {
   const [session, loading] = useSession()
   const router = useRouter()
   const { id } = router.query
   const ogDate=new Date(parseInt(id)).toDateString();
   const current = Date.now();
-  const [loggedIn, updateLoggedIn] = useState(true);
-  const [listArr, updateListArr] = useState([]);
-  const [count, updateCount] = useState([current])
   const newContext = useContext(NewContext);
   const [contextState, updateContextState] = useState(
     [
     ])
-  const [state, updateState] = useState([])
-  const [newestState, updateNewestState] = useState([]);
-  const [signUp, updateSignUp] = useState(false)
-  const [username, updateUsername] = useState("")
-  const [message, updateMessage] = useState("")
-  const [domain, updateDomain] = useState("")
-  const [dontext, updateDontext] = useState("")
   const [auth, updateAuth] = useState(true)
   const [h2, updateH2]=useState("")
-  const [name, updateName] = useState("")
-  const [dbId, updateDbId] = useState("")
   const [placeCard, updatePlaceCard]=useState("")
   useEffect(async () => {
     console.log(session)
     if (session){
       
-      updateDomain(document.documentURI)
-    console.log(document)
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url)
     const responseObj = await response.json();
@@ -48,35 +35,15 @@ export default function Home () {
       updateAuth(false)
     }
     else {
-      updateDontext(
-        JSON.stringify(responseObj.data))
       updateContextState(responseObj.data)
       updateH2(responseObj.listTitle)
       updatePlaceCard(true)
     }}
   }, [router.query.id, session]);
- //if (typeof window !== 'undefined' && loading) return <div> KANBEANOYou are not signed inSign in This board either does not exist, or you do not own it. </div>
 
   // If no session exists, display access denied message
   if (!session) { return <div> <Header  /> <span>This board either does not exist, or you do not own it.</span> </div> }
-  /* const newUser=async()=>{
-     updateName(username);
-     const options ={
-     method: 'PUT',
-     body: name
- };
-   const url=domain+"api/movies?name="+username
-   const response= await fetch(url)
-        const responseObj=await response.json()
-        console.log(responseObj)
-        if(!responseObj.data){
- updateSignUp(false)
- updateLoggedIn(true)
- 
-        }
-        if(responseObj){
-          updateMessage("This username is already taken.")
-       }}*/
+  
 
   const grabName = (e) => {
     updateName(e.target.value)
@@ -90,8 +57,6 @@ export default function Home () {
 
   }
 
-  //let [stateContext, updateStateContext] = useState([]);
-  //const defaultContext = [stateContext, updateStateContext];
 
   const clone = JSON.parse(JSON.stringify(contextState));
   function handleOnDragEnd(result) {
@@ -116,8 +81,6 @@ export default function Home () {
     if(result.type==="parentList"){
     
 
-      const droppableSource = parseInt(result.source.droppableId);
-      const droppableDestination = parseInt(result.destination.droppableId);
       const clonedContext=JSON.parse(JSON.stringify(contextState));
       const [reorderedItem] = clonedContext.splice(result.source.index, 1);
       clonedContext.splice(result.destination.index, 0, reorderedItem);
@@ -133,7 +96,6 @@ export default function Home () {
   }
   const postToAPI = async () => {
     const clone = JSON.parse(JSON.stringify(contextState));
-    const contextString = JSON.stringify(newContext)
     const postObj = JSON.stringify({
       data: clone,
 
@@ -201,25 +163,11 @@ if(response.status===200){console.log("success")}
         </DragDropContext>
         
       </main >
+      
       </div> : <div>Access denied, this is not your board <Link href='/'>Home</Link></div>}
+    
+    
+    <ColorPicker />
     </>
   )
 }
-
-
-{/*<div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-  */} {/*</main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>*/}
