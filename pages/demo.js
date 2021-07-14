@@ -110,7 +110,7 @@ export default function Home () {
     }
     return 0;
   }
-  const postToAPI = async () => {
+  /*const postToAPI = async () => {
     const clone = JSON.parse(JSON.stringify(contextState));
     const contextString = JSON.stringify(newContext)
     const postObj = JSON.stringify({
@@ -126,8 +126,8 @@ export default function Home () {
 
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
-if(response.status===200){console.log("success")}
-  }
+if(response.status===200){}
+  }*/
   const handleOnDragStart=()=>{
 
 
@@ -147,7 +147,7 @@ if(response.status===200){console.log("success")}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >{contextState.map((elem, index) => {
-                  return <Draggable key={()=>uuidv4}  draggableId={index.toString() + "topLevel"} index={index}>
+                  return <Draggable key={uuidv4()}  draggableId={index.toString() + "topLevel"} index={index}>
                     {(provided, snapshot) => (
                       <div className={styles.listItem}
                         ref={provided.innerRef}

@@ -75,7 +75,7 @@ export default function Card(props) {
                 </button>
                 <button className={styles.button}onClick={deleteCard}>
             <svg className={styles.deleteButton} version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100px"
-                    height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
+                    height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
                     <g id="_x37_7_Essential_Icons">
                         <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
 		c0,1.1,0.9,2,2,2h44.8c1.1,0,2-0.9,2-2V27.5H81c1.1,0,2-0.9,2-2C83,24.4,82.1,23.5,81,23.5z M43,19h14v4H43V19z M70.4,81H29.6V27.5

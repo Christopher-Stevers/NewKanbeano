@@ -1,7 +1,6 @@
 //this file conatains next js starter example code.
 .board{display: grid;
-  margin: 50px;
-  overflow: hidden;
+  width: 400px;
   justify-items:center;
   align-items: center;
   height: 150px;
@@ -95,7 +94,8 @@ width: 100%;
 padding: 5%;
 grid-auto-flow: horizontal;
 justify-content: center;
-grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));}
+grid-gap:7%;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));}
 .fullPage{
   position: fixed;
   width: 100%;

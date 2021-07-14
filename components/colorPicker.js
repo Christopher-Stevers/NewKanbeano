@@ -21,7 +21,7 @@ export default function colorPicker(){
 
        useEffect(()=>{
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        console.log(prefersDarkScheme);
+        
         prefersDarkScheme? updateDay(false):updateDay(true);
         if(prefersDarkScheme){
           updateColorContext({

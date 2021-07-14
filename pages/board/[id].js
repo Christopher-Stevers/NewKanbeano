@@ -106,7 +106,7 @@ export default function Home () {
 
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
-if(response.status===200){console.log("success")}
+if(response.status===200){}
   }
   return (
 
@@ -114,7 +114,7 @@ if(response.status===200){console.log("success")}
     <div><Header />
         <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span>
         <button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
-    height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
+    height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
  <g id="_x37_7_Essential_Icons">
    <path id="Save" d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8
      C83,25.2,82.8,24.7,82.4,24.3z M31,18h38v32H31V18z M79,82H21V18h6v34c0,1.1,0.9,2,2,2h42c1.1,0,2-0.9,2-2V20.6l6,6V82z M64.8,24.5
@@ -138,7 +138,7 @@ if(response.status===200){console.log("success")}
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >{contextState.map((elem, index) => {
-                  return <Draggable key={()=>uuidv4} draggableId={index.toString() + "topLevel"} index={index}>
+                  return <Draggable key={uuidv4()} draggableId={index.toString() + "topLevel"} index={index}>
                     {(provided, snapshot) => (
                       <div className={styles.listItem}
                         ref={provided.innerRef}
