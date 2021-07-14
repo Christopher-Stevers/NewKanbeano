@@ -24,13 +24,11 @@ export default function Home () {
   const [h2, updateH2]=useState("")
   const [placeCard, updatePlaceCard]=useState("")
   useEffect(async () => {
-    console.log(session)
     if (session){
       
     const url = "/" + "api/movies?listDate=" + router.query.id
     const response = await fetch(url)
     const responseObj = await response.json();
-    console.log(responseObj)
     if (typeof responseObj[0] === 'string') {
       updateAuth(false)
     }
@@ -91,7 +89,6 @@ export default function Home () {
 
 
     }
-    console.log(result);
     return 0;
   }
   const postToAPI = async () => {
@@ -101,7 +98,6 @@ export default function Home () {
 
     })
 
-    console.log(postObj)
     const options = {
       method: 'POST',
       body: JSON.stringify(clone)

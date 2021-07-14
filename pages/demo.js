@@ -108,7 +108,6 @@ export default function Home () {
 
 
     }
-    console.log(result);
     return 0;
   }
   const postToAPI = async () => {
@@ -119,7 +118,6 @@ export default function Home () {
 
     })
 
-    console.log(postObj)
     const options = {
       method: 'POST',
       body: JSON.stringify(clone)
@@ -132,7 +130,6 @@ if(response.status===200){console.log("success")}
   }
   const handleOnDragStart=()=>{
 
-console.log("dragStarted");
 
   }
   return (

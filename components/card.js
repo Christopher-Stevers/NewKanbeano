@@ -53,15 +53,12 @@ export default function Card(props) {
             
             if(index===parseInt(props.listIndex)){
               return   elem.filter((nestedElem)=>{
-                  console.log(nestedElem.id)
-                  console.log(id)
                   return (nestedElem.id!==id)
             })
                
             }
             return elem;
           })))
-          console.log(updatedContext)
          updateNewContext(updatedContext);
 
     }

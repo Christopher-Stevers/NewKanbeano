@@ -28,7 +28,6 @@ export default function Home() {
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj)
-      console.log(session)
 
     }
 
@@ -64,7 +63,6 @@ export default function Home() {
     }])
 
 updateEnterName(false);
-console.log("yeet")
     const url =  "/api/movies"
     const response = await fetch(url, options)
     const responseObj = await response.json();
@@ -111,14 +109,12 @@ console.log("yeet")
     };
   }*/}
   const deleteFromDb = async (e) => {
-    console.log(e)
     const options = {
       method: 'DELETE',
     };
     const url = "/api/movies?listDate=" + e.currentTarget.id
     const response = await fetch(url, options)
     const resObj=await response.json()
-   console.log(resObj)
    if(resObj) { const timeArr = res.map(elem => elem.listDate.toString())
     const index = timeArr.indexOf(e.target.id)
     const newArr = [...res]
@@ -142,7 +138,6 @@ console.log("yeet")
         
         </li>
         {   [...res].reverse().map(elem => {
-          console.log("noooo")
       const dateURL = "/board/" + elem.listDate
       const dateString= new Date(elem.listDate);
       return <li key={uuidv4()}>

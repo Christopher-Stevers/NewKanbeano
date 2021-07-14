@@ -9,7 +9,6 @@ import ColorPicker from '../components/colorPicker'
 export default function Home() {
     const router=useRouter();
     const [session, loading]=useSession();
-    console.log(session);
    // if(session){router.push("/board")}
     const signingIn=async()=>{
 //await signIn();
