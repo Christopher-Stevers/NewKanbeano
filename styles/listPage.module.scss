@@ -61,12 +61,18 @@ max-width: 70vw;
     margin: 2rem;
 }
 }
-.main{height: 86.5vh;
-    max-height: 86.5vh;
+.main{height:  90vh;
     @media (min-width: 500){
         padding: 2rem;
     }
     overflow-x: scroll;}
+    .main{height: 90vh;
+        @media (min-width: 500){
+            padding: 2rem;
+        }
+        overflow-x: scroll;}
+        
+        .boardMain{height: 79vh;}
 .flexWrapper{
     display: flex;
     min-width: 1000px;
