@@ -39,7 +39,7 @@ export default function Card(props) {
 
     }
     
-    const deleteCard = () => {
+    const deleteCard = async() => {
         const clone = JSON.parse(JSON.stringify(newContext))
         const updatedContext = JSON.parse(JSON.stringify(clone.map((elem, index) => {
 
@@ -51,7 +51,8 @@ export default function Card(props) {
             }
             return elem;
         })))
-        updateNewContext(updatedContext);
+        await updateNewContext(updatedContext);        
+        await saveContextToDB(updatedContext);
 
     }
 

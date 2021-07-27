@@ -44,13 +44,15 @@ export default function CardContainer(props) {
          [cardVals, updateCardVals]
      )*/
     }
-    const deleteList = () => {
+    const deleteList = async() => {
         updateTitleOpen(false)
 
         const updatedContext = clone.filter((elem, index) => {
             return (index !== props.i)
         })
-        updateNewContext(updatedContext);
+        await updateNewContext(updatedContext);
+        
+        await saveContextToDB(updatedContext);
 
 
     }

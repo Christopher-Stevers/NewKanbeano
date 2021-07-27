@@ -26,7 +26,13 @@ body {
   margin: 0;
   border-color: transparent;
   border-image: none;
+  border-image-width: 0px;
+  border-bottom-width: 0px;
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
   outline: none;
+  outline-color: transparent;
   scroll-behavior: smooth;
   fill: inherit;
 }
@@ -43,4 +49,3 @@ a {
   font-weight: normal;
   list-style-type: none;
 }
-button{border: none;}
