@@ -39,9 +39,8 @@ align-content: start;}
     position: sticky;
     display: flex;
     justify-content: space-between;
+    padding: 0 4rem;
     width: 100%;
-    padding-left: .75rem;
-    margin-right: 10rem;
     background-color: var(--main-background);
     border-bottom: 5px solid var(--header-background-color);
 }
@@ -72,7 +71,8 @@ max-width: 70vw;
         }
         overflow-x: scroll;}
         
-        .boardMain{height: 79vh;}
+        .boardMain{height: 82vh;
+        overflow-x: scroll;}
 .flexWrapper{
     display: flex;
     min-width: 1000px;

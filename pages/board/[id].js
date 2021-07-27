@@ -55,44 +55,8 @@ export default function Home () {
 
   }
 
-
-  const clone = JSON.parse(JSON.stringify(contextState));
-  function handleOnDragEnd(result) {
-    if (result.destination === null) { return; }
-    if (result.type === "nestedList") {
-      const droppableSource = parseInt(result.source.droppableId);
-      const droppableDestination = parseInt(result.destination.droppableId);
-      const draggedContext = clone.map((elem, index) => {
-        if (index === parseInt(result.destination.droppableId)) {
-          const clonedContext = JSON.parse(JSON.stringify(clone));
-          const notZero = (result.destination.index) ? result.destination.index : 1;
-          const [reorderedItem] = clonedContext[droppableSource].splice(result.source.index, 1);
-          clonedContext[droppableDestination].splice(notZero, 0, reorderedItem);
-          return clonedContext;
-
-        }
-      })
-      const nextContext = JSON.parse(JSON.stringify(draggedContext[parseInt(droppableDestination)]));
-      updateContextState(nextContext)
-      return;
-    }
-    if(result.type==="parentList"){
-    
-
-      const clonedContext=JSON.parse(JSON.stringify(contextState));
-      const [reorderedItem] = clonedContext.splice(result.source.index, 1);
-      clonedContext.splice(result.destination.index, 0, reorderedItem);
-      updateContextState( clonedContext);
-
-      
-
-
-
-    }
-    return 0;
-  }
-  const postToAPI = async () => {
-    const clone = JSON.parse(JSON.stringify(contextState));
+  const postToAPI = async (stateOfContext) => {
+    const clone = JSON.parse(JSON.stringify(stateOfContext));
     const postObj = JSON.stringify({
       data: clone,
 
@@ -108,29 +72,57 @@ export default function Home () {
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
 if(response.status===200){}
   }
+  
+  const postStateToAPI=()=>{
+  postToAPI(contextState);}
+  const clone = JSON.parse(JSON.stringify(contextState));
+  function handleOnDragEnd(result) {
+    if (result.destination === null) { return; }
+    if (result.type === "nestedList") {
+      const droppableSource = parseInt(result.source.droppableId);
+      const droppableDestination = parseInt(result.destination.droppableId);
+      const draggedContext = clone.map((elem, index) => {
+        if (index === parseInt(result.destination.droppableId)) {
+          const clonedContext = JSON.parse(JSON.stringify(clone));
+          const notZero = (result.destination.index) ? result.destination.index : 1;
+          const [reorderedItem] = clonedContext[droppableSource].splice(result.source.index, 1);
+          clonedContext[droppableDestination].splice(notZero, 0, reorderedItem);
+          
+          return clonedContext;
+
+        }
+      })
+      const nextContext = JSON.parse(JSON.stringify(draggedContext[parseInt(droppableDestination)]));
+      updateContextState(nextContext);
+    postToAPI(nextContext);
+      return;
+    }
+    if(result.type==="parentList"){
+    
+
+      const clonedContext=JSON.parse(JSON.stringify(contextState));
+      const [reorderedItem] = clonedContext.splice(result.source.index, 1);
+      clonedContext.splice(result.destination.index, 0, reorderedItem);
+      updateContextState( clonedContext);
+
+      
+
+
+    postToAPI(clonedContext);
+
+    }
+    return 0;
+  }
+  
   return (
 
     <>{auth ?
     <div><Header />
         <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span>
-        <button className={styles.save}onClick={postToAPI}>{<svg className={styles.saveIcon} version="1.1" x="0px" y="0px" width="100px"
-    height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
- <g id="_x37_7_Essential_Icons">
-   <path id="Save" d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8
-     C83,25.2,82.8,24.7,82.4,24.3z M31,18h38v32H31V18z M79,82H21V18h6v34c0,1.1,0.9,2,2,2h42c1.1,0,2-0.9,2-2V20.6l6,6V82z M64.8,24.5
-     v19c0,1.1-0.9,2-2,2c-1.1,0-2-0.9-2-2v-19c0-1.1,0.9-2,2-2C63.9,22.5,64.8,23.4,64.8,24.5z"/>
- </g>
- <g id="Guides">
- </g>
- <g id="Info">
-   <g id="BORDER">
-     <path fill="#0000FF" d="M1504-930V754H-280V-930H1504 M1512-938H-288V762h1800V-938L1512-938z"/>
-   </g>
- </g>
- </svg>}</button></div>
-      < main className={styles.main} >
+        </div>
+      < main className={styles.boardMain} >
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <NewContext.Provider value={[contextState, updateContextState]}>
+          <NewContext.Provider value={[contextState, updateContextState, postToAPI]}>
 
           <div className={styles.flexWrapper}>  <Droppable key={1} droppableId="kingOfTheDrops" direction="horizontal" type="parentList">
               {(provided, snapshot) => (

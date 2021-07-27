@@ -37,10 +37,17 @@ res.json(dutu)};
 
   const postData=async ()=> {
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
-       db.collection("kanbeano")
+       const hitApi=db.collection("kanbeano")
         .findOneAndUpdate({listDate: idNum}, {
           $set: { data: JSON.parse(req.body) }
-        })
+        });
+         const hitted = await Promise.resolve(hitApi);
+         console.log(hitted.ok);
+
+        if(hitted.ok){
+          console.log(200);
+          res.status(200);
+        res.json({status: 200})}
   }
   const putData=async()=>{
     db.collection("kanbeano").insertOne(JSON.parse(req.body))
