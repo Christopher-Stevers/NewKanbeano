@@ -16,22 +16,22 @@ export default async (req, res) => {
  }
 
   const getData=async()=>{
-    if(req.query.listDate){
 const dutu=await db 
       .collection("kanbeano")
       .findOne({listDate: idNum});
-//if(dutu.email!==session.user.email){res.json({message: "access denied"})
-  
-   // }
-   if(dutu.email===session.user.email){ res.json(dutu)}
-   else{res.json(JSON.stringify(["denied"]))}
- }
+      const isUserArrAuthed=dutu.users?dutu.users.reduce((accum, currentValue)=>{
+  if(accum===dutu.email){return true}
+  if(accum===true){return true}
+  else{return false;}
 
-    else{const dutu=await db 
-    .collection("kanbeano")
-    .find({email: session.user.email})
-.toArray();
-res.json(dutu)};
+   }): false;
+   if(dutu.email===session.user.email||isUserArrAuthed){ res.json(dutu)}
+   else{res.json(JSON.stringify(["denied"]))}
+
+ 
+
+  
+
     }
   
 

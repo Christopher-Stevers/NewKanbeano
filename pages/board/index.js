@@ -24,7 +24,7 @@ export default function Home() {
   
   useEffect(async () => {
     if (session) {
-      const url =  "/api/movies"
+      const url =  "/api/arrayOfBoards"
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj)
@@ -63,7 +63,7 @@ export default function Home() {
     }])
 
 updateEnterName(false);
-    const url =  "/api/movies"
+    const url =  "/api/arrayOfBoards"
     const response = await fetch(url, options)
     const responseObj = await response.json();
 
@@ -112,7 +112,7 @@ updateEnterName(false);
     const options = {
       method: 'DELETE',
     };
-    const url = "/api/movies?listDate=" + e.currentTarget.id
+    const url = "/api/arrayOfBoards?listDate=" + e.currentTarget.id
     const response = await fetch(url, options)
     const resObj=await response.json()
    if(resObj) { const timeArr = res.map(elem => elem.listDate.toString())
@@ -142,7 +142,9 @@ updateEnterName(false);
       const dateString= new Date(elem.listDate);
       return <li key={uuidv4()}>
       <div className={styles.board}><Image priority="true" src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><div>
-        <span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link><button className={styles.delete} id={elem.listDate} onClick={deleteFromDb}>
+        <span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link>
+        
+        {(session.user.email===elem.email)?<button className={styles.delete} id={elem.listDate} onClick={deleteFromDb}>
    <svg height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
                     <g id="_x37_7_Essential_Icons">
                         <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
@@ -158,7 +160,9 @@ updateEnterName(false);
                         </g>
                     </g>
                 </svg>
-                </button></span></div></div>
+                </button>: null}
+                
+                </span></div></div>
       </li>
     }
 

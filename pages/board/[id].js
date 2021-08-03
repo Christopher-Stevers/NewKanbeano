@@ -33,6 +33,7 @@ export default function Home () {
       updateAuth(false)
     }
     else {
+      updateAuth(true)
       updateContextState(responseObj.data)
       updateH2(responseObj.listTitle)
       updatePlaceCard(true)
@@ -116,8 +117,8 @@ if(response.status===200){}
   
   return (
 
-    <>{auth ?
-    <div><Header />
+    <>
+    <div><Header />{auth ?<>
         <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span>
         </div>
       < main className={styles.boardMain} >
@@ -152,8 +153,8 @@ if(response.status===200){}
         
       </main >
       
-      </div> : <div>Access denied, this is not your board <Link href='/'>Home</Link></div>}
-    
+    </>   : <div>Access denied, this is not your board <Link href='/'>Home</Link></div>}
+    </div>
     
     <ColorPicker />
     </>
