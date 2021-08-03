@@ -20,11 +20,13 @@ const dutu=await db
       .collection("kanbeano")
       .findOne({listDate: idNum});
       const isUserArrAuthed=dutu.users?dutu.users.reduce((accum, currentValue)=>{
-  if(accum===dutu.email){return true}
+        console.log(currentValue);
+  if(currentValue===session.user.email){return true}
   if(accum===true){return true}
   else{return false;}
 
    }): false;
+   console.log(isUserArrAuthed)
    if(dutu.email===session.user.email||isUserArrAuthed){ res.json(dutu)}
    else{res.json(JSON.stringify(["denied"]))}
 
