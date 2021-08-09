@@ -19,17 +19,13 @@ export default async (req, res) => {
         }
 
     const getData=async()=>{
-    const dutu=await db 
-        .collection("kanbeano")
-        .find({email: session.user.email})
-    .toArray();
+    
     
     const arrayData=await db 
     .collection("kanbeano")
     .find({users: session.user.email})
     .toArray();
-    console.log(arrayData.concat(dutu));
-    res.json(arrayData.concat(dutu));
+    res.json(arrayData);
     
         }
     const postData=async ()=> {
