@@ -12,7 +12,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ColorPicker from '../../components/colorPicker'
 export default function Home() {
-  const [session, loading] = useSession()
+  const [session, loading] = useSession();
+  const [sessionEmail, updateSessionEmail]=useState("");
   const current = Date.now();
   const [loggedIn, updateLoggedIn] = useState(true);
   const [listArr, updateListArr] = useState([]);
@@ -27,7 +28,8 @@ export default function Home() {
       const url =  "/api/arrayOfBoards"
       const response = await fetch(url);
       const responseObj = await response.json()
-      updateRes(responseObj)
+      updateRes(responseObj);
+      updateSessionEmail(session.user.email)
 
     }
 
@@ -52,7 +54,7 @@ export default function Home() {
         email: session.user.email,
         listTitle: name,
         listDate:current,
-        users:[session.user.email]
+        users:[sessionEmail]
       })
 
     }; 
