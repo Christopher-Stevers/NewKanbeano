@@ -51,7 +51,8 @@ export default function Home() {
         ],
         email: session.user.email,
         listTitle: name,
-        listDate:current
+        listDate:current,
+        users:[session.user.email]
       })
 
     }; 
