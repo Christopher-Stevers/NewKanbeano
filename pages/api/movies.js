@@ -1,8 +1,10 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
 export default async (req, res) => {
+  
   const idNum= parseInt(req.query.listDate)
   const session = await getSession({ req })
+  console.log(session.user.email);
 
   const { db } = await connectToDatabase();
 
@@ -20,13 +22,12 @@ const dutu=await db
       .collection("kanbeano")
       .findOne({listDate: idNum});
       const isUserArrAuthed=dutu.users?dutu.users.reduce((accum, currentValue)=>{
-        console.log(currentValue);
+       
   if(currentValue===session.user.email){return true}
   if(accum===true){return true}
   else{return false;}
 
    }): false;
-   console.log(isUserArrAuthed)
    if(dutu.email===session.user.email||isUserArrAuthed){ res.json(dutu)}
    else{res.json(JSON.stringify(["denied"]))}
 

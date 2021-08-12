@@ -1,6 +1,7 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
 export default async (req, res) => {
+  console.log(session.user.email);
 
     const idNum= parseInt(req.query.listDate)
     const session = await getSession({ req })
