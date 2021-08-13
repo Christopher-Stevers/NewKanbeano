@@ -5,11 +5,11 @@ import NewContext from '../components/newContext'
 export default function Card(props) {
     let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
     const [title, updateTitle] = useState(newContext[props.listIndex][props.index].title);
+    const [dueDate, updateDueDate] = useState(newContext[props.listIndex][props.index].dueDate);
     const [content, updateContent] = useState(newContext[props.listIndex][props.index].content);
     const [editable, updateEditable] = useState(false);
-    console.log(editable)
     const id = newContext[props.listIndex][props.index].id;
-    const modifyContext = async(e) => {
+    const modifyContext = async (e) => {
         const clone = JSON.parse(JSON.stringify(newContext))
         const updatedContext = JSON.parse(JSON.stringify(clone.map((elem, index) => {
 
@@ -19,6 +19,7 @@ export default function Card(props) {
                         return {
                             title: title,
                             content: content,
+                            dueDate: dueDate,
                             id: nestedElem.id,
                             editable:
                                 (newContext[props.listIndex][props.index].editable) ? false : true
@@ -38,8 +39,8 @@ export default function Card(props) {
         updateEditable(false);
 
     }
-    
-    const deleteCard = async() => {
+
+    const deleteCard = async () => {
         const clone = JSON.parse(JSON.stringify(newContext))
         const updatedContext = JSON.parse(JSON.stringify(clone.map((elem, index) => {
 
@@ -51,18 +52,34 @@ export default function Card(props) {
             }
             return elem;
         })))
-        await updateNewContext(updatedContext);        
+        await updateNewContext(updatedContext);
         await saveContextToDB(updatedContext);
-
     }
 
+    const timestampToString = (timestamp) => {
+
+        const dateObj = new Date(parseInt(timestamp));
+        return dateObj.toDateString();
+
+
+    }
+    const dateObjToTimestamp=(dateStr)=>{ 
+        const dateObj=new Date(dateStr);
+     return dateObj.getTime(); 
+
+
+    }
+    const formatDate=(input)=>{ 
+        const dateRegex= /([A-z]{3})(.{5})(\d+)(.{5})/;
+        return input.replace(dateRegex, "$1, $2 $3, $4");
+    }
     return (
 
         <div className={styles.card}>
             <div className={styles.cardTitle}> {editable ? <input className={styles.input} onChange={(e) => updateTitle(e.target.value)} value={title}></input>
-             : <span className={styles.span}>{newContext[props.listIndex][props.index].title}</span>}
+                : <span className={styles.span}>{newContext[props.listIndex][props.index].title}</span>}
 
-                <button className={styles.button} onClick={editable ? modifyContext: ()=>updateEditable(true)}>
+                <button className={styles.button} onClick={editable ? modifyContext : () => updateEditable(true)}>
                     {editable ?
                         <svg className={styles.titleSvg} version="1.1" x="0px" y="0px" width="100px"
                             height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
@@ -118,9 +135,20 @@ export default function Card(props) {
 
                 </button></div>
             {editable ?
-            <textarea className={styles.textArea} onChange={(e) => updateContent(e.target.value)} value={content} ></textarea> :
+                <textarea className={styles.textArea} onChange={(e) => updateContent(e.target.value)} value={content} ></textarea> :
                 <div className={styles.content}>{newContext[props.listIndex][props.index].content}</div>
             }
+            <div className={styles.spaceBetween}><span>Created: </span><span>{formatDate(timestampToString(newContext[props.listIndex][props.index].id))}</span></div>
+            
+                
+                   
+                    {
+                    editable?
+                    <div className={styles.spaceBetween}><label>Due</label><input type="date" onChange={(e) => {updateDueDate(dateObjToTimestamp(e.target.value));
+                    }} ></input></div> :
+                    newContext[props.listIndex][props.index].dueDate ? <div className={styles.spaceBetween}><span> Due: </span> <span>{formatDate(timestampToString(newContext[props.listIndex][props.index].dueDate))}</span></div>: null}
+                    
+                
             <div></div>
         </div>
 

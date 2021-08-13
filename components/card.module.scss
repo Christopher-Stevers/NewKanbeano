@@ -91,3 +91,7 @@ margin: 0 1rem;
     background-color: var(--header-text);
     *{fill: var(--header-background-color);}
 }}
+.spaceBetween{display: flex;
+    width: 90%;
+    padding: .25rem 0;
+justify-content: space-between;}

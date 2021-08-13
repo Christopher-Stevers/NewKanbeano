@@ -22,7 +22,12 @@ export default function Home () {
     ])
   const [auth, updateAuth] = useState(true)
   const [h2, updateH2]=useState("")
-  const [placeCard, updatePlaceCard]=useState("")
+  const [placeCard, updatePlaceCard]=useState("");
+  
+  const formatDate=(input)=>{ 
+    const dateRegex= /([A-z]{3})(.{5})(\d+)(.{5})/;
+    return input.replace(dateRegex, "$1, $2 $3, $4");
+}
   useEffect(async () => {
     if (session){
       
@@ -119,7 +124,7 @@ if(response.status===200){}
 
     <>
     <div><Header />{auth ?<>
-        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{ogDate}</time></span>
+        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{formatDate(ogDate)}</time></span>
         </div>
       < main className={styles.boardMain} >
         <DragDropContext onDragEnd={handleOnDragEnd}>

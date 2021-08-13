@@ -1,5 +1,6 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
+const { MONGO_COLLECTION } = process.env;
 export default async (req, res) => {
   
   const idNum= parseInt(req.query.listDate)
@@ -11,7 +12,7 @@ export default async (req, res) => {
  const deleteData=async()=>{
   
  const deleted=await db 
-      .collection("kanbeano")
+      .collection(MONGO_COLLECTION)
       .deleteOne({listDate:{$eq: idNum}});
       res.json(deleted.deletedCount)
 
@@ -19,7 +20,7 @@ export default async (req, res) => {
 
   const getData=async()=>{
 const dutu=await db 
-      .collection("kanbeano")
+      .collection(MONGO_COLLECTION)
       .findOne({listDate: idNum});
       const isUserArrAuthed=dutu.users?dutu.users.reduce((accum, currentValue)=>{
        
@@ -40,7 +41,7 @@ const dutu=await db
 
   const postData=async ()=> {
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
-       const hitApi=db.collection("kanbeano")
+       const hitApi=db.collection(process.env.MONGO_COLLECTION)
         .findOneAndUpdate({listDate: idNum}, {
           $set: { data: JSON.parse(req.body) }
         });
@@ -53,7 +54,7 @@ const dutu=await db
         res.json({status: 200})}
   }
   const putData=async()=>{
-    db.collection("kanbeano").insertOne(JSON.parse(req.body))
+    db.collection(process.env.MONGO_COLLECTION).insertOne(JSON.parse(req.body))
   }
 
   

@@ -1,5 +1,7 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
+
+const { MONGO_COLLECTION } = process.env;
 export default async (req, res) => {
 
   
@@ -13,7 +15,7 @@ export default async (req, res) => {
     const deleteData=async()=>{
   
         const deleted=await db 
-             .collection("kanbeano")
+             .collection(MONGO_COLLECTION)
              .deleteOne({listDate:{$eq: idNum},
                email: {$eq: session.user.email}});
              res.json(deleted.deletedCount)
@@ -24,7 +26,7 @@ export default async (req, res) => {
     
     
     const arrayData=await db 
-    .collection("kanbeano")
+    .collection(MONGO_COLLECTION)
     .find({users: session.user.email})
     .toArray();
     res.json(arrayData);
@@ -34,7 +36,7 @@ export default async (req, res) => {
       }
 
     const putData=async()=>{
-        db.collection("kanbeano").insertOne(JSON.parse(req.body))
+        db.collection(MONGO_COLLECTION).insertOne(JSON.parse(req.body))
       }
       
 const execute=()=>{ switch(req.method){
