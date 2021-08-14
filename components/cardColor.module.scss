@@ -22,12 +22,13 @@
     position: relative;
     z-index: 10;
     text-align: center;
+        background-color: var(--header-text);
     &:hover {
+        background-color: var(--sublist-background-color);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         cursor: pointer;
         position: relative;
-        background-color: var(--header-text);
         * {
             fill: var(--header-background-color);
         }
@@ -35,7 +36,6 @@
 }
 .list {
     margin-top: 0.3rem;
-    padding-bottom: 0.3rem;
     background-color: var(--header-background-color);
     width: 1.6rem;
     visibility: hidden;
@@ -43,6 +43,7 @@
 }
 .open {
     visibility: visible;
+    background-color: var(--sublist-background-color);
 }
 .hoverDiv {
     &:hover {

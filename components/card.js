@@ -8,6 +8,7 @@ export default function Card(props) {
     const [title, updateTitle] = useState(newContext[props.listIndex][props.index].title);
     const [dueDate, updateDueDate] = useState(newContext[props.listIndex][props.index].dueDate);
     const [content, updateContent] = useState(newContext[props.listIndex][props.index].content);
+    const [cardColour, updateCardColour] = useState(newContext[props.listIndex][props.index].colour)
     const [editable, updateEditable] = useState(false);
     const id = newContext[props.listIndex][props.index].id;
     const modifyContext = async (e) => {
@@ -21,6 +22,7 @@ export default function Card(props) {
                             title: title,
                             content: content,
                             dueDate: dueDate,
+                            colour: cardColour,
                             id: nestedElem.id,
                             editable:
                                 (newContext[props.listIndex][props.index].editable) ? false : true
@@ -41,6 +43,10 @@ export default function Card(props) {
 
     }
 
+    const modifyColour=(colour)=>{
+        //updateCardColour(colour);
+       // modifyContext();
+       }
     const deleteCard = async () => {
         const clone = JSON.parse(JSON.stringify(newContext))
         const updatedContext = JSON.parse(JSON.stringify(clone.map((elem, index) => {
@@ -81,7 +87,7 @@ export default function Card(props) {
         <div style={passedStyles} className={styles.card}>
             <div className={styles.cardTitle}> {editable ? <input className={styles.input} onChange={(e) => updateTitle(e.target.value)} value={title}></input>
                 : <span className={styles.span}>{newContext[props.listIndex][props.index].title}</span>}
-                <CardColor currentColor={passedStyles}/>
+                <CardColor index={props.index} listIndex={props.listIndex} changeColour={modifyColour} currentColor={passedStyles}/>
 
                 <button className={styles.button} onClick={editable ? modifyContext : () => updateEditable(true)}>
                     {editable ?
