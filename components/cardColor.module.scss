@@ -1,0 +1,51 @@
+.container {
+    fill: var(--header-text);
+    height: 1rem;
+    width: 1rem;
+    margin: 0 0.3rem;
+    border-radius: 50%;
+    align-self: start;
+
+    &:hover {
+        fill: var(--header-background-color);
+    }
+}
+
+.colorButton {
+    background-color: var(--header-background-color);
+    width: min-content;
+    aspect-ratio: 1/1;
+    border-radius: 2px;
+    margin: 0.4rem;
+    padding-top: 0.3rem;
+    height: 1.6rem;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    &:hover {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        cursor: pointer;
+        position: relative;
+        background-color: var(--header-text);
+        * {
+            fill: var(--header-background-color);
+        }
+    }
+}
+.list {
+    margin-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    background-color: var(--header-background-color);
+    width: 1.6rem;
+    visibility: hidden;
+    text-align: center;
+}
+.open {
+    visibility: visible;
+}
+.hoverDiv {
+    &:hover {
+        background-color: var(--header-text);
+    }
+}

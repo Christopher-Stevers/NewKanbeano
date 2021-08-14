@@ -2,6 +2,7 @@ import styles from './card.module.scss';
 import { useState, useContext } from 'react'
 import CardContext from './cardContext'
 import NewContext from '../components/newContext'
+import CardColor from './cardColor';
 export default function Card(props) {
     let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
     const [title, updateTitle] = useState(newContext[props.listIndex][props.index].title);
@@ -73,11 +74,14 @@ export default function Card(props) {
         const dateRegex= /([A-z]{3})(.{5})(\d+)(.{5})/;
         return input.replace(dateRegex, "$1, $2 $3, $4");
     }
+    const passedStyles={backgroundColor: newContext[props.listIndex][props.index].colour};
+  
     return (
 
-        <div className={styles.card}>
+        <div style={passedStyles} className={styles.card}>
             <div className={styles.cardTitle}> {editable ? <input className={styles.input} onChange={(e) => updateTitle(e.target.value)} value={title}></input>
                 : <span className={styles.span}>{newContext[props.listIndex][props.index].title}</span>}
+                <CardColor currentColor={passedStyles}/>
 
                 <button className={styles.button} onClick={editable ? modifyContext : () => updateEditable(true)}>
                     {editable ?
