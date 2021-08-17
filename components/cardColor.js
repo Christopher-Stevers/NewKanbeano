@@ -56,7 +56,7 @@ export default function CardColor(props) {
     }
     const red={backgroundColor: "#"};
     const yellow={backgroundColor: "yellow"};
-    const defaultColour={backgroundColor: "var(--content-background-color)"};
+    const defaultColour={backgroundColor: "var(--header-background-color)"};
     const green={backgroundColor: "green"};
     const colourPicked=(arg)=>{
     modifyContext(arg);
