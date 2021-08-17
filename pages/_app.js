@@ -13,6 +13,9 @@ export default function App({ Component, pageProps }) {
     mainBackgroundColor: "hsl(24, 100%, 92%)",
     sublistBackgroundColor: "hsl(7, 48%, 59%)",
     taskContentBackgroundColor:"hsl(24, 100%, 92%)",
+    casual:"#7BF1A8",
+    warn:"hsl(49, 90%, 62%)",
+    urgent:"hsl(345, 93%, 22%)",
     themeDir: "left",
 }
 const statefulTheme=useState(themeObj);

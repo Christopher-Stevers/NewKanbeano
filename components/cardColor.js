@@ -40,6 +40,7 @@ export default function CardColor(props) {
     }
 
     const [open, updateOpen]=useState(false);
+    const [clickedOpen, updateClickedOpen]=useState(false);
     const currentColor=props.passedStyles;
     const handleHover=()=>{ 
      
@@ -47,7 +48,7 @@ export default function CardColor(props) {
     }
     const handleHoverLeave=()=>{
 
-        updateOpen(true);
+        updateOpen(false);
 
     }
     const dotClicked=()=>{
@@ -55,21 +56,28 @@ export default function CardColor(props) {
     }
     const red={backgroundColor: "#"};
     const yellow={backgroundColor: "yellow"};
-    const defaultColour={backgroundColor: "var(--header-background-color)"};
+    const defaultColour={backgroundColor: "var(--content-background-color)"};
     const green={backgroundColor: "green"};
     const colourPicked=(arg)=>{
     modifyContext(arg);
+    console.log(props.currentColor);
 
     }
-    return(<div onMouseLeave={handleHoverLeave} onMouseOver={handleHover} className={styles.colorButton}>
-        <div style={ false ? props.currentColor : defaultColour} className={styles.container}>
+    const handleClick=(e)=>{
+        e.preventDefault();
+    clickedOpen?updateClickedOpen(false):updateClickedOpen(true);
+    updateOpen(false);
+
+    }
+    return(<div onMouseLeave={handleHoverLeave} onMouseOver={handleHover} onClick={handleClick} className={styles.colorButton}>
+        <div onClick={handleClick} style={ props.currentColor.backgroundColor ? props.currentColor : defaultColour} className={styles.container}>
     </div>
-    {<div className={open ? `${styles.list} ${styles.open}`:`${styles.list}`}>
+    {<div className={open||clickedOpen ? `${styles.list} ${styles.open}`:`${styles.list}`}>
     
-    <ColourButton clicked={colourPicked}  colour={"var(--header-background-color)"}/>
-    <ColourButton clicked={colourPicked}  colour={ "#083d2e"}/>
-    <ColourButton clicked={colourPicked}  colour={"#3d2e08"}/>
-    <ColourButton clicked={colourPicked} colour={" #3d0817 "}/>
+    <ColourButton clicked={colourPicked} className={styles.first}  colour={"var(--header-background-color)"}/>
+    <ColourButton clicked={colourPicked}  colour={ "var(--casual-code)"}/>
+    <ColourButton clicked={colourPicked}  colour={"var(--warn-code)"}/>
+    <ColourButton clicked={colourPicked} colour={" var(--urgent-code) "}/>
     </div>
     }
     </div>)

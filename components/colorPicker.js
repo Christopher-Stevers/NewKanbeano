@@ -10,7 +10,11 @@ export default function colorPicker(){
     mainText,
     mainBackgroundColor,
     sublistBackgroundColor,
-    taskContentBackgroundColor, themeDir}=colorContext;
+    taskContentBackgroundColor,
+    casual,
+    warn,
+    urgent,
+     themeDir}=colorContext;
     /*--body-background-color:    hsla(0, 9%, 12%);
        --header-text: hsla(0, 9%, 75%);
        --darker-header-text: hsla(0, 9%, 50%);
@@ -31,6 +35,9 @@ export default function colorPicker(){
           mainBackgroundColor: "hsl(356, 15%, 19%)",
           sublistBackgroundColor: "hsl(7, 48%, 59%)",
           taskContentBackgroundColor:"hsl(356, 15%, 19%)",
+          casual:"hsl(143, 77%, 12%)",
+          warn:"hsl(39, 90%, 19%)",
+          urgent:"hsl(352, 89%, 18%)",
           themeDir: "right",
       
         }
@@ -44,6 +51,9 @@ export default function colorPicker(){
               mainBackgroundColor: "hsl(24, 100%, 92%)",
               sublistBackgroundColor: "hsl(7, 48%, 59%)",
               taskContentBackgroundColor:"hsl(24, 100%, 92%)",
+              casual:"hsl(143, 81%, 71%)",
+              warn:"hsl(49, 90%, 62%)",
+              urgent:"hsl(345, 93%, 22%)",
               themeDir: "left",
       })
       }
@@ -56,6 +66,9 @@ export default function colorPicker(){
         document.querySelector(':root').style.setProperty('--main-background-color', mainBackgroundColor);
         document.querySelector(':root').style.setProperty('--content-background-color', taskContentBackgroundColor);
         document.querySelector(':root').style.setProperty('--header-text', headerText);
+        document.querySelector(':root').style.setProperty('--casual-code', casual);
+        document.querySelector(':root').style.setProperty('--warn-code', warn);
+        document.querySelector(':root').style.setProperty('--urgent-code', urgent);
         document.querySelector(':root').style.setProperty('--theme-dir', themeDir);
     },[headerText,
         headerBackgroundColor,
@@ -89,6 +102,9 @@ else{
         mainBackgroundColor: "hsl(24, 100%, 92%)",
         sublistBackgroundColor: "hsl(7, 48%, 59%)",
         taskContentBackgroundColor:"hsl(24, 100%, 92%)",
+        casual:"hsl(143, 81%, 71%)",
+        warn:"hsl(49, 90%, 62%)",
+        urgent:"hsl(352, 90%, 63%)",
         themeDir: "left",
 })
 }

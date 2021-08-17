@@ -1,30 +1,35 @@
 .container {
     fill: var(--header-text);
-    height: 1rem;
-    width: 1rem;
-    margin: 0 0.3rem;
+    height: 1.5em;
+    width: 1.5em;
+   margin: 0 auto;
     border-radius: 50%;
-    align-self: start;
-
-    &:hover {
-        fill: var(--header-background-color);
-    }
+    align-self: center;
+    
+    
 }
 
 .colorButton {
+    grid-column-start: 4;
+   font-size: 12px;
     background-color: var(--header-background-color);
-    width: min-content;
+    width: 2.6em;
+    height: 2.6em;
     aspect-ratio: 1/1;
     border-radius: 2px;
-    margin: 0.4rem;
-    padding-top: 0.3rem;
-    height: 1.6rem;
+    margin: 0.4em;
+    margin-right:0;
+    margin-left: .3em;
+    padding-top: 0.3em;
+    margin-top: .4rem;
+    height: 2.6em;
+    border: 2px solid var(--header-text);
     position: relative;
     z-index: 10;
     text-align: center;
         background-color: var(--header-text);
     &:hover {
-        background-color: var(--sublist-background-color);
+        background-color: var(--main-background-color);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         cursor: pointer;
@@ -35,15 +40,18 @@
     }
 }
 .list {
-    margin-top: 0.3rem;
-    background-color: var(--header-background-color);
-    width: 1.6rem;
+    margin-top: 0.3em;
+    background-color: var(--main-background-color);
+    width: 2.6em;
+    border: 2px solid var(--header-text);
+    border-top: 0px;
+    margin-left: -2px;
     visibility: hidden;
     text-align: center;
 }
 .open {
     visibility: visible;
-    background-color: var(--sublist-background-color);
+    background-color: var(--main-background-color);
 }
 .hoverDiv {
     &:hover {

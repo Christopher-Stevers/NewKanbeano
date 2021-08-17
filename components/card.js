@@ -87,7 +87,7 @@ export default function Card(props) {
         <div style={passedStyles} className={styles.card}>
             <div className={styles.cardTitle}> {editable ? <input className={styles.input} onChange={(e) => updateTitle(e.target.value)} value={title}></input>
                 : <span className={styles.span}>{newContext[props.listIndex][props.index].title}</span>}
-                <CardColor index={props.index} listIndex={props.listIndex} changeColour={modifyColour} currentColor={passedStyles}/>
+               
 
                 <button className={styles.button} onClick={editable ? modifyContext : () => updateEditable(true)}>
                     {editable ?
@@ -143,7 +143,8 @@ export default function Card(props) {
                     </svg>
 
 
-                </button></div>
+                </button>
+                <CardColor index={props.index} listIndex={props.listIndex} changeColour={modifyColour} currentColor={passedStyles}/></div>
             {editable ?
                 <textarea className={styles.textArea} onChange={(e) => updateContent(e.target.value)} value={content} ></textarea> :
                 <div className={styles.content}>{newContext[props.listIndex][props.index].content}</div>

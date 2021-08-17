@@ -1,7 +1,8 @@
 import styles from './colourButton.module.scss'
 export default function ColourButton(props){
 
-    const handleClick=()=>{ 
+    const handleClick=(e)=>{
+        e.preventDefault(); 
         props.clicked(props.colour);
 
     }
