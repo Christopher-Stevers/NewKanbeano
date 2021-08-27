@@ -23,4 +23,4 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 Deployment
 ---
-This project can be deployed via vercel or netlify. Make sure to set enviromental variables in order to enable backend functionality.
+This project can be deployed via vercel or netlify. Make sure to set enviromental variables again in order to enable backend functionality.
