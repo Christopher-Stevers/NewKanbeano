@@ -93,15 +93,15 @@ export default function Card(props) {
                     {editable ?
                         <svg className={styles.titleSvg} version="1.1" x="0px" y="0px" width="100px"
                             height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
-                            <g id="_x37_7_Essential_Icons">
-                                <path id="Save" d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8
+                            <g >
+                                <path  d="M82.4,24.3l-9.8-9.8c-0.4-0.4-0.9-0.6-1.4-0.6H19c-1.1,0-2,0.9-2,2v68c0,1.1,0.9,2,2,2h62c1.1,0,2-0.9,2-2V25.8
                  C83,25.2,82.8,24.7,82.4,24.3z M31,18h38v32H31V18z M79,82H21V18h6v34c0,1.1,0.9,2,2,2h42c1.1,0,2-0.9,2-2V20.6l6,6V82z M64.8,24.5
                  v19c0,1.1-0.9,2-2,2c-1.1,0-2-0.9-2-2v-19c0-1.1,0.9-2,2-2C63.9,22.5,64.8,23.4,64.8,24.5z"/>
                             </g>
-                            <g id="Guides">
+                            <g >
                             </g>
-                            <g id="Info">
-                                <g id="BORDER">
+                            <g >
+                                <g>
                                     <path fill="#0000FF" d="M1504-930V754H-280V-930H1504 M1512-938H-288V762h1800V-938L1512-938z" />
                                 </g>
                             </g>
@@ -127,16 +127,16 @@ export default function Card(props) {
                 <button className={styles.button} onClick={deleteCard}>
                     <svg className={styles.deleteButton} version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100px"
                         height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
-                        <g id="_x37_7_Essential_Icons">
-                            <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
+                        <g>
+                            <path  d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83
 		c0,1.1,0.9,2,2,2h44.8c1.1,0,2-0.9,2-2V27.5H81c1.1,0,2-0.9,2-2C83,24.4,82.1,23.5,81,23.5z M43,19h14v4H43V19z M70.4,81H29.6V27.5
 		h40.8V81z M61,38.3v32c0,1.1-0.9,2-2,2s-2-0.9-2-2v-32c0-1.1,0.9-2,2-2S61,37.1,61,38.3z M43,38.3v32c0,1.1-0.9,2-2,2s-2-0.9-2-2
 		v-32c0-1.1,0.9-2,2-2S43,37.1,43,38.3z"/>
                         </g>
-                        <g id="Guides">
+                        <g >
                         </g>
-                        <g id="Info">
-                            <g id="BORDER">
+                        <g>
+                            <g >
                                 <path fill="#0000FF" d="M1364-930V754H-420V-930H1364 M1372-938H-428V762h1800V-938L1372-938z" />
                             </g>
                         </g>

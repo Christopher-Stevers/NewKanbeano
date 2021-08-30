@@ -2,6 +2,7 @@ import styles from '../../styles/listPage.module.scss'
 import NewContext from '../../components/newContext'
 import React from 'react'
 import Link from 'next/link'
+import Head from 'next/head'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
 import CardContainer from '../../components/indieContainer'
@@ -123,7 +124,13 @@ if(response.status===200){}
   return (
 
     <>
-    <div><Header />{auth ?<>
+    <div>
+      <Head >
+        <title>{h2}</title>
+ 
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Header />{auth ?<>
         <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{formatDate(ogDate)}</time></span>
         </div>
       < main className={styles.boardMain} >

@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/client'
 import CardContainer from '../../components/indieContainer'
 import { parse, v4 as uuidv4 } from 'uuid';
 import Header from '../../components/header'
+import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import ColorPicker from '../../components/colorPicker'
@@ -126,7 +127,12 @@ updateEnterName(false);
 
 
   }
-  return (<><Header />
+  return (<>
+    <Head >
+      <title>My Boards</title>
+
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head><Header />
 {(session)? 
   < main className={styles.main} >
 <ul className={styles.boards}> 

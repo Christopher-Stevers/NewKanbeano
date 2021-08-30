@@ -1,6 +1,7 @@
 import styles from '../styles/listPage.module.scss'
 import NewContext from '../components/newContext'
 import React from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
@@ -135,6 +136,10 @@ if(response.status===200){}
   return (
 
     <>
+    <Head>
+        <title>Kanbeano Demo</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  </Head>
     <div className={styles.entirePage}><Header />
         
       < main className={styles.main} >
