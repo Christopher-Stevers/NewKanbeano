@@ -14,7 +14,7 @@ import Image from 'next/image'
 import ColorPicker from '../../components/colorPicker'
 export default function Home() {
   const [session, loading] = useSession();
-  const [sessionEmail, updateSessionEmail]=useState("");
+  const [userEmail, updateUserEmail]=useState("");
   const current = Date.now();
   const [loggedIn, updateLoggedIn] = useState(true);
   const [listArr, updateListArr] = useState([]);
@@ -24,13 +24,14 @@ export default function Home() {
   const [res, updateRes] = useState([])
   const [enterName, updateEnterName] = useState(false);
   
+  const periodRegex = /\./g;
   useEffect(async () => {
     if (session) {
       const url =  "/api/arrayOfBoards"
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj);
-      updateSessionEmail(session.user.email)
+      updateUserEmail(session.user.email.replace(periodRegex, ""))
 
     }
 
@@ -52,16 +53,16 @@ export default function Home() {
       body: JSON.stringify({
         data: [
         ],
-        email: session.user.email,
+        email: userEmail,
         listTitle: name,
         listDate:current,
-        users:[sessionEmail]
+        users:[userEmail]
       })
 
     }; 
     updateRes([...res,
     {
-      email: session.user.email,
+      email: userEmail,
       listTitle: name,
       listDate:current
     }])
@@ -153,7 +154,7 @@ updateEnterName(false);
       <div className={styles.board}><Image priority="true" src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/><div>
         <span><Link href={dateURL}>{elem.listTitle|| dateString.toDateString()}</Link>
         
-        {(session.user.email===elem.email)?<button className={styles.delete} id={elem.listDate} onClick={deleteFromDb}>
+        {(userEmail===elem.email)?<button className={styles.delete} id={elem.listDate} onClick={deleteFromDb}>
    <svg height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
                     <g id="_x37_7_Essential_Icons">
                         <path id="Trash" d="M81,23.5H61V17c0-1.1-0.9-2-2-2H41c-1.1,0-2,0.9-2,2v6.5H19c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2h6.6V83

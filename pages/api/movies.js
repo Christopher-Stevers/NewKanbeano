@@ -2,80 +2,87 @@ import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
 const { MONGO_COLLECTION } = process.env;
 export default async (req, res) => {
-  
-  const idNum= parseInt(req.query.listDate)
+
+  const idNum = parseInt(req.query.listDate)
   const session = await getSession({ req })
-  console.log(session.user.email);
 
   const { db } = await connectToDatabase();
 
- const deleteData=async()=>{
-  
- const deleted=await db 
+  const periodRegex = /\./g
+  const userEmail = session.user.email.replace(periodRegex, "");
+  const dutu = await db
       .collection(MONGO_COLLECTION)
-      .deleteOne({listDate:{$eq: idNum}});
-      res.json(deleted.deletedCount)
+      .findOne({ listDate: idNum });
+    const isUserArrAuthed = dutu.users ? dutu.users.reduce((accum, currentValue) => {
 
- }
+      if (currentValue === userEmail) { return true }
+      if (accum === true) { return true }
+      else { return false; }
 
-  const getData=async()=>{
-const dutu=await db 
+    }) : false;
+  const deleteData = async () => {
+
+    if(userEmail===dutu.email){const deleted = await db
       .collection(MONGO_COLLECTION)
-      .findOne({listDate: idNum});
-      const isUserArrAuthed=dutu.users?dutu.users.reduce((accum, currentValue)=>{
-       
-  if(currentValue===session.user.email){return true}
-  if(accum===true){return true}
-  else{return false;}
+      .deleteOne({ listDate: { $eq: idNum } });
+    res.json(deleted.deletedCount)
+    }
+  }
 
-   }): false;
-   if(dutu.email===session.user.email||isUserArrAuthed){ res.json(dutu)}
-   else{res.json(JSON.stringify(["denied"]))}
+  const getData = async () => {
+    
+    if (dutu.email === userEmail || isUserArrAuthed) { res.json(dutu) }
+    else { res.json(JSON.stringify(["denied"])) }
 
- 
 
-  
+
+
+
+  }
+
+
+  const postData = async () => {
+    //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
+    if(isUserArrAuthed) {const hitApi = db.collection(process.env.MONGO_COLLECTION)
+      .findOneAndUpdate({ listDate: idNum }, {
+        $set: { data: JSON.parse(req.body) }
+      });
+    const hitted = await Promise.resolve(hitApi);
+    console.log(hitted.ok);
+
+    if (hitted.ok) {
+      console.log(200);
+      res.status(200);
+      res.json({ status: 200 })
+    }
+  }
+  }
+  const putData = async () => {
+    if(userArrAuthed)db.collection(process.env.MONGO_COLLECTION).insertOne(JSON.parse(req.body))
+  }
+
+
+  const execute = () => {
+    switch (req.method) {
+
+      case "POST":
+        postData();
+        break;
+      case "PUT":
+        putData()
+        break;
+      case "DELETE":
+        deleteData()
+        break;
+      default:
+        getData()
+
 
     }
-  
-
-  const postData=async ()=> {
-    //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
-       const hitApi=db.collection(process.env.MONGO_COLLECTION)
-        .findOneAndUpdate({listDate: idNum}, {
-          $set: { data: JSON.parse(req.body) }
-        });
-         const hitted = await Promise.resolve(hitApi);
-         console.log(hitted.ok);
-
-        if(hitted.ok){
-          console.log(200);
-          res.status(200);
-        res.json({status: 200})}
-  }
-  const putData=async()=>{
-    db.collection(process.env.MONGO_COLLECTION).insertOne(JSON.parse(req.body))
   }
 
-  
-const execute=()=>{ switch(req.method){
-
-case "POST":
-   postData();
-   break;
-case "PUT":
-   putData()
-  break;
-case "DELETE":
-  deleteData()
-  break;
-default:
-   getData()
-
-
-}}
-
-if(!session){ res.json({"message": "please authenticate"})}
-if(session){
-  execute();}
+  if (!session) { res.json({ "message": "please authenticate" }) }
+  if (session) {
+    execute();
+  }
 };

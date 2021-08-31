@@ -7,8 +7,9 @@ export default async (req, res) => {
   
 
     const idNum= parseInt(req.query.listDate)
-    const session = await getSession({ req })
-  
+    const session = await getSession({ req });
+    const periodRegex=/\./g
+    const userEmail=session.user.email.replace(periodRegex,"");
     const { db } = await connectToDatabase();
   
    
@@ -17,7 +18,7 @@ export default async (req, res) => {
         const deleted=await db 
              .collection(MONGO_COLLECTION)
              .deleteOne({listDate:{$eq: idNum},
-               email: {$eq: session.user.email}});
+               email: {$eq: userEmail}});
              res.json(deleted.deletedCount)
        
         }
@@ -27,7 +28,7 @@ export default async (req, res) => {
     
     const arrayData=await db 
     .collection(MONGO_COLLECTION)
-    .find({users: session.user.email})
+    .find({users: userEmail})
     .toArray();
     res.json(arrayData);
     
