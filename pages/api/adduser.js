@@ -36,8 +36,10 @@ export default async (req, res) => {
                 users: otherEmail
             }
         });
-        if (ditu.ok===1){}
- res.status(200).json({result:"success"});
+        if (ditu.ok===1){
+ res.status(200).json({result:"success"})}
+ else{res.status(200).json({result: "failiure"})}
+ 
  }
  else{ res.status(200).json({result:"already"})}
 }

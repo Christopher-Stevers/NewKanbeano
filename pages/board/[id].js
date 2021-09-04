@@ -106,6 +106,9 @@ if(response.status===200){}
     else if(responseObj.result===success){
      updateText( `${email} has been added to this board.`);
     }
+    else if(responseObj.result===failiure){
+      updateText("Sorry, an error occured.")
+    }
       updateIsInvite(false);
      updateSuccess(true);
      setTimeout(function(){ updateSuccess(false); }, 3000);
