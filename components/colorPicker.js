@@ -76,12 +76,13 @@ export default function colorPicker(){
         mainBackgroundColor,
         sublistBackgroundColor,
         taskContentBackgroundColor,
-        themeDir
+        themeDir,
       ]);
   const changeColor=()=>{
       
     day?updateDay(false): updateDay(true);
 if(day){
+    console.log("changeColor");
     updateColorContext({
     headerText:"hsl(0, 0%, 100%)",
     headerBackgroundColor: "hsl(233, 40%, 4%)",
@@ -89,6 +90,9 @@ if(day){
     mainBackgroundColor: "hsl(356, 15%, 19%)",
     sublistBackgroundColor: "hsl(7, 48%, 59%)",
     taskContentBackgroundColor:"hsl(356, 15%, 19%)",
+    casual:"hsl(143, 77%, 12%)",
+    warn:"hsl(39, 90%, 19%)",
+    urgent:"hsl(352, 89%, 18%)",
     themeDir: "right",
 
   }
