@@ -12,7 +12,6 @@ import { useSession } from 'next-auth/client'
 import Header from '../../components/header'
 import ColorPicker from '../../components/colorPicker'
 export default function Home () {
-  const [session, loading] = useSession()
   const router = useRouter()
   const { id } = router.query
   const ogDate=new Date(parseInt(id)).toDateString();
@@ -33,11 +32,11 @@ export default function Home () {
 }
 const [text, updateText]=useState("");
   useEffect(async () => {
-    if (session){
+    if (true){
       
-    const url = "/" + "api/movies?listDate=" + router.query.id
-    const response = await fetch(url)
-    const responseObj = await response.json();
+    //const url = "/" + "api/movies?listDate=" + router.query.id
+   // const response = await fetch(url)
+    const responseObj = {"_id":{"$oid":"60fc42ec60890a0008c13a6c"},"data":[[{"title":"Soul Runner","id":1627291456546},{"title":"Add multi user","content":"","dueDate":1628640000000,"colour":"var(--casual-code)","id":"1627388257441","editable":false}],[{"title":"Kanbeano","id":1627291459259},{"title":"Research task app ux","content":"","dueDate":1627948800000,"colour":" var(--urgent-code) ","id":"1627388282348","editable":false},{"title":"Make all pages standards compliant","content":"","dueDate":1629763200000,"id":"1628550072550","editable":false},{"title":"MoF's suggestions.","content":"so, numbers/crt no, and colour coding for status (green/red/ blue/yellow )\n","dueDate":1627948800000,"id":"1628794311883","editable":false}],[{"title":"WP-Calypso","id":1627291469419},{"title":"Find new Issue","content":"","id":"1627291647320","editable":false},{"title":"Connect with maintainers","content":"","id":"1627291657486","editable":false},{"title":"Apply for jobs","content":"","colour":"var(--header-background-color)","id":"1627291665429","editable":false}],[{"title":"Applications","id":1627291472411},{"title":"Indeed","content":"","id":"1627388353080","editable":false}],[{"title":"Other Projects","id":1627291471268},{"title":"Stock charts.","content":"Simplify ui.","id":"1627291676430","editable":false}]],"email":"christopherstevers1@gmailcom","listTitle":"Projects","listDate":1627144937292,"users":["christopherstevers1@gmailcom","yel,owdawg@gmailcom","geodsawgling@emailcom","geodsawglinmarglg@emailcom","helf@inglegmailcom","elf@inglecom","lando@inglecom","landingo@inglecom","ladorlge@gmailcom","martinee@gmailcom","martiinglee@gmailcom","martiingleeadke@gmailcom","asdfkjsafe@gmailcom","asdfkjssdfsdfaafe@gmailcom","asdfkjsmaryfsdfaafe@gmailcom","asdfkjsmafaafe@gmailcom","home@gmailcom","himmee@gmailcom"]}
     if (typeof responseObj[0] === 'string') {
       updateAuth(false)
     }
@@ -47,10 +46,9 @@ const [text, updateText]=useState("");
       updateH2(responseObj.listTitle)
       updatePlaceCard(true)
     }}
-  }, [router.query.id, session]);
+  }, []);
 
   // If no session exists, display access denied message
-  if (!session) { return <div> <Header  /> <span>This board either does not exist, or you do not own it.</span> </div> }
   
 
   const grabName = (e) => {

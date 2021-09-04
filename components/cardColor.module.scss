@@ -10,7 +10,6 @@
 }
 
 .colorButton {
-    
     grid-column-start: 4;
    font-size: 12px;
     background-color: var(--header-background-color);
@@ -24,7 +23,7 @@
     height: 32px;
     border: 2px solid var(--header-text);
     position: relative;
-    z-index: 10;
+    z-index: 5;
     text-align: center;
         background-color: var(--header-text);
     &:hover {
