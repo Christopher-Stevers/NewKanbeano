@@ -14,9 +14,12 @@ export default async (req, res) => {
       .collection(MONGO_COLLECTION)
       .findOne({ listDate: idNum });
     const isUserArrAuthed = dutu.users ? dutu.users.reduce((accum, currentValue) => {
-
+     
+   
       if (currentValue === userEmail) { return true }
-      if (accum === true) { return true }
+
+      else if (accum === userEmail) { return true }
+      else if (accum===true){return true}
       else { return false; }
 
     }) : false;
@@ -40,7 +43,6 @@ export default async (req, res) => {
 
   }
 
-
   const postData = async () => {
     //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
     if(isUserArrAuthed) {const hitApi = db.collection(process.env.MONGO_COLLECTION)
@@ -48,10 +50,8 @@ export default async (req, res) => {
         $set: { data: JSON.parse(req.body) }
       });
     const hitted = await Promise.resolve(hitApi);
-    console.log(hitted.ok);
 
     if (hitted.ok) {
-      console.log(200);
       res.status(200);
       res.json({ status: 200 })
     }

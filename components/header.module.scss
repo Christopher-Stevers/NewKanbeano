@@ -13,6 +13,8 @@
 .h1 {
   font-size: 3rem;
   margin: 0px;
+  height: 3rem;
+  line-height: 3rem;;
 }
 .signedInText,
 .signedInStatus {
@@ -23,24 +25,11 @@
     padding: 0px 0.5rem;
   }
 }
-.userInfo {
-  background-color: var(--header-background-color);
-  color: var(--header-text);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  align-content: flex-end;
-  align-content: flex-end;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-self: end;
-  width: 100%;
-  @media screen and (min-width: 500px){width: auto};
-  max-width: 100%;
-}
 .loading,
 .loaded {
+  gap: 1rem;
   width: 100%;
+  *{flex: 1;}
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -56,7 +45,6 @@
   padding: 0.6rem 2rem;
   margin: 0;
   color: var(--header-text);
-  transition: all 0.2s ease-in;
 }
 
 .loading {
@@ -64,6 +52,24 @@
   opacity: 0;
 }
 
+.userInfo {
+  flex: 1.5;
+  background-color: var(--header-background-color);
+  color: var(--header-text);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: flex-end;
+  align-content: flex-end;
+  flex-direction: column;
+  justify-self: end;
+  flex-wrap: nowrap;
+  width: 100%;
+  @media screen and (min-width: 500px){width: auto};
+  max-width: 100%;
+  flex: .75;
+  flex-shrink: 0;
+}
 .signedInText,
 .notSignedInText {
   align-self: center;
@@ -75,7 +81,6 @@
   text-overflow: ellipsis;
   display: block;
   width: min-content;
-  z-index: 1;
 }
 
 .signedInText {
@@ -112,14 +117,12 @@
   height: 2.5rem;
   padding: 0rem 0rem;
   position: relative;
-  z-index: 10;
   text-decoration: underline;
   background-color: transparent;
   justify-self: end;
 }
 .flexContainer {
   display: flex;
-  flex-wrap: wrap;
 }
 .buttonPrimary {
   
@@ -155,4 +158,12 @@
 .navItem {
   display: inline-block;
   margin-right: 1rem;
+}
+.myBoards{
+  font-size: 1.5rem;text-decoration: underline;
+  text-align: right;
+  white-space: nowrap;
+  @media screen and (max-width: 340px){
+    text-align: left;
+  }
 }

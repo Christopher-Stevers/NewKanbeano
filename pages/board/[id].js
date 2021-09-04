@@ -21,14 +21,17 @@ export default function Home () {
   const [contextState, updateContextState] = useState(
     [
     ])
+    const [isInvite, updateIsInvite]=useState(false);
+    const [email, updateEmail]=useState("");
   const [auth, updateAuth] = useState(true)
   const [h2, updateH2]=useState("")
   const [placeCard, updatePlaceCard]=useState("");
-  
+  const [success, updateSuccess] =useState(false);
   const formatDate=(input)=>{ 
     const dateRegex= /([A-z]{3})(.{5})(\d+)(.{5})/;
     return input.replace(dateRegex, "$1, $2 $3, $4");
 }
+const [text, updateText]=useState("");
   useEffect(async () => {
     if (session){
       
@@ -79,7 +82,35 @@ export default function Home () {
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
 if(response.status===200){}
   }
-  
+  const inviteMember=()=>{
+    isInvite? updateIsInvite(false): updateIsInvite(true);
+
+  }
+  const addMember=async(e)=>{
+    e.preventDefault();
+    console.log("yeet");
+    const options={
+    method: 'POST',
+    body: JSON.stringify({email: email})
+    }
+    const addURL="/api/adduser?listDate=" + router.query.id;
+    console.log(addURL)
+    
+    const response = await fetch(addURL, options);
+    const responseObj = await response.json()
+    console.log("yeet");
+    if(response.status===200){
+    if(responseObj.result==="already"){
+      updateText(`${email} is already a member.`);
+    }
+    else if(responseObj.result===success){
+     updateText( `${email} has been added to this board.`);
+    }
+      updateIsInvite(false);
+     updateSuccess(true);
+     setTimeout(function(){ updateSuccess(false); }, 3000);
+    }
+  }
   const postStateToAPI=()=>{
   postToAPI(contextState);}
   const clone = JSON.parse(JSON.stringify(contextState));
@@ -131,7 +162,34 @@ if(response.status===200){}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Header />{auth ?<>
-        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2><span className={styles.date}> Created <time>{formatDate(ogDate)}</time></span>
+        <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2>
+        
+        {isInvite?<div onClick={()=>updateIsInvite(false)} className={styles.overlayGrid}><form onClick={(e)=>e.stopPropagation()} className={styles.addModal}>
+       <span>  <label >New members' email</label> <input placeholder="email@provider.com" type="email" value={email} onChange={(e)=>{updateEmail(e.target.value)}}></input></span>  
+               <button type="submit" onClick={addMember}>Invite Member</button></form></div>:<button onClick={inviteMember} className={styles.invite}>
+
+<svg className={styles.user} version="1.1"  x="0px" y="0px" width="100px"
+	 height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" >
+<g id="_x37_7_Essential_Icons">
+	<path id="Users" d="M78.2,58.2C81.1,55.8,83,52.1,83,48c0-6.9-5.6-13-12-13s-12,6.1-12,13c0,4.1,1.9,7.8,4.8,10.2
+		c-1.3,0.5-2.5,1-3.7,1.7c-3.8-4.5-8.8-8-14.6-9.7C49.9,47.1,53,41.8,53,36c0-9.1-7.5-17-16-17c-8.5,0-16,7.9-16,17
+		c0,5.8,3.1,11.1,7.5,14.2C16.1,53.9,7,65.4,7,79c0,1.1,0.9,2,2,2h82c1.1,0,2-0.9,2-2C93,69.4,86.8,61.2,78.2,58.2z M63,48
+		c0-4.2,3.5-9,8-9c4.5,0,8,4.8,8,9c0,4.2-3.5,9-8,9C66.5,57,63,52.2,63,48z M25,36c0-6.1,5.1-13,12-13c6.9,0,12,6.9,12,13
+		s-5.1,13-12,13C30.1,49,25,42.1,25,36z M11.1,77c1-13.4,12.3-24,25.9-24c13.7,0,24.9,10.6,25.9,24H11.1z M66.9,77
+		c-0.3-5-1.9-9.8-4.5-13.8C65,61.8,67.9,61,71,61c9.3,0,16.9,7,17.9,16H66.9z"/><span>+</span>
+</g>
+<g id="Guides">
+</g>
+<g id="Info">
+	<g id="BORDER">
+		<path fill="#0000FF" d="M1084-790V894H-700V-790H1084 M1092-798H-708V902h1800V-798L1092-798z"/>
+	</g>
+</g>
+</svg><span>+</span>
+</button>}
+{success? <div className={styles.emailAdded}>{text}</div>: null }
+        
+        <span className={styles.date}> Created <time>{formatDate(ogDate)}</time></span>
         </div>
       < main className={styles.boardMain} >
         <DragDropContext onDragEnd={handleOnDragEnd}>

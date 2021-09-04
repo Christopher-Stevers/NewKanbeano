@@ -15,7 +15,9 @@ export default function Header () {
       <div className={styles.signedInStatus}>
         <div className={(!session && loading) ? styles.loading : styles.loaded}>
           <h1 className={styles.h1}><Link href="/">KANBEANO</Link>
-          </h1><div className={styles.userInfo}>{!session && <>
+          </h1>
+          <div className={styles.myBoards}><Link href="/board">My Boards</Link></div>
+          <div className={styles.userInfo}>{!session && <>
             <a
                 href={`/api/auth/signin`}
                 className={styles.buttonPrimary}
