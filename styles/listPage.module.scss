@@ -162,7 +162,7 @@ button{height: 2rem; border-radius: 1rem;
 }
 .overlayGrid {
     background-color: rgba(0, 0, 0, 0.75);
-    position: fixed;
+    position: absolute;
     display: grid;
     align-content: center;
     justify-content: center;

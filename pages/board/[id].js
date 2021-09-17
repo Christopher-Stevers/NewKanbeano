@@ -167,9 +167,7 @@ if(response.status===200){}
       <Header />{auth ?<>
         <div className={styles.listHeader}><h2 className={styles.h2}>{h2}</h2>
         
-        {isInvite?<div onClick={()=>updateIsInvite(false)} className={styles.overlayGrid}><form onClick={(e)=>e.stopPropagation()} className={styles.addModal}>
-       <span>  <label >New members' email</label> <input onChange={(e)=>updateEmail(e.target.value)} placeholder="email@provider.com" type="email" value={email} onChange={(e)=>{updateEmail(e.target.value)}}></input></span>  
-               <button type="submit" onClick={addMember}>Invite Member</button></form></div>:<button onClick={inviteMember} className={styles.invite}>
+        {isInvite?null:<button onClick={inviteMember} className={styles.invite}>
 
 <svg className={styles.user} version="1.1"  x="0px" y="0px" width="100px"
 	 height="100px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" >
@@ -230,6 +228,10 @@ if(response.status===200){}
     </div>
     
     <ColorPicker />
+    
+    {isInvite?<div onClick={()=>updateIsInvite(false)} className={styles.overlayGrid}><form onClick={(e)=>e.stopPropagation()} className={styles.addModal}>
+       <span>  <label >New members' email</label> <input onChange={(e)=>updateEmail(e.target.value)} placeholder="email@provider.com" type="email" value={email} onChange={(e)=>{updateEmail(e.target.value)}}></input></span>  
+               <button type="submit" onClick={addMember}>Invite Member</button></form></div>:null}
     </>
   )
 }
