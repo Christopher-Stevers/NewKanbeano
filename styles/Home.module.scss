@@ -35,6 +35,7 @@ div{background-color: hsla(0, 0%, 0%, .75);
   display: grid;
   grid-template-rows: 1fr 1fr;
   input{width: 10rem;height: 2rem;
+    padding: .5rem;
   grid-area: 1/1/2/2}
   button{width: 8rem; height: 2rem;
     grid-area: 2/1/3/2}
@@ -45,6 +46,8 @@ div{background-color: hsla(0, 0%, 0%, .75);
 .newBoard{
   z-index: 3;
   font-weight: bold;
+
+}
   .addButton{
 
     width: 2rem;
@@ -68,8 +71,6 @@ div{background-color: hsla(0, 0%, 0%, .75);
   }
 
 
-
-}
 }
 .delete{background-color: red;
  align-self: center;

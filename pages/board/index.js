@@ -140,7 +140,7 @@ updateEnterName(false);
 <li><div className={styles.board}><Image className={styles.image}src="/Optimized-Screenshot_2021-04-30 Screenshot.webp" width="300" height="150"/>{enterName ?
         <div className={styles.openBoard}>
           <input value={name} onChange={(e) => updateName(e.target.value)}></input>
-          <button onClick={newBoard}>Create</button>
+          <button className={styles.addButton} onClick={newBoard}>Create</button>
         </div>
         : 
         <div className={styles.newBoard}><button className={styles.addButton} onClick={() => updateEnterName(true)}>+</button></div>}
