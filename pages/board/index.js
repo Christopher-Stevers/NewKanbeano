@@ -185,7 +185,7 @@ updateEnterName(false);
 }
 
 export async function getServerSideProps(ctx) {
-  console.log(ctx.resolvedUrl);
+  console.log(ctx.req.headers.host);
     const session = await getSession(ctx);
     if (session) {
       const url = ctx.req.headers.host+ "/api/arrayOfBoards"
