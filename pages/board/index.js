@@ -4,7 +4,7 @@ import NewContext from '../../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
-import { useSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import CardContainer from '../../components/indieContainer'
 import { parse, v4 as uuidv4 } from 'uuid';
 import Header from '../../components/header'
@@ -12,16 +12,16 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import ColorPicker from '../../components/colorPicker'
-export default function Home() {
+export default function Home({ serverUserEmail, serverRes}) {
   const [session, loading] = useSession();
-  const [userEmail, updateUserEmail]=useState("");
+  const [userEmail, updateUserEmail]=useState(serverUserEmail);
   const current = Date.now();
   const [loggedIn, updateLoggedIn] = useState(true);
   const [listArr, updateListArr] = useState([]);
   const [count, updateCount] = useState([current])
   const newContext = useContext(NewContext);
   const [domain, updateDomain] = useState("")
-  const [res, updateRes] = useState([])
+  const [res, updateRes] = useState(serverRes)
   const [enterName, updateEnterName] = useState(false);
   
   const periodRegex = /\./g;
@@ -183,3 +183,38 @@ updateEnterName(false);
   </>
   )
 }
+
+export async function getServerSideProps(ctx) {
+  console.log(ctx.resolvedUrl);
+    const session = await getSession(ctx);
+    if (session) {
+      const url = ctx.req.headers.host+ "/api/arrayOfBoards"
+      const response = await fetch(url);
+      const responseObj = await response.json()
+      updateRes(responseObj);
+      updateUserEmail(session.user.email.replace(periodRegex, ""))
+
+        return {
+          props: {
+            serverRes: responseObj,
+            serverUserEmail: session.user.email.replace(periodRegex, "")
+          }
+        }
+      }
+      else {
+    
+        return {
+          props: {
+            serverRes: [],
+            serverUserEmail: "",
+          }
+        }
+      }
+  
+  
+  
+  
+  
+    }
+  
+  
