@@ -190,10 +190,9 @@ export async function getServerSideProps(ctx) {
     if (session) {
       const url = ctx.req.headers.host+ "/api/arrayOfBoards"
       const response = await fetch(url);
-      const responseObj = await response.json()
-      updateRes(responseObj);
-      updateUserEmail(session.user.email.replace(periodRegex, ""))
+      const responseObj = await response.json();
 
+      const periodRegex = /\./g;
         return {
           props: {
             serverRes: responseObj,
