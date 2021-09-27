@@ -4,7 +4,7 @@ import NewContext from '../../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
-import { useSession, getSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 import CardContainer from '../../components/indieContainer'
 import { parse, v4 as uuidv4 } from 'uuid';
 import Header from '../../components/header'
@@ -12,16 +12,16 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import ColorPicker from '../../components/colorPicker'
-export default function Home({ serverUserEmail, serverRes}) {
+export default function Home() {
   const [session, loading] = useSession();
-  const [userEmail, updateUserEmail]=useState(serverUserEmail);
+  const [userEmail, updateUserEmail]=useState("");
   const current = Date.now();
   const [loggedIn, updateLoggedIn] = useState(true);
   const [listArr, updateListArr] = useState([]);
   const [count, updateCount] = useState([current])
   const newContext = useContext(NewContext);
   const [domain, updateDomain] = useState("")
-  const [res, updateRes] = useState(serverRes)
+  const [res, updateRes] = useState([])
   const [enterName, updateEnterName] = useState(false);
   
   const periodRegex = /\./g;
@@ -183,37 +183,3 @@ updateEnterName(false);
   </>
   )
 }
-
-export async function getServerSideProps(ctx) {
-  console.log(ctx.req.headers.host);
-    const session = await getSession(ctx);
-    if (session) {
-      const url = ctx.req.headers.host+ "/api/arrayOfBoards"
-      const response = await fetch(url);
-      const responseObj = await response.json();
-
-      const periodRegex = /\./g;
-        return {
-          props: {
-            serverRes: responseObj,
-            serverUserEmail: session.user.email.replace(periodRegex, "")
-          }
-        }
-      }
-      else {
-    
-        return {
-          props: {
-            serverRes: [],
-            serverUserEmail: "",
-          }
-        }
-      }
-  
-  
-  
-  
-  
-    }
-  
-  
