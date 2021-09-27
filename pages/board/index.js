@@ -188,7 +188,7 @@ export async function getServerSideProps(ctx) {
   console.log(ctx.req.headers.host);
     const session = await getSession(ctx);
     if (session) {
-      const url = ctx.req.headers.host+ "/api/arrayOfBoards"
+      const url = "https://"+ctx.req.headers.host+ "/api/arrayOfBoards"
       const response = await fetch(url);
       const responseObj = await response.json();
 
@@ -206,6 +206,7 @@ export async function getServerSideProps(ctx) {
           props: {
             serverRes: [],
             serverUserEmail: "",
+            serverURL:ctx.req.headers.host
           }
         }
       }
