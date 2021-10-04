@@ -1,96 +1,106 @@
-.cardContainer{display: grid;
-width: 100%;
-justify-items: center;
-justify-content:center;
-align-content: space-between;
-background-color: var(--sublist-background-color);
-min-height: 300px;
-padding: 1rem;
-margin: 10px;
-
-
+.cardContainer {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  justify-content: center;
+  align-content: space-between;
+  background-color: var(--sublist-background-color);
+  min-height: 300px;
+  padding: 1rem;
+  margin: 10px;
 }
-.titleSvg{height: 1rem;
-width: 2rem;
-&:hover{fill: var(--header-text)}}
-
-.listTitle{
-    width: 300px;
-    max-width: 50vw;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content:space-between;
-    min-height: 3rem;
-    color: var(--header-text);
-    background-color:  var(--header-background-color);
-    padding: .5rem 1rem;
-    overflow: hidden;
-    padding-right: 1rem;
-    h2{flex: 1;}
-    input{flex: 1;
-        border-radius: 2px;
-    justify-self: flex-start;}
+.titleSvg {
+  height: 1rem;
+  width: 2rem;
+  &:hover {
+    fill: var(--header-text);
+  }
 }
-.needsRoom{
-    min-width: 200px;
-    padding: 1rem;
-    width: 300px;
-    max-width: 66vw;
-min-height: 300px;
+
+.listTitle {
+  width: 300px;
+  max-width: 50vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 3rem;
+  color: var(--header-text);
+  background-color: var(--header-background-color);
+  padding: 0.5rem 1rem;
+  overflow: hidden;
+  padding-right: 1rem;
+  h2 {
+    flex: 1;
+  }
+  input {
+    flex: 1;
+    border-radius: 2px;
+    justify-self: flex-start;
+  }
+}
+.needsRoom {
+  min-width: 200px;
+  padding: 1rem;
+  width: 300px;
+  max-width: 66vw;
+  min-height: 300px;
 }
 .titleButton {
-    margin-left: 1rem;
-    height: 2rem;
-    width: 2rem;
-    border: 1px solid transparent;
-    background-color: var(--header-text);
-    justify-self: end;
-    border-radius: 3px;
+  margin-left: 1rem;
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid transparent;
+  background-color: var(--header-text);
+  justify-self: end;
+  border-radius: 3px;
+  fill: var(--header-background-color);
+  &:hover {
     fill: var(--header-background-color);
-    &:hover {
-        fill: var(--header-background-color);
-        //border: solid var(--header-text) 3px;
+    //border: solid var(--header-text) 3px;
     background-color: var(--main-background-color);
     color: var(--header-text);
     fill: var(--header-text);
     cursor: pointer;
-    *{fill: inherit;}
+    * {
+      fill: inherit;
     }
+  }
 }
-.deleteButton{
-    height: 1.8rem;
-    width: 1.8rem;
-    fill: var(--header-background-color);
+.deleteButton {
+  height: 1.8rem;
+  width: 1.8rem;
+  fill: var(--header-background-color);
 }
 
-.input{
-    height: 2rem;
-    font-size: 1.5rem;
-    max-width: 60%;
-    justify-self: flex-start;
+.input {
+  height: 2rem;
+  font-size: 1.5rem;
+  max-width: 60%;
+  justify-self: flex-start;
 }
-.h2{
-    max-width: 60%;
-    font-size: 1.5rem;
-    justify-self: flex-start;
+.h2 {
+  max-width: 60%;
+  font-size: 1.5rem;
+  justify-self: flex-start;
 }
-.add{margin: 1rem;
-    color: var(--header-background-color);
-width: 2rem;
-height: 2rem;
-font-weight: bold;
+.add {
+  margin: 1rem;
+  color: var(--header-background-color);
+  width: 2rem;
+  height: 2rem;
+  font-weight: bold;
 
-background-color: var(--header-text);
+  background-color: var(--header-text);
 
-    color: var(--header-background-color);
-    font-weight: bold;
-        background-color: var(--header-text);
-        width: 2rem;
-    height: 2rem;
-&:hover{
-    background-color: var(--main-background-color) ;
+  color: var(--header-background-color);
+  font-weight: bold;
+  background-color: var(--header-text);
+  width: 2rem;
+  height: 2rem;
+  &:hover {
+    background-color: var(--main-background-color);
     color: var(--header-text);
     box-shadow: 0px 0px 2px 2px var(--header-text);
     cursor: pointer;
-}
+  }
 }

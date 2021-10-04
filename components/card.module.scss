@@ -1,99 +1,111 @@
 .card {
-    background-color: var(--header-background-color);
-    box-shadow: 
-    0px 0px 3px 3px var(--header-text);
-    color: var(--header-text);
-    width: 100%;
-    max-width: 60vw;
-    margin: 1rem 0;
-    padding-bottom: 10px;
-    display: grid;
-    transition-duration: .3s;
-    justify-items: center;
-    align-content: space-between;
-    &:hover{
-        box-shadow: 
-        0px 0px 4px 4px var(--header-text);}
-        &:focus{box-shadow: none;}
-        &:active{box-shadow:none;}
+  background-color: var(--header-background-color);
+  box-shadow: 0px 0px 3px 3px var(--header-text);
+  color: var(--header-text);
+  width: 100%;
+  max-width: 60vw;
+  margin: 1rem 0;
+  padding-bottom: 10px;
+  display: grid;
+  transition-duration: 0.3s;
+  justify-items: center;
+  align-content: space-between;
+  &:hover {
+    box-shadow: 0px 0px 4px 4px var(--header-text);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
 }
-.needsRoom>li{
-    padding: 10px;
+.needsRoom > li {
+  padding: 10px;
 }
-.content{
-    margin: 0;
-    color: var(--header-text);
-    background-color: var(--content-background-color);
-    width: 90%;
-    word-break: break-word;
-    align-self: stretch;
-    padding: 10px;
-    min-height: 120px;
+.content {
+  margin: 0;
+  color: var(--header-text);
+  background-color: var(--content-background-color);
+  width: 90%;
+  word-break: break-word;
+  align-self: stretch;
+  padding: 10px;
+  min-height: 120px;
 }
-.input{
-    background-color: var(--header-text);
-    font-size: 1rem;
-    max-width: 150px;
-    height: max-content;
-    align-self: center;
+.input {
+  background-color: var(--header-text);
+  font-size: 1rem;
+  max-width: 150px;
+  height: max-content;
+  align-self: center;
+}
+.span {
+  color: var(--header-text);
+  align-self: center;
+}
+.titleSvg {
+  height: 20px;
+  fill: var(--header-text);
+  width: 20px;
+  &:hover {
+    fill: var(--header-background-color);
+  }
+}
 
-
-    
-}
-.span{
-    color: var(--header-text);
-    align-self: center;}
-.titleSvg{height: 20px;
-    fill: var(--header-text);
-    width: 20px;
-&:hover{fill: var(--header-background-color)}}
-    
 .cardTitle {
+  grid-template-columns: minmax(50px, 2fr) auto auto auto;
+  margin: 1rem;
+  display: grid;
+  justify-content: space-between;
+  width: 90%;
+  font-size: 1rem;
+  align-content: start;
+  align-self: center;
 
-    grid-template-columns: minmax(50px, 2fr) auto auto auto;
-    margin: 1rem ;
-    display: grid;
-    justify-content: space-between;
-    width: 90%;
-    font-size: 1rem;
-    align-content: start;
-    align-self: center;
-    
-    word-break: break-word;
+  word-break: break-word;
 }
-.deleteButton{
-    font-size: 16px;
-    fill: var(--header-text);
-    height: 20px;
-    width: 20px;
-    align-self: start;
-    &:hover{
-        fill: var(--header-background-color);}
+.deleteButton {
+  font-size: 16px;
+  fill: var(--header-text);
+  height: 20px;
+  width: 20px;
+  align-self: start;
+  &:hover {
+    fill: var(--header-background-color);
+  }
 }
-.textArea{
-    resize: vertical;
-    min-height: 120px;
-font-size: 1rem;
-padding: .1rem;
-height: 100px; 
-width: 90%;
-align-self: stretch;
-margin: 0 1rem;
+.textArea {
+  resize: vertical;
+  min-height: 120px;
+  font-size: 1rem;
+  padding: 0.1rem;
+  height: 100px;
+  width: 90%;
+  align-self: stretch;
+  margin: 0 1rem;
 }
-.button{background-color: var(--header-background-color);
-    font-size: 16px;
-    width: 32px;
-    height: 32px;
-    border-radius: 2px;
-    margin: .4em;
-    padding-left: .3em;
-    padding-right: .3em;
-&:hover{cursor: pointer;
+.button {
+  background-color: var(--header-background-color);
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  margin: 0.4em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  &:hover {
+    cursor: pointer;
     position: relative;
     background-color: var(--header-text);
-    *{fill: var(--header-background-color);}
-}}
-.spaceBetween{display: flex;
-    width: 90%;
-    padding: .25rem 0;
-justify-content: space-between;}
+    * {
+      fill: var(--header-background-color);
+    }
+  }
+}
+.spaceBetween {
+  display: flex;
+  width: 90%;
+  padding: 0.25rem 0;
+  justify-content: space-between;
+}

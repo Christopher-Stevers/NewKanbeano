@@ -14,14 +14,15 @@
   font-size: 3rem;
   margin: 0px;
   height: 3rem;
-  line-height: 3rem;;
+  line-height: 3rem;
 }
 .signedInText,
 .signedInStatus {
   display: inline;
   flex-wrap: wrap;
   width: 100%;
-  p, .button {
+  p,
+  .button {
     padding: 0px 0.5rem;
   }
 }
@@ -29,7 +30,9 @@
 .loaded {
   gap: 1rem;
   width: 100%;
-  *{flex: 1;}
+  * {
+    flex: 1;
+  }
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -65,16 +68,18 @@
   justify-self: end;
   flex-wrap: nowrap;
   width: 100%;
-  @media screen and (min-width: 500px){width: auto};
+  @media screen and (min-width: 500px) {
+    width: auto;
+  }
   max-width: 100%;
-  flex: .75;
+  flex: 0.75;
   flex-shrink: 0;
 }
 .signedInText,
 .notSignedInText {
   align-self: center;
   padding: 0rem 0rem;
-  
+
   left: 1rem;
   right: 6.5rem;
   white-space: nowrap;
@@ -125,7 +130,6 @@
   display: flex;
 }
 .buttonPrimary {
-  
   padding: 0.7rem 0rem;
   box-shadow: 0 0 3px 3px var(--header-text);
   background-color: var(--header-text);
@@ -146,9 +150,11 @@
 .button {
   display: grid;
   align-content: center;
-    padding: 0px 0.5rem;
+  padding: 0px 0.5rem;
 }
-.strong{font-weight: 700;}
+.strong {
+  font-weight: 700;
+}
 .navItems {
   margin-bottom: 2rem;
   padding: 0;
@@ -159,11 +165,12 @@
   display: inline-block;
   margin-right: 1rem;
 }
-.myBoards{
-  font-size: 1.5rem;text-decoration: underline;
+.myBoards {
+  font-size: 1.5rem;
+  text-decoration: underline;
   text-align: right;
   white-space: nowrap;
-  @media screen and (max-width: 340px){
+  @media screen and (max-width: 340px) {
     text-align: left;
   }
 }

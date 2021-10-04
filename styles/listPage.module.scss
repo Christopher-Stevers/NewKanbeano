@@ -1,227 +1,228 @@
 .entirePage {
-    min-height: 100vh;
-    display: grid;
-    align-content: start;
+  min-height: 100vh;
+  display: grid;
+  align-content: start;
 }
 .saveIcon {
-    height: 3.7rem;
-    &:hover {
-    }
+  height: 3.7rem;
+  &:hover {
+  }
 
-    &:active {
-        background-color: var(--darker-header-text);
-    }
+  &:active {
+    background-color: var(--darker-header-text);
+  }
 }
 .save {
-    aspect-ratio: 1;
-    background-color: var(--header-background-color);
-    fill: var(--header-text);
-    * {
-        background-color: inherit;
-        fill: inherit;
+  aspect-ratio: 1;
+  background-color: var(--header-background-color);
+  fill: var(--header-text);
+  * {
+    background-color: inherit;
+    fill: inherit;
+  }
+  &:hover {
+    cursor: pointer;
+    cursor: pointer;
+    background-color: var(--header-text);
+    fill: var(--header-background-color);
+    background-color: var(--header-text);
+    &:active {
+      background-color: var(--darker-header-text);
     }
-    &:hover {
-        cursor: pointer;
-        cursor: pointer;
-        background-color: var(--header-text);
-        fill: var(--header-background-color);
-        background-color: var(--header-text);
-        &:active {
-            background-color: var(--darker-header-text);
-        }
-    }
+  }
 }
 .header {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .list {
-    display: flex;
-    list-style: none;
-    padding-top: 20px;
+  display: flex;
+  list-style: none;
+  padding-top: 20px;
 }
 
 .listHeader {
-    align-items: center;
-    position: sticky;
-    display: flex;
-    gap: 1rem;
-    justify-content: space-between;
-    padding: 0 4rem;
-    width: 100%;
-    background-color: var(--main-background);
-    border-bottom: 5px solid var(--header-background-color);
+  align-items: center;
+  position: sticky;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0 4rem;
+  width: 100%;
+  background-color: var(--main-background);
+  border-bottom: 5px solid var(--header-background-color);
 }
 .h2 {
-    line-height: 1.5 rem;
-    margin: 1rem 0.6rem;
-    color: var(--header-text);
+  line-height: 1.5 rem;
+  margin: 1rem 0.6rem;
+  color: var(--header-text);
 }
 .date {
-    color: var(--header-text);
+  color: var(--header-text);
 }
 .listItem {
-    margin: 0.5rem;
-    height: min-content;
-    width: 350px;
-    max-width: 70vw;
-    @media (min-width: 500) {
-        margin: 2rem;
-    }
+  margin: 0.5rem;
+  height: min-content;
+  width: 350px;
+  max-width: 70vw;
+  @media (min-width: 500) {
+    margin: 2rem;
+  }
 }
 .main {
-    height: 90vh;
-    @media (min-width: 500) {
-        padding: 2rem;
-    }
-    overflow-x: scroll;
+  height: 90vh;
+  @media (min-width: 500) {
+    padding: 2rem;
+  }
+  overflow-x: scroll;
 }
 .main {
-    height: 90vh;
-    @media (min-width: 500) {
-        padding: 2rem;
-    }
-    overflow-x: scroll;
+  height: 90vh;
+  @media (min-width: 500) {
+    padding: 2rem;
+  }
+  overflow-x: scroll;
 }
 
 .boardMain {
-    height: 82vh;
-    overflow-x: scroll;
+  height: 82vh;
+  overflow-x: scroll;
 }
 .flexWrapper {
-    display: flex;
-    min-width: 1000px;
+  display: flex;
+  min-width: 1000px;
 }
 .addList {
-    height: 200px;
-    min-width: 364px;
-    justify-items: center;
-    background-color: var(--sublist-background-color);
-    margin: 38px 3rem 0 3rem;
-    display: grid;
-    justify-content: center;
-    align-content: center;
+  height: 200px;
+  min-width: 364px;
+  justify-items: center;
+  background-color: var(--sublist-background-color);
+  margin: 38px 3rem 0 3rem;
+  display: grid;
+  justify-content: center;
+  align-content: center;
 }
 .addModal {
-    height: 200px;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 30%;
-    min-width: 300px;
-    justify-items: center;
-    gap: 1rem;
-    border: 4px solid var(--header-text);
-    background-color: var(--header-background-color);
-    color: var(--header-text);
-    display: grid;
-    padding: 1rem;
+  height: 200px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 30%;
+  min-width: 300px;
+  justify-items: center;
+  gap: 1rem;
+  border: 4px solid var(--header-text);
+  background-color: var(--header-background-color);
+  color: var(--header-text);
+  display: grid;
+  padding: 1rem;
+  justify-content: center;
+  align-content: center;
+  font-size: 1.5rem;
+  span {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
-    font-size: 1.5rem;
-    span {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
+    gap: 1rem;
 
-        input{height: 2.5rem; width: 100%;
-        border-radius: 4px;
-        color: inherit;
-    background-color: var(--main-background-color);
-border: 4px solid transparent;
-padding: .5rem ;
-
-}
+    input {
+      height: 2.5rem;
+      width: 100%;
+      border-radius: 4px;
+      color: inherit;
+      background-color: var(--main-background-color);
+      border: 4px solid transparent;
+      padding: 0.5rem;
     }
-button{height: 2rem; border-radius: 1rem;
+  }
+  button {
+    height: 2rem;
+    border-radius: 1rem;
     padding: 8px;
     &:hover {
-    background-color: var(--header-background-color);
-    fill: var(--header-text);
+      background-color: var(--header-background-color);
+      fill: var(--header-text);
+      color: var(--header-text);
+      box-shadow: 0px 0px 2px 2px var(--header-text);
+      cursor: pointer;
+    }
+  }
+}
+.button {
+  color: var(--header-background-color);
+  font-weight: bold;
+  background-color: var(--header-text);
+  width: 2rem;
+  height: 2rem;
+  &:hover {
+    background-color: var(--main-background-color);
     color: var(--header-text);
     box-shadow: 0px 0px 2px 2px var(--header-text);
     cursor: pointer;
-}
-}
-
-}
-.button {
-    color: var(--header-background-color);
-    font-weight: bold;
-    background-color: var(--header-text);
-    width: 2rem;
-    height: 2rem;
-    &:hover {
-        background-color: var(--main-background-color);
-        color: var(--header-text);
-        box-shadow: 0px 0px 2px 2px var(--header-text);
-        cursor: pointer;
-    }
+  }
 }
 .overlayGrid {
-    background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    top: 0px;
-    left: 0px;
-    height: 100vh;
-    width: 100%;
-    z-index: 6;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100%;
+  z-index: 6;
 }
 
 .user {
-    width: 2rem;
-    height: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
 .invite {
-    width: 7rem;
-    padding: 4px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    font-size: 2rem;
+  width: 7rem;
+  padding: 4px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 .invite > span {
-    position: relative;
-    top: -2px;
-    font-size: 1.5rem;
+  position: relative;
+  top: -2px;
+  font-size: 1.5rem;
 }
 .invite:hover {
-    background-color: var(--header-background-color);
-    fill: var(--header-text);
-    color: var(--header-text);
-    box-shadow: 0px 0px 2px 2px var(--header-text);
-    cursor: pointer;
+  background-color: var(--header-background-color);
+  fill: var(--header-text);
+  color: var(--header-text);
+  box-shadow: 0px 0px 2px 2px var(--header-text);
+  cursor: pointer;
 }
 
-.emailAdded{
-    position: fixed;
-    bottom: 0px;
-    background-color: var(--header-background-color);
-    color: var(--header-text);
-    font-size: 1.5rem;
-    text-align: center;
-    left: 25%;
-    right: 25%;
-    padding: .5rem;
-    border-radius: 12px;
-    animation-name: email;
-    transition-duration: .25s;
-  }
-  
+.emailAdded {
+  position: fixed;
+  bottom: 0px;
+  background-color: var(--header-background-color);
+  color: var(--header-text);
+  font-size: 1.5rem;
+  text-align: center;
+  left: 25%;
+  right: 25%;
+  padding: 0.5rem;
+  border-radius: 12px;
+  animation-name: email;
+  transition-duration: 0.25s;
+}
+
 @keyframes email {
-    0% {
-        transform: translateX(0%);
-      }
-    
-      100% {
-        transform: translateX(100%);
-      }
-    
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }

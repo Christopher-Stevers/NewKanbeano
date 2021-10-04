@@ -1,25 +1,28 @@
 .container {
-    fill: var(--header-text);
-    height: 1.5em;
-    width: 1.5em;
-    margin: 0 auto;
-    border-radius: 50%;
-    align-self: start;
-    display: block;
+  fill: var(--header-text);
+  height: 1.5em;
+  width: 1.5em;
+  margin: 0 auto;
+  border-radius: 50%;
+  align-self: start;
+  display: block;
 
-  
-    &:hover {
-        fill: var(--header-background-color);
-        cursor: pointer;
-    }
+  &:hover {
+    fill: var(--header-background-color);
+    cursor: pointer;
+  }
 }
-.hoverDiv:nth-child(1){ *{border: 2px solid var(--header-text)}}
+.hoverDiv:nth-child(1) {
+  * {
+    border: 2px solid var(--header-text);
+  }
+}
 
 .hoverDiv {
-    padding: .3em 0em;
-    background-color: var(--main-background-color);
-    &:hover {
-        cursor: default;
-        background-color: var(--header-text);
-    }
+  padding: 0.3em 0em;
+  background-color: var(--main-background-color);
+  &:hover {
+    cursor: default;
+    background-color: var(--header-text);
+  }
 }

@@ -1,61 +1,59 @@
 .container {
-    fill: var(--header-text);
-    height: 20px;
-    width: 20px;
-   margin: 0 auto;
-    border-radius: 50%;
-    align-self: center;
-    
-    
+  fill: var(--header-text);
+  height: 20px;
+  width: 20px;
+  margin: 0 auto;
+  border-radius: 50%;
+  align-self: center;
 }
 
 .colorButton {
-    grid-column-start: 4;
-   font-size: 12px;
-    background-color: var(--header-background-color);
-    width: 32px;
-    aspect-ratio: 1/1;
-    border-radius: 2px;
-    margin-right:0;
-    margin-left: 4px;
-    padding: 4px;
-    margin: 6px;
-    height: 32px;
-    border: 2px solid var(--header-text);
+  grid-column-start: 4;
+  font-size: 12px;
+  background-color: var(--header-background-color);
+  width: 32px;
+  aspect-ratio: 1/1;
+  border-radius: 2px;
+  margin-right: 0;
+  margin-left: 4px;
+  padding: 4px;
+  margin: 6px;
+  height: 32px;
+  border: 2px solid var(--header-text);
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  background-color: var(--header-text);
+  &:hover {
+    background-color: var(--main-background-color);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    cursor: pointer;
     position: relative;
-    z-index: 5;
-    text-align: center;
-        background-color: var(--header-text);
-    &:hover {
-        background-color: var(--main-background-color);
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        cursor: pointer;
-        position: relative;
-        * {
-            fill: var(--header-background-color);
-        }
+    * {
+      fill: var(--header-background-color);
     }
+  }
 }
 .list {
-    box-sizing: border-box;
-    margin-top: 4px;
-    background-color: var(--main-background-color);
-    width: 32px;
-    border: 2px solid var(--header-text);
-    border-top: 0px;
-    left: -6px;
-    position: relative;
-    visibility: hidden;
-    text-align: center;
-    position: relative;
+  box-sizing: border-box;
+  margin-top: 4px;
+  background-color: var(--main-background-color);
+  width: 32px;
+  border: 2px solid var(--header-text);
+  border-top: 0px;
+  left: -6px;
+  position: relative;
+  visibility: hidden;
+  text-align: center;
+  position: relative;
 }
 .open {
-    visibility: visible;
-    background-color: var(--main-background-color);
+  visibility: visible;
+  background-color: var(--main-background-color);
 }
 .hoverDiv {
-    &:hover {
-        background-color: var(--header-text);
-    }
+  &:hover {
+    background-color: var(--header-text);
+  }
 }
