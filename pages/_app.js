@@ -3,6 +3,7 @@ import { Provider } from "next-auth/client";
 import ColorContext from "../components/colorContext";
 import "../styles/globals.scss";
 import { useState } from "react";
+import PropTypes from "prop-types";
 export default function App({ Component, pageProps }) {
   const themeObj = {
     headerText: "black",
@@ -31,3 +32,10 @@ export default function App({ Component, pageProps }) {
     </Provider>
   );
 }
+
+App.propTypes = {
+  Component: PropTypes.func.isRequired,
+  pageProps: PropTypes.shape({
+    session: PropTypes.object
+  }),
+};
