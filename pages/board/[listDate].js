@@ -1,5 +1,6 @@
 import styles from '../../styles/listPage.module.scss'
 import NewContext from '../../components/newContext'
+import GetBoard from '../api/components/getBoard'
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -8,19 +9,18 @@ import { useState, useContext, useEffect } from 'react'
 import CardContainer from '../../components/indieContainer'
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import Header from '../../components/header'
 import ColorPicker from '../../components/colorPicker'
-export default function Home () {
+export default function Home ({data}) {
   const [session, loading] = useSession()
   const router = useRouter()
-  const { id } = router.query
-  const ogDate=new Date(parseInt(id)).toDateString();
+  const { listDate } = router.query
+  const ogDate=new Date(parseInt(listDate)).toDateString();
   const current = Date.now();
   const newContext = useContext(NewContext);
   const [contextState, updateContextState] = useState(
-    [
-    ])
+    data);
     const [isInvite, updateIsInvite]=useState(false);
     const [email, updateEmail]=useState("");
   const [auth, updateAuth] = useState(true)
@@ -35,9 +35,10 @@ const [text, updateText]=useState("");
   useEffect(async () => {
     if (session){
       
-    const url = "/" + "api/movies?listDate=" + router.query.id
+    const url = "/" + "api/movies?listDate=" + router.query.listDate
     const response = await fetch(url)
     const responseObj = await response.json();
+    console.log(responseObj)
     if (typeof responseObj[0] === 'string') {
       updateAuth(false)
     }
@@ -47,7 +48,7 @@ const [text, updateText]=useState("");
       updateH2(responseObj.listTitle)
       updatePlaceCard(true)
     }}
-  }, [router.query.id, session]);
+  }, [router.query.listDate, session]);
 
   // If no session exists, display access denied message
   if (!session) { return <div> <Header  /> <span>This board either does not exist, or you do not own it.</span> </div> }
@@ -60,7 +61,7 @@ const [text, updateText]=useState("");
     updateContextState(
       contextState.concat([[{
         title: "",
-        id: current + 1
+        listDate: current + 1
       }]]));
 
   }
@@ -78,7 +79,7 @@ const [text, updateText]=useState("");
     };
 
 
-    const url = "/" + "api/movies?listDate=" + router.query.id
+    const url = "/" + "api/movies?listDate=" + router.query.listDate
     const response = await fetch(url, JSON.parse(JSON.stringify(options)))
 if(response.status===200){}
   }
@@ -93,7 +94,7 @@ if(response.status===200){}
     method: 'POST',
     body: JSON.stringify({email: email})
     }
-    const addURL="/api/adduser?listDate=" + router.query.id;
+    const addURL="/api/adduser?listDate=" + router.query.listDate;
     console.log(addURL)
     
     const response = await fetch(addURL, options);
@@ -234,4 +235,12 @@ if(response.status===200){}
                <button type="submit" onClick={addMember}>Invite Member</button></form></div>:null}
     </>
   )
+}
+
+export async function getServerSideProps(context){
+  const session = await getSession(context);
+  const document=await GetBoard(context, session);
+  const data=document.data
+  console.log(data);
+  return{ props: { data, }}
 }

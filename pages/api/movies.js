@@ -1,5 +1,6 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
+import GetBoard from './components/getBoard';
 const { MONGO_COLLECTION } = process.env;
 export default async (req, res) => {
 
@@ -33,9 +34,10 @@ export default async (req, res) => {
   }
 
   const getData = async () => {
-    
-    if (dutu.email === userEmail || isUserArrAuthed) { res.json(dutu) }
-    else { res.json(JSON.stringify(["denied"])) }
+    const data=await GetBoard(req, session)
+    await res.json(data);
+    //if (dutu.email === userEmail || isUserArrAuthed) { res.json(dutu) }
+    //else { res.json(JSON.stringify(["denied"])) }
 
 
 
