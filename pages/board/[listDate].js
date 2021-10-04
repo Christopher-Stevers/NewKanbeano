@@ -24,7 +24,6 @@ export default function Home({ data }) {
   const [email, updateEmail] = useState("");
   const [auth, updateAuth] = useState(true);
   const [h2, updateH2] = useState("");
-  const [placeCard, updatePlaceCard] = useState("");
   const [success, updateSuccess] = useState(false);
   const formatDate = (input) => {
     const dateRegex = /([A-z]{3})(.{5})(\d+)(.{5})/;
@@ -43,7 +42,6 @@ export default function Home({ data }) {
           updateAuth(true);
           updateContextState(responseObj.data);
           updateH2(responseObj.listTitle);
-          updatePlaceCard(true);
         }
       }
     };
@@ -263,13 +261,11 @@ export default function Home({ data }) {
                       )}
                     </Droppable>
                     <div>
-                      {placeCard ? (
-                        <div className={styles.addList}>
+                       <div className={styles.addList}>
                           <button className={styles.button} onClick={addList}>
                             +
                           </button>
                         </div>
-                      ) : null}
                     </div>
                   </div>
                 </NewContext.Provider>

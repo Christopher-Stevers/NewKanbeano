@@ -12,14 +12,13 @@ import GetListOfBoards from "../api/components/getListOfBoards";
 import ColorPicker from "../../components/colorPicker";
 export default function Home({ listOfBoards }) {
   const [session] = useSession();
-  const [userEmail, updateUserEmail] = useState("");
+  const [userEmail, updateUserEmail] = useState((session)?session.user.email:"");
   const current = Date.now();
   const [res, updateRes] = useState(listOfBoards);
   const [enterName, updateEnterName] = useState(false);
-
   useEffect(() => {
-    const periodRegex = /\./g;
     async () => {
+    const periodRegex = /\./g;
       if (session) {
         const url = "/api/arrayOfBoards";
         const response = await fetch(url);
@@ -39,6 +38,7 @@ export default function Home({ listOfBoards }) {
     );
   }
   const newBoard = async () => {
+    console.log(userEmail);
     const options = {
       method: "PUT",
       body: JSON.stringify({
@@ -60,7 +60,9 @@ export default function Home({ listOfBoards }) {
 
     updateEnterName(false);
     const url = "/api/arrayOfBoards";
-    await fetch(url, options);
+    const response=await fetch(url, options);
+    const responseJson=await response.json();
+    console.warn(responseJson);
   }
   const deleteFromDb = async (e) => {
     const options = {

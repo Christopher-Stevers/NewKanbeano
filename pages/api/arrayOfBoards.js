@@ -23,6 +23,7 @@ export default async function ArrayOfBoards(req, res) {
   const postData = async () => {};
 
   const putData = async () => {
+    console.log(req.body);
     db.collection(MONGO_COLLECTION).insertOne(JSON.parse(req.body));
   };
 
