@@ -187,8 +187,11 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  font-size: 2rem;
-}
+  font-size: 2rem;  
+  background-color: var(--header-text);
+  fill: var(--header-background-color);
+  color: var(--header-background-color);
+  margin: .5rem 0px;}
 .invite > span {
   position: relative;
   top: -2px;
