@@ -82,7 +82,6 @@ export default function colorPicker(){
       
     day?updateDay(false): updateDay(true);
 if(day){
-    console.log("changeColor");
     updateColorContext({
     headerText:"hsl(0, 0%, 100%)",
     headerBackgroundColor: "hsl(233, 40%, 4%)",

@@ -12,11 +12,8 @@ export default async (req, res) => {
     const { db } = await connectToDatabase();
     const periodRegex=/\./g
     const userEmail=session.user.email.replace(periodRegex,"");
-    console.log(session.user.email);
 if(session.user.email==="christopher.stevers1@gmail.com"){
 
-console.log(userEmail);
-console.log("yeet");
 
  
 
@@ -36,9 +33,7 @@ const arrayData=await db
 .toArray();
 
 const processMigration=(elem)=>{ 
-    console.log("neeed to build"+elem._id);
     elem.email=elem.email.replace(periodRegex,"");
-    console.log(elem.email);
     db.collection(process.env.MONGO_COLLECTION)
       .findOneAndUpdate({ _id: elem._id }, {
         $set: { email: elem.email.replace(periodRegex,"") }

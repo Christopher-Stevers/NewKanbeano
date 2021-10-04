@@ -4,15 +4,16 @@ import NewContext from '../../components/newContext'
 import React from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { useState, useContext, useEffect } from 'react'
-import { useSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import CardContainer from '../../components/indieContainer'
 import { parse, v4 as uuidv4 } from 'uuid';
 import Header from '../../components/header'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
+import GetListOfBoards from '../api/components/getListOfBoards';
 import ColorPicker from '../../components/colorPicker'
-export default function Home() {
+export default function Home({emptyArr, listOfBoards}) {
   const [session, loading] = useSession();
   const [userEmail, updateUserEmail]=useState("");
   const current = Date.now();
@@ -21,7 +22,7 @@ export default function Home() {
   const [count, updateCount] = useState([current])
   const newContext = useContext(NewContext);
   const [domain, updateDomain] = useState("")
-  const [res, updateRes] = useState([])
+  const [res, updateRes] = useState(listOfBoards)
   const [enterName, updateEnterName] = useState(false);
   
   const periodRegex = /\./g;
@@ -31,6 +32,7 @@ export default function Home() {
       const response = await fetch(url);
       const responseObj = await response.json()
       updateRes(responseObj);
+      console.log(responseObj);
       updateUserEmail(session.user.email.replace(periodRegex, ""))
 
     }
@@ -182,4 +184,18 @@ updateEnterName(false);
     <ColorPicker />
   </>
   )
+}
+
+export async function getServerSideProps(context){
+
+  const session = await getSession(context);
+  const emptyArr=[]
+  if(!session){return {props: { emptyArr }}}
+  const document=await GetListOfBoards(context, session);
+  const listOfBoards=document.map((elem)=>{
+    
+    return {listTitle: elem.listTitle, listDate: elem.listDate, users: elem.users}}
+    );
+  console.log(listOfBoards);
+  return{ props: { emptyArr, listOfBoards }}
 }

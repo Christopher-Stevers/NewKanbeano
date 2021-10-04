@@ -52,7 +52,6 @@ export default function CardColor(props) {
 
     }
     const dotClicked=()=>{
-        console.log("do something");
     }
     const red={backgroundColor: "#"};
     const yellow={backgroundColor: "yellow"};
@@ -60,7 +59,6 @@ export default function CardColor(props) {
     const green={backgroundColor: "green"};
     const colourPicked=(arg)=>{
     modifyContext(arg);
-    console.log(props.currentColor);
 
     }
     const handleClick=(e)=>{

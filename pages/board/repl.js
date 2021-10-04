@@ -86,13 +86,11 @@ if(response.status===200){}
   }
   const addMember=async(e)=>{
     e.preventDefault();
-    console.log("yeet");
     const options={
     method: 'POST',
     body: JSON.stringify({email: email})
     }
     const addURL="/api/adduser?listDate=" + router.query.id;
-    console.log(addURL)
     
     const response = await fetch(addURL, options);
     const responseObj = await response.json()

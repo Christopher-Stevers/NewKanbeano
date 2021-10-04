@@ -38,7 +38,6 @@ const [text, updateText]=useState("");
     const url = "/" + "api/movies?listDate=" + router.query.listDate
     const response = await fetch(url)
     const responseObj = await response.json();
-    console.log(responseObj)
     if (typeof responseObj[0] === 'string') {
       updateAuth(false)
     }
@@ -89,13 +88,11 @@ if(response.status===200){}
   }
   const addMember=async(e)=>{
     e.preventDefault();
-    console.log("yeet");
     const options={
     method: 'POST',
     body: JSON.stringify({email: email})
     }
     const addURL="/api/adduser?listDate=" + router.query.listDate;
-    console.log(addURL)
     
     const response = await fetch(addURL, options);
     const responseObj = await response.json()
@@ -238,9 +235,11 @@ if(response.status===200){}
 }
 
 export async function getServerSideProps(context){
+
   const session = await getSession(context);
+  const emptyArr=[]
+  if(!session){return {props: { emptyArr }}}
   const document=await GetBoard(context, session);
-  const data=document.data
-  console.log(data);
+  const data=document.data;
   return{ props: { data, }}
 }

@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from 'next-auth/client'
-
+import GetListOfBoards  from "./components/getListOfBoards";
 const { MONGO_COLLECTION } = process.env;
 export default async (req, res) => {
 
@@ -25,11 +25,7 @@ export default async (req, res) => {
 
     const getData=async()=>{
     
-    
-    const arrayData=await db 
-    .collection(MONGO_COLLECTION)
-    .find({users: userEmail})
-    .toArray();
+    const arrayData=await GetListOfBoards(req, session);
     res.json(arrayData);
     
         }

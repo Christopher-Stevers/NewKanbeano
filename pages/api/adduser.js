@@ -9,17 +9,13 @@ export default async (req, res) => {
 
     const periodRegex = /\./g;
     const body=JSON.parse(req.body);
-    console.log(body);
     if(body.email){const dutu = await db
         .collection(MONGO_COLLECTION)
         .findOne({ listDate: idNum });
     const userEmail = session.user.email.replace(periodRegex, "");
     const dbEmail= dutu.email.replace(periodRegex, "");
     const otherEmail=body.email.replace(periodRegex, "");
-    console.log(otherEmail);
-    console.log(userEmail)
     const isEmailAuthed=(userEmail===dbEmail);
-    console.log(isEmailAuthed);
    
    
    if(isEmailAuthed){ 
