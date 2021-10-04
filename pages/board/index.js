@@ -1,26 +1,19 @@
 import styles from "../../styles/Home.module.scss";
-import NewContext from "../../components/newContext";
 import React from "react";
-import { DragDropContext } from "react-beautiful-dnd";
-import { useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import { useSession, getSession } from "next-auth/client";
-import CardContainer from "../../components/indieContainer";
-import { parse, v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import Header from "../../components/header";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import GetListOfBoards from "../api/components/getListOfBoards";
 import ColorPicker from "../../components/colorPicker";
-export default function Home({ emptyArr, listOfBoards }) {
-  const [session, loading] = useSession();
+export default function Home({ listOfBoards }) {
+  const [session] = useSession();
   const [userEmail, updateUserEmail] = useState("");
   const current = Date.now();
-  const [loggedIn, updateLoggedIn] = useState(true);
-  const [listArr, updateListArr] = useState([]);
-  const [count, updateCount] = useState([current]);
-  const newContext = useContext(NewContext);
-  const [domain, updateDomain] = useState("");
   const [res, updateRes] = useState(listOfBoards);
   const [enterName, updateEnterName] = useState(false);
 
@@ -36,13 +29,7 @@ export default function Home({ emptyArr, listOfBoards }) {
       }
     };
   }, [session]);
-  const [contextState, updateContextState] = useState([]);
   const [name, updateName] = useState("");
-  const [state, updateState] = useState([]);
-  const [newestState, updateNewestState] = useState([]);
-  const [signUp, updateSignUp] = useState(false);
-  const [username, updateUsername] = useState("");
-  const [message, updateMessage] = useState("");
   if (!session) {
     return (
       <>
@@ -73,60 +60,7 @@ export default function Home({ emptyArr, listOfBoards }) {
 
     updateEnterName(false);
     const url = "/api/arrayOfBoards";
-    const response = await fetch(url, options);
-    const responseObj = await response.json();
-  }; /* */
-  //const [dbId, updateDbId] = useState("")
-
-  //let [stateContext, updateStateContext] = useState([
-  //]);
-  //const defaultContext = [stateContext, updateStateContext];
-
-  const clone = JSON.parse(JSON.stringify(contextState));
-  function handleOnDragEnd(result) {
-    if (result.destination === null) {
-      return;
-    }
-    const droppableSource = parseInt(result.source.droppableId);
-    const droppableDestination = parseInt(result.destination.droppableId);
-    const draggedContext = clone.map((elem, index) => {
-      if (index === parseInt(result.destination.droppableId)) {
-        const clonedContext = JSON.parse(JSON.stringify(clone));
-        const [reorderedItem] = clonedContext[droppableSource].splice(
-          result.source.index,
-          1
-        );
-        clonedContext[droppableDestination].splice(
-          result.destination.index,
-          0,
-          reorderedItem
-        );
-        return clonedContext;
-      }
-    });
-    const nextContext = JSON.parse(
-      JSON.stringify(draggedContext[parseInt(droppableDestination)])
-    );
-    updateContextState(nextContext);
-    return;
-  }
-  {
-    /*
-  const postToAPI = async () => {
-    const clone = JSON.parse(JSON.stringify(contextState));
-    const contextString = JSON.stringify(newContext)
-    const postObj = JSON.stringify({
-      _id: dbId,
-      data: clone,
-
-      name: name
-    })
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(clone)
-    };
-  }*/
+    await fetch(url, options);
   }
   const deleteFromDb = async (e) => {
     const options = {
@@ -249,6 +183,11 @@ export default function Home({ emptyArr, listOfBoards }) {
     </>
   );
 }
+
+
+Home.propTypes = {
+  listOfBoards: PropTypes.array.isRequired,
+};
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

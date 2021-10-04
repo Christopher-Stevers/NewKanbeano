@@ -9,5 +9,6 @@
   },
   "globals": {
     "React": "writable"
-  }
+  },
+  "env": {"es6": true}
 }

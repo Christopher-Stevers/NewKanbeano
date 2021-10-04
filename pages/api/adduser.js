@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from "next-auth/client";
 const { MONGO_COLLECTION } = process.env;
-export default async (req, res) => {
+export default async function BoardList  (req, res) {
   const idNum = parseInt(req.query.listDate);
   const session = await getSession({ req });
 
@@ -42,4 +42,4 @@ export default async (req, res) => {
   } else {
     res.status(401).json({ result: "please authenticate" });
   }
-};
+}

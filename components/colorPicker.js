@@ -1,7 +1,7 @@
 import styles from "./colorPicker.module.scss";
 import ColorContext from "./colorContext";
 import { useEffect, useContext, useState } from "react";
-export default function colorPicker() {
+export default function ColorPicker() {
   const [colorContext, updateColorContext] = useContext(ColorContext);
   const [day, updateDay] = useState(false);
   const {
@@ -16,14 +16,7 @@ export default function colorPicker() {
     urgent,
     themeDir,
   } = colorContext;
-  /*--body-background-color:    hsla(0, 9%, 12%);
-       --header-text: hsla(0, 9%, 75%);
-       --darker-header-text: hsla(0, 9%, 50%);
-       --darker-header-background-color: hsla(0, 9%, 7%);
-       --header-background-color:hsla(0, 9%, 4%, 1);
-       --list-header-background-color:  hsla(0, 9%, 9%);
-       --dark-header-text:hsla(0, 9%, 25%);*/
-
+ 
   useEffect(() => {
     const prefersDarkScheme = window.matchMedia(
       "(prefers-color-scheme: dark)"
@@ -57,13 +50,13 @@ export default function colorPicker() {
         themeDir: "left",
       });
     }
-  }, []);
+  }, [updateColorContext]);
   useEffect(() => {
     document
       .querySelector(":root")
       .style.setProperty(
         "--header-background-color",
-        colorContext.headerBackgroundColor
+        headerBackgroundColor
       );
     document
       .querySelector(":root")
@@ -91,7 +84,7 @@ export default function colorPicker() {
     mainBackgroundColor,
     sublistBackgroundColor,
     taskContentBackgroundColor,
-    themeDir,
+    themeDir, casual, warn, urgent,
   ]);
   const changeColor = () => {
     day ? updateDay(false) : updateDay(true);

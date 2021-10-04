@@ -2,7 +2,7 @@ import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from "next-auth/client";
 import GetListOfBoards from "./components/getListOfBoards";
 const { MONGO_COLLECTION } = process.env;
-export default async (req, res) => {
+export default async function ArrayOfBoards(req, res) {
   const idNum = parseInt(req.query.listDate);
   const session = await getSession({ req });
   const periodRegex = /\./g;
@@ -48,4 +48,4 @@ export default async (req, res) => {
   if (session) {
     execute();
   }
-};
+}

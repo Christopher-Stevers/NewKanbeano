@@ -1,18 +1,11 @@
 import Header from "../components/header";
 import styles from "../styles/root.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import { signIn, useSession } from "next-auth/client";
+import { signIn,  } from "next-auth/client";
 import ColorPicker from "../components/colorPicker";
 export default function Home() {
-  const router = useRouter();
-  const [session, loading] = useSession();
-  // if(session){router.push("/board")}
-  const signingIn = async () => {
-    //await signIn();
-    // router.push("/board");
-  };
+ 
   return (
     <>
       <Head>
@@ -26,15 +19,15 @@ export default function Home() {
           Kanban <em className={styles.em}>simplified</em>
         </h2>
         <p className={styles.like}>
-          Kanban doesn't need to be complicated. A Board. With Lists. That's
-          what you need, and that's what Kanbeano gives you. Check out the{` `}
+          Kanban {`doesn't`} need to be complicated. A Board. With Lists. {`That's`}
+          what you need, and {`that's `}what Kanbeano gives you. Check out the{` `}
           <span className={styles.link}>
             <Link href="/demo">demo</Link>
-          </span>{" "}
-          or{" "}
+          </span>{` `}
+          or{` `}
           <button onClick={signIn} className={styles.link}>
             sign in
-          </button>{" "}
+          </button>{` `}
           to create an account and save your boards.
         </p>
       </main>

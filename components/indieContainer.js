@@ -4,11 +4,9 @@
 import { useContext, useState } from "react";
 import Card from "./card";
 import styles from "./cardContainer.module.scss";
-import CardContext from "./cardContext";
 import NewContext from "./newContext";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-
-import { v4 as uuidv4 } from "uuid";
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import PropTypes from "prop-types"
 export default function CardContainer(props) {
   const [newContext, updateNewContext, saveContextToDB] =
     useContext(NewContext);
@@ -18,7 +16,6 @@ export default function CardContainer(props) {
   const clone = JSON.parse(JSON.stringify(newContext));
   const [titleOpen, updateTitleOpen] = useState(false);
   const [title, updateTitle] = useState(newContext[ownIndex][0].title);
-  //coment
 
   const addObjectToContext = () => {
     const updatedContext = clone.map((elem, index) => {
@@ -34,9 +31,6 @@ export default function CardContainer(props) {
       return elem;
     });
     updateNewContext(updatedContext);
-    /* newContext[0][props.i][0][0].push(
-         [cardVals, updateCardVals]
-     )*/
   };
   const deleteList = async () => {
     updateTitleOpen(false);
@@ -48,7 +42,6 @@ export default function CardContainer(props) {
 
     await saveContextToDB(updatedContext);
   };
-  /*onDragEnd={handleOnDragEnd}*/
   const closeTitle = () => {
     if (!titleOpen) {
       updateTitleOpen(true);
@@ -223,3 +216,7 @@ export default function CardContainer(props) {
     </div>
   );
 }
+
+CardContainer.propTypes = {
+  i: PropTypes.number.isRequired
+};

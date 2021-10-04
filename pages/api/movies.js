@@ -2,7 +2,7 @@ import { connectToDatabase } from "../../util/mongodb";
 import { getSession } from "next-auth/client";
 import GetBoard from "./components/getBoard";
 const { MONGO_COLLECTION } = process.env;
-export default async (req, res) => {
+export default async function BoardData(req, res){
   const idNum = parseInt(req.query.listDate);
   const session = await getSession({ req });
 
@@ -62,7 +62,7 @@ export default async (req, res) => {
     }
   };
   const putData = async () => {
-    if (userArrAuthed)
+    if (isUserArrAuthed)
       db.collection(process.env.MONGO_COLLECTION).insertOne(
         JSON.parse(req.body)
       );
@@ -90,4 +90,4 @@ export default async (req, res) => {
   if (session) {
     execute();
   }
-};
+}

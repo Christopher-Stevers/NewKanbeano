@@ -1,5 +1,4 @@
 import { connectToDatabase } from "../../../util/mongodb";
-import { getSession } from "next-auth/client";
 const { MONGO_COLLECTION } = process.env;
 export default async function GetBoard(req, session) {
   if (!session) {

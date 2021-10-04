@@ -1,7 +1,7 @@
 import styles from "./card.module.scss";
 import { useState, useContext } from "react";
-import CardContext from "./cardContext";
 import NewContext from "../components/newContext";
+import PropTypes from "prop-types";
 import CardColor from "./cardColor";
 export default function Card(props) {
   let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
@@ -14,12 +14,12 @@ export default function Card(props) {
   const [content, updateContent] = useState(
     newContext[props.listIndex][props.index].content
   );
-  const [cardColour, updateCardColour] = useState(
+  const [cardColour] = useState(
     newContext[props.listIndex][props.index].colour
   );
   const [editable, updateEditable] = useState(false);
   const id = newContext[props.listIndex][props.index].id;
-  const modifyContext = async (e) => {
+  const modifyContext = async () => {
     const clone = JSON.parse(JSON.stringify(newContext));
     const updatedContext = JSON.parse(
       JSON.stringify(
@@ -50,10 +50,6 @@ export default function Card(props) {
     updateEditable(false);
   };
 
-  const modifyColour = (colour) => {
-    //updateCardColour(colour);
-    // modifyContext();
-  };
   const deleteCard = async () => {
     const clone = JSON.parse(JSON.stringify(newContext));
     const updatedContext = JSON.parse(
@@ -194,7 +190,6 @@ export default function Card(props) {
         <CardColor
           index={props.index}
           listIndex={props.listIndex}
-          changeColour={modifyColour}
           currentColor={passedStyles}
         />
       </div>
@@ -245,3 +240,9 @@ export default function Card(props) {
     </div>
   );
 }
+
+Card.propTypes = {
+    listIndex: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired
+  };
+  

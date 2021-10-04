@@ -315,7 +315,7 @@ export default function Home({ data }) {
 }
 
 Home.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export async function getServerSideProps(context) {

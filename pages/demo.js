@@ -2,25 +2,13 @@ import styles from "../styles/listPage.module.scss";
 import NewContext from "../components/newContext";
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useState, useContext, useEffect } from "react";
+import { useState, } from "react";
 import CardContainer from "../components/indieContainer";
 import { v4 as uuidv4 } from "uuid";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/client";
 import Header from "../components/header";
 import ColorPicker from "../components/colorPicker";
 export default function Home() {
-  const [session, loading] = useSession();
-  const router = useRouter();
-  const { id } = router.query;
-  const ogDate = new Date(parseInt(id)).toDateString();
-  const current = Date.now();
-  const [loggedIn, updateLoggedIn] = useState(true);
-  const [listArr, updateListArr] = useState([]);
-  const [count, updateCount] = useState([current]);
-  const newContext = useContext(NewContext);
   const [contextState, updateContextState] = useState([
     [
       {
@@ -71,7 +59,6 @@ export default function Home() {
       },
     ],
   ]);
-  const [placeCard, updatePlaceCard] = useState("");
   //if (typeof window !== 'undefined' && loading) return <div> KANBEANOYou are not signed inSign in This board either does not exist, or you do not own it. </div>
 
   const addList = () => {
@@ -80,7 +67,7 @@ export default function Home() {
         [
           {
             title: "",
-            id: current + 1,
+            id: uuidv4(),
           },
         ],
       ])
@@ -120,8 +107,6 @@ export default function Home() {
       return;
     }
     if (result.type === "parentList") {
-      const droppableSource = parseInt(result.source.droppableId);
-      const droppableDestination = parseInt(result.destination.droppableId);
       const clonedContext = JSON.parse(JSON.stringify(contextState));
       const [reorderedItem] = clonedContext.splice(result.source.index, 1);
       clonedContext.splice(result.destination.index, 0, reorderedItem);
@@ -171,7 +156,7 @@ if(response.status===200){}
                   direction="horizontal"
                   type="parentList"
                 >
-                  {(provided, snapshot) => (
+                  {(provided) => (
                     <div
                       className={styles.list}
                       ref={provided.innerRef}
@@ -184,7 +169,7 @@ if(response.status===200){}
                             draggableId={index.toString() + "topLevel"}
                             index={index}
                           >
-                            {(provided, snapshot) => (
+                            {(provided) => (
                               <div
                                 className={styles.listItem}
                                 ref={provided.innerRef}
@@ -203,13 +188,13 @@ if(response.status===200){}
                   )}
                 </Droppable>
                 <div>
-                  {true ? (
+                   {
                     <div className={styles.addList}>
                       <button className={styles.button} onClick={addList}>
                         +
                       </button>
                     </div>
-                  ) : null}
+                  } 
                 </div>
               </div>
             </NewContext.Provider>

@@ -1,13 +1,10 @@
 import styles from "./cardColor.module.scss";
 import ColourButton from "./colourButton.js";
 import { useState, useContext } from "react";
-import CardContext from "./cardContext";
+import PropTypes from "prop-types";
 import NewContext from "../components/newContext";
 export default function CardColor(props) {
   let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
-  const [cardColour, updateCardColour] = useState(
-    newContext[props.listIndex][props.index].colour
-  );
   const { title, content, dueDate, id } =
     newContext[props.listIndex][props.index];
   const modifyContext = async (colour) => {
@@ -40,18 +37,13 @@ export default function CardColor(props) {
 
   const [open, updateOpen] = useState(false);
   const [clickedOpen, updateClickedOpen] = useState(false);
-  const currentColor = props.passedStyles;
   const handleHover = () => {
     updateOpen(true);
   };
   const handleHoverLeave = () => {
     updateOpen(false);
   };
-  const dotClicked = () => {};
-  const red = { backgroundColor: "#" };
-  const yellow = { backgroundColor: "yellow" };
   const defaultColour = { backgroundColor: "var(--header-background-color)" };
-  const green = { backgroundColor: "green" };
   const colourPicked = (arg) => {
     modifyContext(arg);
   };
@@ -100,3 +92,10 @@ export default function CardColor(props) {
     </div>
   );
 }
+
+CardColor.propTypes = {
+  currentColor: PropTypes.object.isRequired,
+  backgroundColor: PropTypes.string,
+  index: PropTypes.number.isRequired,
+  listIndex: PropTypes.number.isRequired
+};

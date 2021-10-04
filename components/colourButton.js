@@ -1,4 +1,5 @@
 import styles from "./colourButton.module.scss";
+import PropTypes from "prop-types"
 export default function ColourButton(props) {
   const handleClick = (e) => {
     e.preventDefault();
@@ -14,3 +15,9 @@ export default function ColourButton(props) {
     </div>
   );
 }
+
+ColourButton.propTypes = {
+  clicked: PropTypes.func.isRequired,
+  colour: PropTypes.string.isRequired,
+};
+
