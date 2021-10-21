@@ -114,6 +114,7 @@ export default function Home() {
     }
     return 0;
   }
+  const saveContextToDB=async ()=>{return }
   /*const postToAPI = async () => {
     const clone = JSON.parse(JSON.stringify(contextState));
     const contextString = JSON.stringify(newContext)
@@ -147,7 +148,7 @@ if(response.status===200){}
             onDragEnd={handleOnDragEnd}
             onDragStart={handleOnDragStart}
           >
-            <NewContext.Provider value={[contextState, updateContextState]}>
+            <NewContext.Provider value={[contextState, updateContextState, saveContextToDB]}>
               <div className={styles.flexWrapper}>
                 {" "}
                 <Droppable
@@ -176,7 +177,7 @@ if(response.status===200){}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
                               >
-                                <CardContainer i={index} />{" "}
+                                <CardContainer  i={index} />{" "}
                               </div>
                             )}
                           </Draggable>

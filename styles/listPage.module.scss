@@ -5,8 +5,6 @@
 }
 .saveIcon {
   height: 3.7rem;
-  &:hover {
-  }
 
   &:active {
     background-color: var(--darker-header-text);
@@ -65,7 +63,7 @@
 .listItem {
   margin: 0.5rem;
   height: min-content;
-  width: 350px;
+  width: 400px;
   max-width: 70vw;
   @media (min-width: 500) {
     margin: 2rem;
