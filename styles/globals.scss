@@ -1,17 +1,33 @@
 :root {
-  --body-background-color: hsla(0, 9%, 12%);
-  --header-text: hsla(0, 9%, 75%);
-  --darker-header-text: hsla(0, 9%, 50%);
-  --darker-header-background-color: hsla(0, 9%, 7%);
-  --header-background-color: hsla(0, 9%, 4%, 1);
-  --list-header-background-color: hsla(0, 9%, 9%);
-  --dark-header-text: hsla(0, 9%, 25%);
+  --header-background-color: white;
+  --sublist-background-color: hsl(7, 48%, 59%);
+  --main-background-color: hsl(24, 100%, 92%);
+  --content-background-color: hsl(24, 100%, 92%);
+  --header-text: black;
+  --casual-code: hsl(143, 81%, 71%);
+  --warn-code: hsl(49, 90%, 62%);
+  --urgent-code: hsl(345, 93%, 22%);
+  --theme-dir: left;
   font-size: 12px;
   color: inherit;
+
   @media screen and (min-width: 768px) {
     font-size: 16px;
   }
+  @media (prefers-color-scheme: dark){
+    
+    --header-background-color: hsl(233, 40%, 4%);
+    --sublist-background-color: hsl(7, 48%, 59%);
+    --main-background-color: hsl(356, 15%, 19%);
+    --content-background-color: hsl(356, 15%, 19%);
+    --header-text: hsl(0, 0%, 100%);
+    --casual-code: hsl(143, 77%, 12%);
+    --warn-code: hsl(39, 90%, 19%);
+    --urgent-code: hsl(352, 89%, 18%);
+    --theme-dir: right;
 }
+}
+
 html {
   background-color: var(--main-background-color);
 }

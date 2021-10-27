@@ -10,11 +10,10 @@ import { useState, useEffect } from "react";
 import CardContainer from "../../components/indieContainer";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
-import { useSession, getSession } from "next-auth/client";
+import {  getSession } from "next-auth/client";
 import Header from "../../components/header";
 import ColorPicker from "../../components/colorPicker";
-export default function Home({ data }) {
-  const [session] = useSession();
+export default function Home({ data, session }) {
   const router = useRouter();
   const { listDate } = router.query;
   const ogDate = new Date(parseInt(listDate)).toDateString();
@@ -322,5 +321,5 @@ export async function getServerSideProps(context) {
   }
   const document = await GetBoard(context, session);
   const data = document.data;
-  return { props: { data } };
+  return { props: { data, session } };
 }

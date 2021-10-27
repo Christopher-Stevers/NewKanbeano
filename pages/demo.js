@@ -4,11 +4,12 @@ import React from "react";
 import Head from "next/head";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useState, } from "react";
+import { getSession} from"next-auth/client";
 import CardContainer from "../components/indieContainer";
 import { v4 as uuidv4 } from "uuid";
 import Header from "../components/header";
 import ColorPicker from "../components/colorPicker";
-export default function Home() {
+export default function Home({session}) {
   const [contextState, updateContextState] = useState([
     [
       {
@@ -141,7 +142,7 @@ if(response.status===200){}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <div className={styles.entirePage}>
-        <Header />
+        <Header session={session} />
 
         <main className={styles.main}>
           <DragDropContext
@@ -205,4 +206,9 @@ if(response.status===200){}
       <ColorPicker />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return { props: {  session } };
 }

@@ -2,9 +2,9 @@ import Header from "../components/header";
 import styles from "../styles/root.module.scss";
 import Link from "next/link";
 import Head from "next/head";
-import { signIn,  } from "next-auth/client";
+import { signIn, getSession  } from "next-auth/client";
 import ColorPicker from "../components/colorPicker";
-export default function Home() {
+export default function Home({session}) {
  
   return (
     <>
@@ -12,7 +12,7 @@ export default function Home() {
         <title>Kanbeano</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header session={session} />
 
       <main className={styles.main}>
         <h2 className={styles.h2}>
@@ -34,4 +34,8 @@ export default function Home() {
       <ColorPicker />
     </>
   );
+}
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  return { props: {  session } };
 }

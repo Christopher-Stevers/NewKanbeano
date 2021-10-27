@@ -10,15 +10,15 @@ import Link from "next/link";
 import Image from "next/image";
 import GetListOfBoards from "../api/components/getListOfBoards";
 import ColorPicker from "../../components/colorPicker";
-export default function Home({ listOfBoards }) {
-  const [session] = useSession();
-  const [userEmail, updateUserEmail] = useState((session)?session.user.email:"");
+export default function Home({ listOfBoards, session }) {
+  const periodRegex = /\./g;
+  const [userEmail, updateUserEmail] = useState((session)?session.user.email.replace(periodRegex, ""):"");
   const current = Date.now();
   const [res, updateRes] = useState(listOfBoards);
+  console.log(res);
   const [enterName, updateEnterName] = useState(false);
   useEffect(() => {
     async () => {
-    const periodRegex = /\./g;
       if (session) {
         const url = "/api/arrayOfBoards";
         const response = await fetch(url);
@@ -32,7 +32,7 @@ export default function Home({ listOfBoards }) {
   if (!session) {
     return (
       <>
-        <Header />
+        <Header session={session}/>
         <main className={styles.fullPage}></main>
       </>
     );
@@ -203,7 +203,8 @@ export async function getServerSideProps(context) {
       listTitle: elem.listTitle,
       listDate: elem.listDate,
       users: elem.users,
+      email: elem.email
     };
   });
-  return { props: { emptyArr, listOfBoards } };
+  return { props: { emptyArr, listOfBoards, session } };
 }
