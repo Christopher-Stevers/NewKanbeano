@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }) {
     warn: "hsl(49, 90%, 62%)",
     urgent: "hsl(345, 93%, 22%)",
     themeDir: "left",
+    userPref: "unknown"
   };
   const statefulTheme = useState(themeObj);
   return (

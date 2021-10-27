@@ -3,7 +3,6 @@ import ColorContext from "./colorContext";
 import { useEffect, useContext, useState } from "react";
 export default function ColorPicker() {
   const [colorContext, updateColorContext] = useContext(ColorContext);
-  const [day, updateDay] = useState(false);
   const {
     headerText,
     headerBackgroundColor,
@@ -15,40 +14,45 @@ export default function ColorPicker() {
     warn,
     urgent,
     themeDir,
+    userPref
   } = colorContext;
- 
+ const darkObj={
+  headerText: "hsl(0, 0%, 100%)",
+  headerBackgroundColor: "hsl(233, 40%, 4%)",
+  mainText: "yellow",
+  mainBackgroundColor: "hsl(356, 15%, 19%)",
+  sublistBackgroundColor: "hsl(7, 48%, 59%)",
+  taskContentBackgroundColor: "hsl(356, 15%, 19%)",
+  casual: "hsl(143, 77%, 12%)",
+  warn: "hsl(39, 90%, 19%)",
+  urgent: "hsl(352, 89%, 18%)",
+  themeDir: "right",
+  userPref: "dark"
+}
+const lightObj={
+  headerText: "black",
+  headerBackgroundColor: "white",
+  mainText: "yellow",
+  mainBackgroundColor: "hsl(24, 100%, 92%)",
+  sublistBackgroundColor: "hsl(7, 48%, 59%)",
+  taskContentBackgroundColor: "hsl(24, 100%, 92%)",
+  casual: "hsl(143, 81%, 71%)",
+  warn: "hsl(49, 90%, 62%)",
+  urgent: "hsl(345, 93%, 22%)",
+  themeDir: "left",
+  userPref: "light"
+}
   useEffect(() => {
+    if(userPref==="unknown"){
+
     const prefersDarkScheme = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
-
-    prefersDarkScheme ? updateDay(false) : updateDay(true);
     if (prefersDarkScheme) {
-      updateColorContext({
-        headerText: "hsl(0, 0%, 100%)",
-        headerBackgroundColor: "hsl(233, 40%, 4%)",
-        mainText: "yellow",
-        mainBackgroundColor: "hsl(356, 15%, 19%)",
-        sublistBackgroundColor: "hsl(7, 48%, 59%)",
-        taskContentBackgroundColor: "hsl(356, 15%, 19%)",
-        casual: "hsl(143, 77%, 12%)",
-        warn: "hsl(39, 90%, 19%)",
-        urgent: "hsl(352, 89%, 18%)",
-        themeDir: "right",
-      });
+      updateColorContext(darkObj);
     } else {
-      updateColorContext({
-        headerText: "black",
-        headerBackgroundColor: "white",
-        mainText: "yellow",
-        mainBackgroundColor: "hsl(24, 100%, 92%)",
-        sublistBackgroundColor: "hsl(7, 48%, 59%)",
-        taskContentBackgroundColor: "hsl(24, 100%, 92%)",
-        casual: "hsl(143, 81%, 71%)",
-        warn: "hsl(49, 90%, 62%)",
-        urgent: "hsl(345, 93%, 22%)",
-        themeDir: "left",
-      });
+      updateColorContext(lightObj);
+    }
     }
   }, [updateColorContext]);
   useEffect(() => {
@@ -87,33 +91,11 @@ export default function ColorPicker() {
     themeDir, casual, warn, urgent,
   ]);
   const changeColor = () => {
-    day ? updateDay(false) : updateDay(true);
-    if (day) {
-      updateColorContext({
-        headerText: "hsl(0, 0%, 100%)",
-        headerBackgroundColor: "hsl(233, 40%, 4%)",
-        mainText: "yellow",
-        mainBackgroundColor: "hsl(356, 15%, 19%)",
-        sublistBackgroundColor: "hsl(7, 48%, 59%)",
-        taskContentBackgroundColor: "hsl(356, 15%, 19%)",
-        casual: "hsl(143, 77%, 12%)",
-        warn: "hsl(39, 90%, 19%)",
-        urgent: "hsl(352, 89%, 18%)",
-        themeDir: "right",
-      });
-    } else {
-      updateColorContext({
-        headerText: "black",
-        headerBackgroundColor: "white",
-        mainText: "yellow",
-        mainBackgroundColor: "hsl(24, 100%, 92%)",
-        sublistBackgroundColor: "hsl(7, 48%, 59%)",
-        taskContentBackgroundColor: "hsl(24, 100%, 92%)",
-        casual: "hsl(143, 81%, 71%)",
-        warn: "hsl(49, 90%, 62%)",
-        urgent: "hsl(352, 90%, 63%)",
-        themeDir: "left",
-      });
+    
+    if (userPref==="light") {
+      updateColorContext(darkObj);
+    } else if (userPref==="dark") {
+      updateColorContext(lightObj);
     }
   };
 

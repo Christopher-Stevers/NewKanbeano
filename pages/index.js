@@ -19,7 +19,7 @@ export default function Home() {
           Kanban <em className={styles.em}>simplified</em>
         </h2>
         <p className={styles.like}>
-          Kanban {`doesn't`} need to be complicated. A Board. With Lists. {`That's`}
+          Kanban {`doesn't`} need to be complicated. A Board. With Lists. {`That's `}
           what you need, and {`that's `}what Kanbeano gives you. Check out the{` `}
           <span className={styles.link}>
             <Link href="/demo">demo</Link>
