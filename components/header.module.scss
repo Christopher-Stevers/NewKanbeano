@@ -129,6 +129,7 @@
   display: flex;
 }
 .buttonPrimary {
+  
   display: grid;
   align-content: center;
   box-shadow: 0 0 3px 3px var(--header-text);
@@ -146,7 +147,7 @@
     box-shadow: 0 0 2px 2px var(--header-text);
   }
   text-decoration: none;
-  padding: 0 1.4rem;
+  padding: 10px 1.4rem;
 }
 .button {
   height: 2.5rem;
