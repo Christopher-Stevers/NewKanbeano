@@ -1,6 +1,6 @@
 import styles from "./colorPicker.module.scss";
 import ColorContext from "./colorContext";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, } from "react";
 export default function ColorPicker() {
   const [colorContext, updateColorContext] = useContext(ColorContext);
   const {
@@ -54,7 +54,9 @@ const lightObj={
       updateColorContext(lightObj);
     }
     }
-  }, [updateColorContext]);
+    
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateColorContext, userPref]);
   useEffect(() => {
     document
       .querySelector(":root")

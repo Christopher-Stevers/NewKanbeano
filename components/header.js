@@ -1,19 +1,17 @@
 //I copy pasted example this code from  https://github.com/nextauthjs/next-auth-example
 
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, signOut,  } from "next-auth/client";
 import styles from "./header.module.scss";
+import PropTypes from "prop-types"
 
-// The approach used in this component shows how to built a sign in and sign out
-// component that works on pages which support both client and server side
-// rendering, and avoids any flash incorrect content on initial page load.
-export default function Header({}) {
-  const [session, loading] = useSession();
+// This header is built for serverside 
+export default function Header({session}) {
 
   return (
     <header className={styles.header}>
       <div className={styles.signedInStatus}>
-        <div className={!session && loading ? styles.loading : styles.loaded}>
+        <div className={ styles.loaded}>
           <h1 className={styles.h1}>
             <Link href="/">KANBEANO</Link>
           </h1>
@@ -73,3 +71,8 @@ export default function Header({}) {
     </header>
   );
 }
+
+
+Header.propTypes = {
+  session: PropTypes.object
+};

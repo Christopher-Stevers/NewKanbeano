@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import {  getSession } from "next-auth/client";
 import Header from "../../components/header";
+import FourZeroFourTemplate from "../../components/fourZeroFourTemplate";
 import ColorPicker from "../../components/colorPicker";
 export default function Home({ data, session }) {
   const router = useRouter();
@@ -49,13 +50,11 @@ export default function Home({ data, session }) {
   // If no session exists, display access denied message
   if (!session) {
     return (
-      <div>
-        {" "}
-        <Header />{" "}
-        <span>
-          This board either does not exist, or you do not own it.
-        </span>{" "}
-      </div>
+      <>
+        
+        <Header />
+        <FourZeroFourTemplate centeredText="Please sign in to access your boards." />
+      </>
     );
   }
 
@@ -165,7 +164,7 @@ export default function Home({ data, session }) {
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <Header />
+        <Header session={session}/>
         {auth ? (
           <>
             <div className={styles.listHeader}>
@@ -310,7 +309,9 @@ export default function Home({ data, session }) {
 }
 
 Home.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
+    session: PropTypes.object,
+  
 };
 
 export async function getServerSideProps(context) {

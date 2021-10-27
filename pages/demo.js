@@ -7,6 +7,7 @@ import { useState, } from "react";
 import { getSession} from"next-auth/client";
 import CardContainer from "../components/indieContainer";
 import { v4 as uuidv4 } from "uuid";
+import PropTypes from "prop-types";
 import Header from "../components/header";
 import ColorPicker from "../components/colorPicker";
 export default function Home({session}) {
@@ -207,6 +208,10 @@ if(response.status===200){}
     </>
   );
 }
+
+Home.propTypes = {
+  session: PropTypes.object,
+};
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

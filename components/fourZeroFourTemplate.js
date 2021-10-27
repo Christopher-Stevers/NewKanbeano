@@ -1,14 +1,18 @@
 import styles from "./fourZeroFour.module.scss"
-import Header from"../components/header"
-export default function fourZeroFourTemplate(){
+import ColorPicker from "./colorPicker"
+import PropTypes from "prop-types"
+export default function FourZeroFourTemplate({centeredText}){
 
 
     return(
 <>
-<Header />
 <main className={styles.container}>
 
-<div className={styles.text}>404 | Page not found.</div></main>
+<div className={styles.text}>{centeredText}</div></main>
+<ColorPicker />
 </>
     )
+}
+FourZeroFourTemplate.propTypes={
+    centeredText: PropTypes.string.isRequired,
 }

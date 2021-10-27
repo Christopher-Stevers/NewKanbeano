@@ -1,17 +1,18 @@
 import styles from "../../styles/Home.module.scss";
 import React from "react";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { useSession, getSession } from "next-auth/client";
+import { useState, useEffect} from "react";
+import {  getSession } from "next-auth/client";
 import { v4 as uuidv4 } from "uuid";
 import Header from "../../components/header";
+import FourZeroFourTemplate from "../../components/fourZeroFourTemplate"
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import GetListOfBoards from "../api/components/getListOfBoards";
 import ColorPicker from "../../components/colorPicker";
 export default function Home({ listOfBoards, session }) {
-  const periodRegex = /\./g;
+  const periodRegex =/\./g
   const [userEmail, updateUserEmail] = useState((session)?session.user.email.replace(periodRegex, ""):"");
   const current = Date.now();
   const [res, updateRes] = useState(listOfBoards);
@@ -26,14 +27,17 @@ export default function Home({ listOfBoards, session }) {
         updateRes(responseObj);
         updateUserEmail(session.user.email.replace(periodRegex, ""));
       }
-    };
+    };  
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
   const [name, updateName] = useState("");
+  
   if (!session) {
     return (
       <>
-        <Header session={session}/>
-        <main className={styles.fullPage}></main>
+        
+        <Header />
+        <FourZeroFourTemplate centeredText="Please sign in to access your boards." />
       </>
     );
   }
@@ -86,7 +90,7 @@ export default function Home({ listOfBoards, session }) {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      <Header  session={session}/>
       {session ? (
         <main className={styles.main}>
           <ul className={styles.boards}>
@@ -188,7 +192,8 @@ export default function Home({ listOfBoards, session }) {
 
 
 Home.propTypes = {
-  listOfBoards: PropTypes.array.isRequired,
+  listOfBoards: PropTypes.array,
+  session: PropTypes.object,
 };
 
 export async function getServerSideProps(context) {

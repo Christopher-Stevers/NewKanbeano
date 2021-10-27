@@ -2,6 +2,7 @@ import Header from "../components/header";
 import styles from "../styles/root.module.scss";
 import Link from "next/link";
 import Head from "next/head";
+import PropTypes from "prop-types";
 import { signIn, getSession  } from "next-auth/client";
 import ColorPicker from "../components/colorPicker";
 export default function Home({session}) {
@@ -35,6 +36,11 @@ export default function Home({session}) {
     </>
   );
 }
+
+Home.propTypes = {
+  session: PropTypes.object,
+};
+
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   return { props: {  session } };
