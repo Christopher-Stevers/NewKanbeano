@@ -38,7 +38,7 @@ const lightObj={
   taskContentBackgroundColor: "hsl(24, 100%, 92%)",
   casual: "hsl(143, 81%, 71%)",
   warn: "hsl(49, 90%, 62%)",
-  urgent: "hsl(345, 93%, 22%)",
+  urgent: "hsl(345, 53%, 52%)",
   themeDir: "left",
   userPref: "light"
 }
