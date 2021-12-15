@@ -38,12 +38,9 @@ export default async function BoardData(req, res){
   const getData = async () => {
     const data = await GetBoard(req, session);
     await res.json(data);
-    //if (dutu.email === userEmail || isUserArrAuthed) { res.json(dutu) }
-    //else { res.json(JSON.stringify(["denied"])) }
   };
 
   const postData = async () => {
-    //const clone=JSON.parse((JSON.parse(JSON.stringify(req.body))));
     if (isUserArrAuthed) {
       const hitApi = db
         .collection(process.env.MONGO_COLLECTION)

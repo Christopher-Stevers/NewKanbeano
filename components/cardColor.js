@@ -5,13 +5,10 @@ import PropTypes from "prop-types";
 import NewContext from "../components/newContext";
 export default function CardColor(props) {
   let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
-  const { title, content, dueDate, id } =
-    newContext[props.listIndex][props.index];
+  const currentCardData=newContext[props.listIndex][props.index]
+  const { title, content, dueDate, id } = currentCardData;
   const modifyContext = async (colour) => {
-    const clone = JSON.parse(JSON.stringify(newContext));
-    const updatedContext = JSON.parse(
-      JSON.stringify(
-        clone.map((elem, index) => {
+    const updatedContext = newContext.map((elem, index) => {
           if (index === parseInt(props.listIndex)) {
             return elem.map((nestedElem) => {
               if (nestedElem.id === id) {
@@ -28,9 +25,8 @@ export default function CardColor(props) {
             });
           }
           return elem;
-        })
-      )
-    );
+        });
+      
     await updateNewContext(updatedContext);
     await saveContextToDB(updatedContext);
   };

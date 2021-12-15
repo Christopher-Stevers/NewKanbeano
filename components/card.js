@@ -4,26 +4,24 @@ import NewContext from "../components/newContext";
 import PropTypes from "prop-types";
 import CardColor from "./cardColor";
 export default function Card(props) {
-  let [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
+  const [newContext, updateNewContext, saveContextToDB] = useContext(NewContext);
+  const currentCardData=newContext[props.listIndex][props.index];
   const [title, updateTitle] = useState(
-    newContext[props.listIndex][props.index].title
+    currentCardData.title
   );
   const [dueDate, updateDueDate] = useState(
-    newContext[props.listIndex][props.index].dueDate
+    currentCardData.dueDate
   );
   const [content, updateContent] = useState(
-    newContext[props.listIndex][props.index].content
+    currentCardData.content
   );
   const [cardColour] = useState(
-    newContext[props.listIndex][props.index].colour
+    currentCardData.colour
   );
   const [editable, updateEditable] = useState(false);
-  const id = newContext[props.listIndex][props.index].id;
+  const id = currentCardData.id;
   const modifyContext = async () => {
-    const clone = JSON.parse(JSON.stringify(newContext));
-    const updatedContext = JSON.parse(
-      JSON.stringify(
-        clone.map((elem, index) => {
+    const updatedContext = newContext.map((elem, index) => {
           if (index === parseInt(props.listIndex)) {
             return elem.map((nestedElem) => {
               if (nestedElem.id === id) {
@@ -33,7 +31,7 @@ export default function Card(props) {
                   dueDate: dueDate,
                   colour: cardColour,
                   id: nestedElem.id,
-                  editable: newContext[props.listIndex][props.index].editable
+                  editable: currentCardData.editable
                     ? false
                     : true,
                 };
@@ -42,28 +40,21 @@ export default function Card(props) {
             });
           }
           return elem;
-        })
-      )
-    );
+        });
     await updateNewContext(updatedContext);
     await saveContextToDB(updatedContext);
-    updateEditable(false);
+   // updateEditable(false);
   };
 
   const deleteCard = async () => {
-    const clone = JSON.parse(JSON.stringify(newContext));
-    const updatedContext = JSON.parse(
-      JSON.stringify(
-        clone.map((elem, index) => {
+    const updatedContext = newContext.map((elem, index) => {
           if (index === parseInt(props.listIndex)) {
             return elem.filter((nestedElem) => {
               return nestedElem.id !== id;
             });
           }
           return elem;
-        })
-      )
-    );
+        });
     await updateNewContext(updatedContext);
     await saveContextToDB(updatedContext);
   };
@@ -81,7 +72,7 @@ export default function Card(props) {
     return input.replace(dateRegex, "$1, $2 $3, $4");
   };
   const passedStyles = {
-    backgroundColor: newContext[props.listIndex][props.index].colour,
+    backgroundColor: currentCardData.colour,
   };
 
   return (
@@ -96,7 +87,7 @@ export default function Card(props) {
           ></input>
         ) : (
           <span className={styles.span}>
-            {newContext[props.listIndex][props.index].title}
+            {currentCardData.title}
           </span>
         )}
         <button
@@ -201,14 +192,14 @@ export default function Card(props) {
         ></textarea>
       ) : (
         <div className={styles.content}>
-          {newContext[props.listIndex][props.index].content}
+          {currentCardData.content}
         </div>
       )}
       <div className={styles.spaceBetween}>
         <span>Created: </span>
         <span>
           {formatDate(
-            timestampToString(newContext[props.listIndex][props.index].id)
+            timestampToString(currentCardData.id)
           )}
         </span>
       </div>
@@ -223,13 +214,13 @@ export default function Card(props) {
             }}
           ></input>
         </div>
-      ) : newContext[props.listIndex][props.index].dueDate ? (
+      ) : currentCardData.dueDate ? (
         <div className={styles.spaceBetween}>
           <span> Due: </span>{" "}
           <span>
             {formatDate(
               timestampToString(
-                newContext[props.listIndex][props.index].dueDate
+                currentCardData.dueDate
               )
             )}
           </span>

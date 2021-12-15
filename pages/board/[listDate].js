@@ -33,7 +33,7 @@ export default function Home({ data, session }) {
   useEffect(() => {
     async () => {
       if (session) {
-        const url = "/" + "api/movies?listDate=" + router.query.listDate;
+        const url = "/" + "api/board?listDate=" + router.query.listDate;
         const response = await fetch(url);
         const responseObj = await response.json();
         if (typeof responseObj[0] === "string") {
@@ -72,15 +72,13 @@ export default function Home({ data, session }) {
   };
 
   const postToAPI = async (stateOfContext) => {
-    const clone = JSON.parse(JSON.stringify(stateOfContext));
-
     const options = {
       method: "POST",
-      body: JSON.stringify(clone),
+      body: JSON.stringify(stateOfContext),
     };
 
-    const url = "/" + "api/movies?listDate=" + router.query.listDate;
-    await fetch(url, JSON.parse(JSON.stringify(options)));
+    const url = "/api/board?listDate=" + router.query.listDate;
+    await fetch(url, options);
     //if (response.status === 200) { }
   };
   const inviteMember = () => {
@@ -112,7 +110,6 @@ export default function Home({ data, session }) {
       }, 3000);
     }
   };
-  const clone = JSON.parse(JSON.stringify(contextState));
   function handleOnDragEnd(result) {
     if (result.destination === null) {
       return;
@@ -120,9 +117,9 @@ export default function Home({ data, session }) {
     if (result.type === "nestedList") {
       const droppableSource = parseInt(result.source.droppableId);
       const droppableDestination = parseInt(result.destination.droppableId);
-      const draggedContext = clone.map((elem, index) => {
+      const draggedContext = contextState.map((elem, index) => {
         if (index === parseInt(result.destination.droppableId)) {
-          const clonedContext = JSON.parse(JSON.stringify(clone));
+          const clonedContext = JSON.parse(JSON.stringify(contextState));
           const notZero = result.destination.index
             ? result.destination.index
             : 1;
@@ -135,11 +132,8 @@ export default function Home({ data, session }) {
           return clonedContext;
         }
       });
-      const nextContext = JSON.parse(
-        JSON.stringify(draggedContext[parseInt(droppableDestination)])
-      );
-      updateContextState(nextContext);
-      postToAPI(nextContext);
+      updateContextState(draggedContext[parseInt(droppableDestination)]);
+      postToAPI(draggedContext[parseInt(droppableDestination)]);
       return;
     }
     if (result.type === "parentList") {

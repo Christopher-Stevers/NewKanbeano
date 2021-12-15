@@ -13,12 +13,11 @@ export default function CardContainer(props) {
 
   const ownIndex = parseInt(props.i);
   const current = Date.now();
-  const clone = JSON.parse(JSON.stringify(newContext));
   const [titleOpen, updateTitleOpen] = useState(false);
   const [title, updateTitle] = useState(newContext[ownIndex][0].title);
 
   const addObjectToContext = () => {
-    const updatedContext = clone.map((elem, index) => {
+    const updatedContext = newContext.map((elem, index) => {
       if (index === parseInt(props.i)) {
         return elem.concat({
           title: "",
@@ -35,7 +34,7 @@ export default function CardContainer(props) {
   const deleteList = async () => {
     updateTitleOpen(false);
 
-    const updatedContext = clone.filter((elem, index) => {
+    const updatedContext = newContext.filter((elem, index) => {
       return index !== props.i;
     });
     await updateNewContext(updatedContext);
@@ -47,7 +46,7 @@ export default function CardContainer(props) {
       updateTitleOpen(true);
     }
     if (titleOpen) {
-      const updatedContext = clone.map((elem, index) => {
+      const updatedContext = newContext.map((elem, index) => {
         if (index === parseInt(props.i)) {
           return elem.map((elem, index) => {
             if (index === 0) {

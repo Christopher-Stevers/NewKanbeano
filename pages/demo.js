@@ -80,7 +80,6 @@ export default function Home({session}) {
   //let [stateContext, updateStateContext] = useState([]);
   //const defaultContext = [stateContext, updateStateContext];
 
-  const clone = JSON.parse(JSON.stringify(contextState));
   function handleOnDragEnd(result) {
     if (result.destination === null) {
       return;
@@ -88,9 +87,9 @@ export default function Home({session}) {
     if (result.type === "nestedList") {
       const droppableSource = parseInt(result.source.droppableId);
       const droppableDestination = parseInt(result.destination.droppableId);
-      const draggedContext = clone.map((elem, index) => {
+      const draggedContext = contextState.map((elem, index) => {
         if (index === parseInt(result.destination.droppableId)) {
-          const clonedContext = JSON.parse(JSON.stringify(clone));
+          const clonedContext = JSON.parse(JSON.stringify(contextState));
           const notZero = result.destination.index
             ? result.destination.index
             : 1;
@@ -102,10 +101,7 @@ export default function Home({session}) {
           return clonedContext;
         }
       });
-      const nextContext = JSON.parse(
-        JSON.stringify(draggedContext[parseInt(droppableDestination)])
-      );
-      updateContextState(nextContext);
+      updateContextState(draggedContext[parseInt(droppableDestination)]);
       return;
     }
     if (result.type === "parentList") {
@@ -117,25 +113,6 @@ export default function Home({session}) {
     return 0;
   }
   const saveContextToDB=async ()=>{return }
-  /*const postToAPI = async () => {
-    const clone = JSON.parse(JSON.stringify(contextState));
-    const contextString = JSON.stringify(newContext)
-    const postObj = JSON.stringify({
-      data: clone,
-
-    })
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(clone)
-    };
-
-
-    const url = "/" + "api/movies?listDate=" + router.query.id
-    const response = await fetch(url, JSON.parse(JSON.stringify(options)))
-if(response.status===200){}
-  }*/
-  const handleOnDragStart = () => {};
   return (
     <>
       <Head>
@@ -148,7 +125,6 @@ if(response.status===200){}
         <main className={styles.main}>
           <DragDropContext
             onDragEnd={handleOnDragEnd}
-            onDragStart={handleOnDragStart}
           >
             <NewContext.Provider value={[contextState, updateContextState, saveContextToDB]}>
               <div className={styles.flexWrapper}>
