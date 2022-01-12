@@ -97,7 +97,7 @@ export default function Home({ listOfBoards, session }) {
             <li>
               <div className={styles.board}>
                 <Image
-                  alt="picture of a board page"
+                  alt="picture of board"
                   className={styles.image}
                   src="/Optimized-Screenshot_2021-04-30 Screenshot.webp"
                   width="300"
@@ -132,7 +132,7 @@ export default function Home({ listOfBoards, session }) {
                 <li key={uuidv4()}>
                   <div className={styles.board}>
                     <Image
-                      alt="picture of a board page"
+                      alt=""
                       priority="true"
                       src="/Optimized-Screenshot_2021-04-30 Screenshot.webp"
                       width="300"
