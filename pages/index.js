@@ -21,16 +21,10 @@ export default function Home({session}) {
         </h2>
         <p className={styles.like}>
           Kanban {`doesn't`} need to be complicated. A Board. With Lists. {`That's `}
-          what you need, and {`that's `}what Kanbeano gives you. Check out the{` `}
+          what you need, and {`that's `}what Kanbeano gives you. Check out the frontend{` `}
           <span className={styles.link}>
             <Link href="/demo">demo</Link>
-          </span>{` `}
-          or{` `}
-          <button onClick={signIn} className={styles.link}>
-            sign in
-          </button>{` `}
-          to create an account and save your boards.
-        </p>
+          </span>.{` `}I got busy with work and quit supporting the fullstack version. I know no one cares . . . but if you want it working shoot me an email at christopher.stever1@gmail.com and it will working in a day.
       </main>
       <ColorPicker />
     </>
